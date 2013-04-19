@@ -17,13 +17,14 @@ win32: LIBS +=  "$$_PRO_FILE_PWD_/../librairie/qextserialport/libQt5ExtSerialPor
 else: unix: LIBS +=  "$$_PRO_FILE_PWD_/../librairie/qextserialport/libQt5ExtSerialPort.so"
 
 SOURCES += main.cpp\
-        Gui.cpp \
     PinController.cpp \
-    Arduino.cpp
+    Arduino.cpp \
+    GuiController.cpp
 
-HEADERS  += Gui.h \
+HEADERS  += \
     PinController.h \
     Arduino.h \
-    define_exception.h
+    define_exception.h \
+    GuiController.h
 
 FORMS    += Gui.ui

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "PinController.h"
+#include "Arduino.h"
 
 namespace Ui {
 class Gui;
@@ -10,20 +11,26 @@ class Gui;
 
 class PinController;
 
-class Gui : public QMainWindow
+class GuiController : public QMainWindow
 {
     Q_OBJECT
     
 public:
-    explicit Gui(QWidget *parent = 0);
-    ~Gui();
+    explicit GuiController(QWidget *parent = 0);
+    ~GuiController();
     void addToTab1Layout(QWidget *widget);
+    Arduino *getArduino();
     
 private:
     Ui::Gui *ui;
     QList<PinController *> pinControllerList;
+    Arduino arduino;
 
     void addPinControl(quint8 pinNumber);
+
+private slots:
+    void on_pushButtonConnect_clicked();
+
 };
 
 #endif // GUI_H

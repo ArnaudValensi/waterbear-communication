@@ -13,6 +13,12 @@ public:
     ~Arduino();
     void initPort(QString portStr);
     void closePort();
+    struct Buffer
+    {
+        Buffer(char pin, char value) : pin(pin), value(value) {}
+        unsigned char pin;
+        unsigned char value;
+    };
 
 private:
     QextSerialPort *port;
@@ -21,7 +27,7 @@ private:
 signals:
     
 public slots:
-    void transmitCmd(int value);
+    void transmitCmd(Arduino::Buffer);
     
 };
 

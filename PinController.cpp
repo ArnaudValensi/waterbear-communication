@@ -1,8 +1,9 @@
 #include <QVBoxLayout>
 #include "PinController.h"
 
-PinController::PinController(Gui *ui, quint8 pinNumber, QObject *parent) :
+PinController::PinController(GuiController *ui, quint8 pinNumber, QObject *parent) :
     QObject(parent),
+    pinNumber(pinNumber),
     ui(ui)
 {
     this->groupBox = new QGroupBox();
@@ -32,7 +33,9 @@ PinController::PinController(Gui *ui, quint8 pinNumber, QObject *parent) :
 
     //connect(vertSlider, &QSlider::valueChanged, lcd, &QLCDNumber::display);
     connect(vertSlider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
-    //connect(vertSlider, SIGNAL(valueChanged(int)), this, SLOT(transmitCmd(int)));
+    connect(vertSlider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
+    connect(this, SIGNAL(sliderValueChanged(Arduino::Buffer)),
+            ui->getArduino(), SLOT(transmitCmd(Arduino::Buffer)));
     connect(maxValue, SIGNAL(editingFinished()), this, SLOT(updateSliderRange()));
     connect(minValue, SIGNAL(editingFinished()), this, SLOT(updateSliderRange()));
 }
@@ -43,4 +46,10 @@ void PinController::updateSliderRange()
     quint8 min = this->minValue->text().toUShort();
 
     vertSlider->setRange(min, max);
+}
+
+void PinController::sendValueToArduino(int value)
+{
+    Arduino::Buffer buffer(this->pinNumber, value);
+    emit sliderValueChanged(buffer);
 }
