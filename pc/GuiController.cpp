@@ -25,7 +25,8 @@
 
 GuiController::GuiController(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::Gui)
+    ui(new Ui::Gui),
+    arduino(this)
 {
     ui->setupUi(this);
     for(int i = 0; i < 10; ++i)
@@ -46,7 +47,7 @@ void GuiController::addPinControl(quint8 pinNumber)
     pinControllerList.push_back(pin);
 }
 
-void GuiController::addToTab1Layout(QWidget *widget)\
+void GuiController::addToTab1Layout(QWidget *widget)
 {
     this->ui->tab1Layout->addWidget(widget);
 }
@@ -67,4 +68,12 @@ void GuiController::on_pushButtonConnect_clicked()
 Arduino *GuiController::getArduino()
 {
     return &this->arduino;
+}
+
+void GuiController::displayArduinoMessage(QString data)
+{
+    this->ui->textBrowserArduino->insertPlainText(data);
+    QTextCursor c =  this->ui->textBrowserArduino->textCursor();
+    c.movePosition(QTextCursor::End);
+    this->ui->textBrowserArduino->setTextCursor(c);
 }

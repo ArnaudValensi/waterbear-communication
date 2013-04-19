@@ -24,11 +24,13 @@
 #include <qextserialport.h>
 #include "define_exception.h"
 
+class GuiController;
+
 class Arduino : public QObject
 {
     Q_OBJECT
 public:
-    explicit Arduino(QObject *parent = 0);
+    explicit Arduino(GuiController *controller, QObject *parent = 0);
     ~Arduino();
     void initPort(QString portStr);
     void closePort();
@@ -42,11 +44,13 @@ public:
 private:
     QextSerialPort *port;
     bool isConnected;
+    GuiController *controller;
     
 signals:
     
 public slots:
     void transmitCmd(Arduino::Buffer);
+    void onDataAvailable();
     
 };
 

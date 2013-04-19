@@ -39,6 +39,7 @@ public:
     ~GuiController();
     void addToTab1Layout(QWidget *widget);
     Arduino *getArduino();
+    void displayArduinoMessage(QString data);
     
 private:
     Ui::Gui *ui;

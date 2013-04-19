@@ -20,11 +20,13 @@
 #include <QMessageBox>
 #include <QDebug>
 #include "Arduino.h"
+#include "GuiController.h"
 
-Arduino::Arduino(QObject *parent) :
+Arduino::Arduino(GuiController *controller, QObject *parent) :
     QObject(parent),
     port(NULL),
-    isConnected(false)
+    isConnected(false),
+    controller(controller)
 {
 }
 
@@ -40,6 +42,8 @@ void Arduino::initPort(QString portStr)
         port->close();
 
     port = new QextSerialPort(portStr); //we create the port
+
+    connect(port, SIGNAL(readyRead()), this, SLOT(onDataAvailable()));
 
     port->open(QIODevice::ReadWrite | QIODevice::Unbuffered); //we open the port
     if(!port->isOpen())
@@ -70,4 +74,11 @@ void Arduino::transmitCmd(Arduino::Buffer buffer)
   }
   port->write((char *) &buffer, sizeof(buffer));
   qDebug() << "Valeur : " << QString::number(buffer.value) << ", Pin : " << QString::number(buffer.pin);
+}
+
+void Arduino::onDataAvailable()
+{
+    QByteArray data = port->readAll();
+
+    this->controller->displayArduinoMessage(QString(data));
 }
