@@ -13,7 +13,7 @@ TEMPLATE = app
 
 INCLUDEPATH += "$$_PRO_FILE_PWD_/../librairie/qextserialport/src"
 
-win32: LIBS +=  "$$_PRO_FILE_PWD_/../librairie/qextserialport/libQt5ExtSerialPort.dll"
+win32: LIBS +=  "$$_PRO_FILE_PWD_/../librairie/qextserialport/Qt5ExtSerialPort1.dll"
 else: unix: LIBS +=  "$$_PRO_FILE_PWD_/../librairie/qextserialport/libQt5ExtSerialPort.so"
 
 SOURCES += main.cpp\
