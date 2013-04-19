@@ -47,6 +47,1150 @@
        <attribute name="title">
         <string>Tab 2</string>
        </attribute>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>131</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter un pin</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>10</y>
+          <width>171</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Enregistrer la configuration</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>10</y>
+          <width>151</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Charger une configuration</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>50</y>
+          <width>181</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>113</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Numéro du pin</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>in</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_2">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>out</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>151</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Bouton poussoir</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_4">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Interrupteur</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_5">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>111</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Slider horizontal</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_6">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Entrée texte</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_7">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>121</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Potentiomètre</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_15">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>180</y>
+           <width>111</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Slider vertical</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>50</y>
+          <width>181</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+        <widget class="QLineEdit" name="lineEdit_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>113</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Numéro du pin</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_8">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>in</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_9">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>out</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_10">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>LCD</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_11">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Champ texte</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_12">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>141</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Barre de progression</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_13">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Courbe</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_14">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>141</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Compteur a aiguille</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_16">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>180</y>
+           <width>101</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Led rouge vert</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_17">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>200</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Voyant</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>50</y>
+          <width>181</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+        <widget class="QLineEdit" name="lineEdit_3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>113</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Numéro du pin</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_18">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>in</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_19">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>out</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_20">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>LCD</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_21">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Champ texte</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_22">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>141</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Barre de progression</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_23">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Courbe</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_24">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>141</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Compteur a aiguille</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_25">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>180</y>
+           <width>101</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Led rouge vert</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_26">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>200</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Voyant</string>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>181</width>
+           <height>201</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>GroupBox</string>
+         </property>
+         <widget class="QLineEdit" name="lineEdit_4">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>113</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Numéro du pin</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton_27">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>50</y>
+            <width>82</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>in</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton_28">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>50</y>
+            <width>82</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>out</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton_29">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>80</y>
+            <width>82</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>LCD</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton_30">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>82</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Champ texte</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton_31">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>120</y>
+            <width>141</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Barre de progression</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton_32">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>140</y>
+            <width>82</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Courbe</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton_33">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>141</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Compteur a aiguille</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton_34">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>180</y>
+            <width>101</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Led rouge vert</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton_35">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>200</y>
+            <width>82</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Voyant</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_5">
+        <property name="geometry">
+         <rect>
+          <x>580</x>
+          <y>50</y>
+          <width>181</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+        <widget class="QLineEdit" name="lineEdit_5">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>113</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Numéro du pin</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_36">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>in</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_37">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>out</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_38">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>LCD</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_39">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Champ texte</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_40">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>141</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Barre de progression</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_41">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Courbe</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_42">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>141</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Compteur a aiguille</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_43">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>180</y>
+           <width>101</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Led rouge vert</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_44">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>200</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Voyant</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_6">
+        <property name="geometry">
+         <rect>
+          <x>770</x>
+          <y>50</y>
+          <width>181</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+        <widget class="QLineEdit" name="lineEdit_6">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>113</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Numéro du pin</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_45">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>in</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_46">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>out</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_47">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>LCD</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_48">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Champ texte</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_49">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>141</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Barre de progression</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_50">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Courbe</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_51">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>141</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Compteur a aiguille</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_52">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>180</y>
+           <width>101</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Led rouge vert</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_53">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>200</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Voyant</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_7">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>250</y>
+          <width>181</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+        <widget class="QLineEdit" name="lineEdit_7">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>113</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Numéro du pin</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_54">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>in</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_55">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>out</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_56">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>151</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Bouton poussoir</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_57">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Interrupteur</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_58">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>111</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Slider horizontal</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_59">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Entrée texte</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_60">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>121</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Potentiomètre</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_61">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>180</y>
+           <width>111</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Slider vertical</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_8">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>250</y>
+          <width>181</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+        <widget class="QLineEdit" name="lineEdit_8">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>113</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Numéro du pin</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_62">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>in</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_63">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>50</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>out</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_64">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>151</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Bouton poussoir</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_65">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Interrupteur</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_66">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>111</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Slider horizontal</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_67">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>82</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Entrée texte</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_68">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>121</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Potentiomètre</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radioButton_69">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>180</y>
+           <width>111</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Slider vertical</string>
+         </property>
+        </widget>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -85,7 +1229,7 @@
      <x>0</x>
      <y>0</y>
      <width>980</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
