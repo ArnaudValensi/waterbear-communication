@@ -11,10 +11,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = arduino-control-interface
 TEMPLATE = app
 
-INCLUDEPATH += "$$_PRO_FILE_PWD_/../librairie/qextserialport/src"
+INCLUDEPATH += "$$_PRO_FILE_PWD_/../../librairie/qextserialport/src"
 
-win32: LIBS +=  "$$_PRO_FILE_PWD_/../librairie/qextserialport/Qt5ExtSerialPort1.dll"
-else: unix: LIBS +=  "$$_PRO_FILE_PWD_/../librairie/qextserialport/libQt5ExtSerialPort.so"
+win32: LIBS +=  "$$_PRO_FILE_PWD_/../../librairie/qextserialport/Qt5ExtSerialPort1.dll"
+else: unix: LIBS +=  "$$_PRO_FILE_PWD_/../../librairie/qextserialport/libQt5ExtSerialPort.so"
 
 SOURCES += main.cpp\
     PinController.cpp \
