@@ -50,7 +50,7 @@ void loop() {
 
     Serial.print("pin: ");
     Serial.print(data.pin);
-    Serial.print("value: ");
+    Serial.print(" value: ");
     Serial.println(data.value);
   }
 }
