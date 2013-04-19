@@ -13,8 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        Gui.cpp
+        Gui.cpp \
+    PinController.cpp \
+    Core.cpp \
+    Arduino.cpp
 
-HEADERS  += Gui.h
+HEADERS  += Gui.h \
+    PinController.h \
+    Core.h \
+    Arduino.h
 
 FORMS    += Gui.ui
