@@ -44,6 +44,7 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QObject *paren
     maxValue->setText(QString::number(defaultMax));
     minValue->setText(QString::number(defaultMin));
     vertSlider->setRange(defaultMin, defaultMax);
+    lcd->setSegmentStyle(QLCDNumber::Flat);
 //    maxValue->setMaxLength(3);
 //    minValue->setMaxLength(3);
 //    QRect maxValueRect = maxValue->geometry();
