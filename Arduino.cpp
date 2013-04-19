@@ -24,7 +24,7 @@ void Arduino::initPort(QString portStr)
 
     port->open(QIODevice::ReadWrite | QIODevice::Unbuffered); //we open the port
     if(!port->isOpen())
-        throw ArduinoError("Impossible to open the port!");
+        throw ArduinoError("Unable to open the port!");
 
     //we set the port properties
     port->setBaudRate(BAUD9600);//modify the port settings on your own
@@ -32,6 +32,8 @@ void Arduino::initPort(QString portStr)
     port->setParity(PAR_NONE);
     port->setDataBits(DATA_8);
     port->setStopBits(STOP_1);
+
+    this->isConnected = true;
 }
 
 void Arduino::closePort()
@@ -40,16 +42,13 @@ void Arduino::closePort()
         port->close();
 }
 
-//void Arduino::on_pushButtonConnect_clicked()
-//{
-//    init_port(ui->lineEditPort->text());
-//}
-
-void Arduino::transmitCmd(int value)
+void Arduino::transmitCmd(Arduino::Buffer buffer)
 {
-  if(value < 0 || value > 255)return; //if the value is not between 0 and 255 no transmission
-
-  char buf = value;
-  port->write(&buf, 1);
-  qDebug() << "Valeur : " << value;
+  if (!this->isConnected)
+  {
+      qDebug() << "Error: Not connected to Arduino";
+      return;
+  }
+  port->write((char *) &buffer, sizeof(buffer));
+  qDebug() << "Valeur : " << QString::number(buffer.value) << ", Pin : " << QString::number(buffer.pin);
 }
