@@ -22,6 +22,7 @@
 
 #include <QMainWindow>
 #include "PinController.h"
+#include "PinConfig.h"
 #include "Arduino.h"
 
 namespace Ui {
@@ -38,19 +39,22 @@ public:
     explicit GuiController(QWidget *parent = 0);
     ~GuiController();
     void addToTab1Layout(QWidget *widget);
+    void addToTab2Layout(QWidget *widget);
     Arduino *getArduino();
     void displayArduinoMessage(QString data);
     
 private:
     Ui::Gui *ui;
     QList<PinController *> pinControllerList;
+    QList<PinConfig *> pinConfigList;
     Arduino arduino;
 
     void addPinControl(quint8 pinNumber);
 
 private slots:
     void on_pushButtonConnect_clicked();
-
+    void on_dockWidgetConsole_topLevelChanged(bool);
+    void on_pushButtonAddPin_clicked();
 };
 
 #endif // GUI_H

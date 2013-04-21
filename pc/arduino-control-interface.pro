@@ -19,12 +19,14 @@ else: unix: LIBS +=  "$$_PRO_FILE_PWD_/../../librairie/qextserialport/libQt5ExtS
 SOURCES += main.cpp\
     PinController.cpp \
     Arduino.cpp \
-    GuiController.cpp
+    GuiController.cpp \
+    PinConfig.cpp
 
 HEADERS  += \
     PinController.h \
     Arduino.h \
     define_exception.h \
-    GuiController.h
+    GuiController.h \
+    PinConfig.h
 
 FORMS    += Gui.ui

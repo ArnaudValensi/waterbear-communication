@@ -1,5 +1,3 @@
-#include <QMessageBox>
-#include "GuiController.h"
 /* ***** BEGIN LICENSE BLOCK *****
  *
  * This file is part of arduino-control-interface.
@@ -19,6 +17,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+#include <QMessageBox>
+#include <QDebug>
+#include "GuiController.h"
 #include "ui_Gui.h"
 #include "PinController.h"
 
@@ -52,6 +53,11 @@ void GuiController::addToTab1Layout(QWidget *widget)
     this->ui->tab1Layout->addWidget(widget);
 }
 
+void GuiController::addToTab2Layout(QWidget *widget)
+{
+    this->ui->tab2Layout->addWidget(widget);
+}
+
 void GuiController::on_pushButtonConnect_clicked()
 {
     try
@@ -63,6 +69,26 @@ void GuiController::on_pushButtonConnect_clicked()
     {
         QMessageBox::warning(this, "Arduino", e.what());
     }
+}
+
+void GuiController::on_dockWidgetConsole_topLevelChanged(bool floating)
+{
+    qDebug() << "floating: " << floating;
+    if (floating)
+    {
+        // TODO: does not work.
+//        QRect rect = this->ui->dockWidgetConsole->geometry();
+//        rect.setWidth(200);
+//        rect.setHeight(600);
+//        this->ui->dockWidgetConsole->setGeometry(rect);
+    }
+}
+
+void GuiController::on_pushButtonAddPin_clicked()
+{
+    PinConfig *pinConfig = new PinConfig(this);
+
+    pinConfigList.push_back(pinConfig);
 }
 
 Arduino *GuiController::getArduino()
