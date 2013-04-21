@@ -17,7 +17,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#include <QVBoxLayout>
 #include "PinController.h"
 
 PinController::PinController(GuiController *ui, quint8 pinNumber, QObject *parent) :
@@ -30,21 +29,21 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QObject *paren
     this->maxValue = new QLineEdit();
     this->minValue = new QLineEdit();
     this->lcd = new QLCDNumber();
+    this->vbox = new QVBoxLayout();
 
-    QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(maxValue);
-    vbox->addWidget(vertSlider);
-    vbox->addWidget(minValue);
-    vbox->addWidget(lcd);
+    this->vbox->addWidget(this->maxValue);
+    this->vbox->addWidget(this->vertSlider);
+    this->vbox->addWidget(this->minValue);
+    this->vbox->addWidget(this->lcd);
     //vbox->addStretch(1);
-    groupBox->setLayout(vbox);
-    this->ui->addToTab1Layout(groupBox);
+    this->groupBox->setLayout(this->vbox);
+    this->ui->addToTab1Layout(this->groupBox);
 
-    groupBox->setTitle(QString("Pin %1").arg(pinNumber));
-    maxValue->setText(QString::number(defaultMax));
-    minValue->setText(QString::number(defaultMin));
-    vertSlider->setRange(defaultMin, defaultMax);
-    lcd->setSegmentStyle(QLCDNumber::Flat);
+    this->groupBox->setTitle(QString("Pin %1").arg(pinNumber));
+    this->maxValue->setText(QString::number(defaultMax));
+    this->minValue->setText(QString::number(defaultMin));
+    this->vertSlider->setRange(defaultMin, defaultMax);
+    this->lcd->setSegmentStyle(QLCDNumber::Flat);
 //    maxValue->setMaxLength(3);
 //    minValue->setMaxLength(3);
 //    QRect maxValueRect = maxValue->geometry();

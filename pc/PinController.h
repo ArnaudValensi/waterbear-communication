@@ -27,6 +27,7 @@
 #include <QSlider>
 #include <QLineEdit>
 #include <QLCDNumber>
+#include <QVBoxLayout>
 #include "GuiController.h"
 #include "Arduino.h"
 
@@ -48,6 +49,7 @@ private:
     QLineEdit *maxValue;
     QLineEdit *minValue;
     QLCDNumber *lcd;
+    QVBoxLayout *vbox;
         
 public slots:
     void updateSliderRange();

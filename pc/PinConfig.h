@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QGroupBox>
 #include <QLineEdit>
+#include <QRadioButton>
+#include <QVBoxLayout>
+#include <QButtonGroup>
 
 class GuiController;
 
@@ -17,7 +20,11 @@ private:
     GuiController *ui;
     QGroupBox *groupBox;
     QLineEdit *pinNumber;
-    
+    QRadioButton *radioIn;
+    QRadioButton *radioOut;
+    QButtonGroup *radioInOutGroup;
+    QVBoxLayout *vbox;
+
 signals:
     
 public slots:
