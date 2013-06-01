@@ -14,7 +14,7 @@ TEMPLATE = app
 INCLUDEPATH += "$$_PRO_FILE_PWD_/../../librairie/qextserialport/src"
 
 win32: LIBS +=  "$$_PRO_FILE_PWD_/../../librairie/qextserialport/Qt5ExtSerialPort1.dll"
-else: unix: LIBS +=  "$$_PRO_FILE_PWD_/../../librairie/qextserialport/libQt5ExtSerialPort.so"
+else: unix: LIBS +=  -L"$$_PRO_FILE_PWD_/../../librairie/qextserialport" -lQt5ExtSerialPort
 
 SOURCES += main.cpp\
     PinController.cpp \

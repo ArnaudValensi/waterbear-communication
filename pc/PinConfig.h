@@ -27,20 +27,25 @@ private:
     QButtonGroup *radioInOutGroup;
     QVBoxLayout *vbox;
     //QWidget *outConfig;
+
+    // For outConfigGroupBox
     QGroupBox *outConfigGroupBox;
     QPushButton *outConfigButton;
     QSlider *outConfigSlider;
     QVBoxLayout *outConfigVbox;
 
+    // For inConfigGroupBox
+    QGroupBox *inConfigGroupBox;
 
-    void displayInConfig();
-    void displayOutConfig();
-
+    void createOutConfigGroupBox();
+    void createInConfigGroupBox();
 
 signals:
     
 public slots:
-    
+    void displayInConfig();
+    void displayOutConfig();
+
 };
 
 #endif // PINCONFIG_H
