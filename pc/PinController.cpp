@@ -39,10 +39,10 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QObject *paren
     this->groupBox->setLayout(this->vbox);
     this->ui->addToTab1Layout(this->groupBox);
 
-    this->groupBox->setTitle(QString("Pin %1").arg(pinNumber));
-    this->maxValue->setText(QString::number(defaultMax));
-    this->minValue->setText(QString::number(defaultMin));
-    this->vertSlider->setRange(defaultMin, defaultMax);
+    this->groupBox->setTitle(QString("Pin %1").arg(this->pinNumber));
+    this->maxValue->setText(QString::number(this->defaultMax));
+    this->minValue->setText(QString::number(this->defaultMin));
+    this->vertSlider->setRange(this->defaultMin, this->defaultMax);
     this->lcd->setSegmentStyle(QLCDNumber::Flat);
 //    maxValue->setMaxLength(3);
 //    minValue->setMaxLength(3);
@@ -51,12 +51,12 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QObject *paren
 //    maxValue->setGeometry(maxValueRect);
 
     //connect(vertSlider, &QSlider::valueChanged, lcd, &QLCDNumber::display);
-    connect(vertSlider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
-    connect(vertSlider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
+    connect(this->vertSlider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
+    connect(this->vertSlider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
     connect(this, SIGNAL(sliderValueChanged(Arduino::Buffer)),
             ui->getArduino(), SLOT(transmitCmd(Arduino::Buffer)));
-    connect(maxValue, SIGNAL(editingFinished()), this, SLOT(updateSliderRange()));
-    connect(minValue, SIGNAL(editingFinished()), this, SLOT(updateSliderRange()));
+    connect(this->maxValue, SIGNAL(editingFinished()), this, SLOT(updateSliderRange()));
+    connect(this->minValue, SIGNAL(editingFinished()), this, SLOT(updateSliderRange()));
 }
 
 void PinController::updateSliderRange()

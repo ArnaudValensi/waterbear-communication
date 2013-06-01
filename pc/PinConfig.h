@@ -7,6 +7,8 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 #include <QButtonGroup>
+#include <QPushButton>
+#include <QSlider>
 
 class GuiController;
 
@@ -24,6 +26,16 @@ private:
     QRadioButton *radioOut;
     QButtonGroup *radioInOutGroup;
     QVBoxLayout *vbox;
+    //QWidget *outConfig;
+    QGroupBox *outConfigGroupBox;
+    QPushButton *outConfigButton;
+    QSlider *outConfigSlider;
+    QVBoxLayout *outConfigVbox;
+
+
+    void displayInConfig();
+    void displayOutConfig();
+
 
 signals:
     
