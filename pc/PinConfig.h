@@ -30,21 +30,27 @@ private:
 
     // For outConfigGroupBox
     QGroupBox *outConfigGroupBox;
-    QPushButton *outConfigButton;
-    QSlider *outConfigSlider;
-    QVBoxLayout *outConfigVbox;
+    QVBoxLayout *outConfigVbox;    
+    QRadioButton *radioOutSlider;
+    QRadioButton *radioOutPot;
 
     // For inConfigGroupBox
     QGroupBox *inConfigGroupBox;
 
+    QGroupBox *subConfigGroupBox;
+
     void createOutConfigGroupBox();
     void createInConfigGroupBox();
+    void clearOutConfig();
 
 signals:
     
 public slots:
     void displayInConfig();
     void displayOutConfig();
+
+    void displayOutSliderConfig();
+    void displayOutPotConfig();
 
 };
 
