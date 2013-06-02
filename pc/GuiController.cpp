@@ -30,8 +30,8 @@ GuiController::GuiController(QWidget *parent) :
     arduino(this)
 {
     ui->setupUi(this);
-    for(int i = 0; i < 10; ++i)
-        this->addPinControl(i);
+//    for(int i = 0; i < 10; ++i)
+//        this->addPinControl(i);
 }
 
 GuiController::~GuiController()
@@ -41,11 +41,12 @@ GuiController::~GuiController()
     delete ui;
 }
 
-void GuiController::addPinControl(quint8 pinNumber)
+PinController *GuiController::addPinControl(quint8 pinNumber)
 {
     PinController *pin = new PinController(this, pinNumber);
 
     pinControllerList.push_back(pin);
+    return pin;
 }
 
 void GuiController::addToTab1Layout(QWidget *widget)

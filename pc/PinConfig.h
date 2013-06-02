@@ -9,8 +9,10 @@
 #include <QButtonGroup>
 #include <QPushButton>
 #include <QSlider>
+//#include "PinController.h"
 
 class GuiController;
+class PinController;
 
 class PinConfig : public QObject
 {
@@ -40,9 +42,19 @@ private:
 
     QGroupBox *subConfigGroupBox;
 
+    int pin;
+    PinController *pinController;
+
     void createOutConfigGroupBox();
     void createInConfigGroupBox();
     void clearOutConfig();
+    QWidget *outWidgetAt(int pos);
+
+    void applyOutSlider();
+    PinController *createPinController(int pin);
+
+protected:
+    void setLayout(QLayout *layout);
 
 signals:
     
@@ -52,6 +64,8 @@ public slots:
 
     void displayOutSliderConfig();
     void displayOutPotConfig();
+
+    void apply();
 
 };
 

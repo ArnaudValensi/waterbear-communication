@@ -42,14 +42,13 @@ public:
     void addToTab2Layout(QWidget *widget);
     Arduino *getArduino();
     void displayArduinoMessage(QString data);
-    
+    PinController *addPinControl(quint8 pinNumber);
+
 private:
     Ui::Gui *ui;
     QList<PinController *> pinControllerList;
     QList<PinConfig *> pinConfigList;
     Arduino arduino;
-
-    void addPinControl(quint8 pinNumber);
 
 private slots:
     void on_pushButtonConnect_clicked();

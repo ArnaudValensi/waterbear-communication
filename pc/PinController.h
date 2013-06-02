@@ -38,6 +38,7 @@ class PinController : public QObject
     Q_OBJECT
 public:
     explicit PinController(GuiController *ui, quint8 pinNumber, QObject *parent = 0);
+    void setLayout(QLayout *layout);
 
 private:
     static quint8 const defaultMin = 0;
