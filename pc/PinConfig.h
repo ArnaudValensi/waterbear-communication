@@ -27,6 +27,7 @@ private:
     QButtonGroup *radioInOutGroup;
     QVBoxLayout *vbox;
     //QWidget *outConfig;
+    QPushButton *buttonApply;
 
     // For outConfigGroupBox
     QGroupBox *outConfigGroupBox;
