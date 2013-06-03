@@ -53,7 +53,6 @@ private:
     QVBoxLayout *vbox;
         
 public slots:
-    void updateSliderRange();
     void sendValueToArduino(int value);
 
 signals:

@@ -25,46 +25,8 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QObject *paren
     ui(ui)
 {
     this->groupBox = new QGroupBox();
-    this->vertSlider = new QSlider(Qt::Vertical);
-    this->maxValue = new QLineEdit();
-    this->minValue = new QLineEdit();
-    this->lcd = new QLCDNumber();
-    this->vbox = new QVBoxLayout();
-
-    this->vbox->addWidget(this->maxValue);
-    this->vbox->addWidget(this->vertSlider);
-    this->vbox->addWidget(this->minValue);
-    this->vbox->addWidget(this->lcd);
-    //vbox->addStretch(1);
-//    this->groupBox->setLayout(this->vbox);
     this->ui->addToTab1Layout(this->groupBox);
-
     this->groupBox->setTitle(QString("Pin %1").arg(this->pinNumber));
-//    this->maxValue->setText(QString::number(this->defaultMax));
-//    this->minValue->setText(QString::number(this->defaultMin));
-//    this->vertSlider->setRange(this->defaultMin, this->defaultMax);
-//    this->lcd->setSegmentStyle(QLCDNumber::Flat);
-////    maxValue->setMaxLength(3);
-////    minValue->setMaxLength(3);
-////    QRect maxValueRect = maxValue->geometry();
-////    maxValueRect.setWidth(41);
-////    maxValue->setGeometry(maxValueRect);
-
-//    //connect(vertSlider, &QSlider::valueChanged, lcd, &QLCDNumber::display);
-//    connect(this->vertSlider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
-//    connect(this->vertSlider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
-//    connect(this, SIGNAL(sliderValueChanged(Arduino::Buffer)),
-//            ui->getArduino(), SLOT(transmitCmd(Arduino::Buffer)));
-//    connect(this->maxValue, SIGNAL(editingFinished()), this, SLOT(updateSliderRange()));
-//    connect(this->minValue, SIGNAL(editingFinished()), this, SLOT(updateSliderRange()));
-}
-
-void PinController::updateSliderRange()
-{
-//    quint8 max = this->maxValue->text().toUShort();
-//    quint8 min = this->minValue->text().toUShort();
-
-//    vertSlider->setRange(min, max);
 }
 
 void PinController::sendValueToArduino(int value)
