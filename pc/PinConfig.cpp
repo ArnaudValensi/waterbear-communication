@@ -24,6 +24,7 @@
 #include "AElement.h"
 #include "ElementSlider.h"
 #include "ElementPot.h"
+#include "ElementPushButton.h"
 
 PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     QObject(parent),
@@ -39,8 +40,10 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
 
     AElement *slider = new ElementSlider(this, "Slider");
     AElement *pot = new ElementPot(this, "Pot");
+    AElement *button = new ElementPushButton(this, "Button");
     this->elementList.push_back(slider);
     this->elementList.push_back(pot);
+    this->elementList.push_back(button);
 
     this->createOutConfigGroupBox();
     this->createInConfigGroupBox();

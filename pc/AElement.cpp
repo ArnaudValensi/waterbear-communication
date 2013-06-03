@@ -31,6 +31,11 @@ AElement::AElement(PinConfig *pinConfig, QString name, QObject *parent) :
     QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayOut()));
 }
 
+AElement::~AElement()
+{
+
+}
+
 QString AElement::getName() const
 {
     return this->name;

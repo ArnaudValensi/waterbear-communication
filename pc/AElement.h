@@ -31,6 +31,7 @@ class AElement : public QObject
     Q_OBJECT
 public:
     explicit AElement(PinConfig *pinConfig, QString name, QObject *parent = 0);
+    virtual ~AElement();
     QString getName() const;
     QRadioButton *getRadioButton() const;
     virtual void displayElem();
@@ -48,7 +49,7 @@ protected:
 
 public slots:
     void displayOut();
-    void sendValueToArduino(int value);
+    void sendValueToArduino(int value = 0);
 
 };
 
