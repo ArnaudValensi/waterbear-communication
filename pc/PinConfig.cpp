@@ -38,15 +38,18 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     this->radioInOutGroup = new QButtonGroup();
     this->buttonApply = new QPushButton("Apply");
 
-    AElement *slider = new ElementSlider(this, "Slider");
-    AElement *pot = new ElementPot(this, "Pot");
-    AElement *button = new ElementPushButton(this, "Button");
+    AElement *slider = new ElementSlider(this, "Slider", AElement::OUT);
+    AElement *pot = new ElementPot(this, "Pot", AElement::OUT);
+    AElement *button = new ElementPushButton(this, "Button", AElement::OUT);
+    AElement *sliderIn = new ElementSlider(this, "Slider", AElement::IN);
+    this->elementList.push_back(sliderIn);
     this->elementList.push_back(slider);
     this->elementList.push_back(pot);
     this->elementList.push_back(button);
 
-    this->createOutConfigGroupBox();
-    this->createInConfigGroupBox();
+    this->createConfigGroupBox();
+//    this->createOutConfigGroupBox();
+//    this->createInConfigGroupBox();
 
     // Sub config
     this->subConfigGroupBox = new QGroupBox();
@@ -78,11 +81,29 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     QObject::connect(buttonApply, SIGNAL(clicked(bool)), this, SLOT(apply()));
 }
 
-//void PinConfig::createConfigGroupBox()
-//{
+void PinConfig::createConfigGroupBox()
+{
+    this->inConfigGroupBox = new QGroupBox();
+    this->outConfigGroupBox = new QGroupBox();
 
-//}
+    this->inConfigVbox = new QVBoxLayout();
+    this->outConfigVbox = new QVBoxLayout();
 
+    this->inConfigGroupBox->setLayout(this->inConfigVbox);
+    this->outConfigGroupBox->setLayout(this->outConfigVbox);
+
+    for (int i = 0; i < this->elementList.size(); ++i)
+    {
+        AElement *elem = this->elementList.at(i);
+
+        if (elem->getTransfertType() == AElement::IN)
+            this->inConfigVbox->addWidget(elem->getRadioButton());
+        else if (elem->getTransfertType() == AElement::OUT)
+            this->outConfigVbox->addWidget(elem->getRadioButton());
+    }
+}
+
+// Deprecated
 // This is displayed when 'out' is selected in checkbox
 void PinConfig::createOutConfigGroupBox()
 {
@@ -94,6 +115,7 @@ void PinConfig::createOutConfigGroupBox()
         this->outConfigVbox->addWidget(this->elementList.at(i)->getRadioButton());
 }
 
+// Deprecated
 void PinConfig::createInConfigGroupBox()
 {
     // This is displayed when 'out' is selected in checkbox
@@ -120,8 +142,7 @@ void PinConfig::displayOutConfig()
     this->buttonApply->hide();
 }
 
-//--------------------------------------------------------------
-// Out options
+// Used by AElement, before adding widgets to the display layout
 void PinConfig::preDisplayConfig()
 {
     this->subConfigGroupBox->show();
@@ -129,6 +150,7 @@ void PinConfig::preDisplayConfig()
     this->buttonApply->show();
 }
 
+// Used by AElement, after adding widgets to the display layout
 void PinConfig::postDisplayConfig()
 {
 
@@ -154,7 +176,8 @@ void PinConfig::clearOutConfig()
     delete groupBoxLayout;
 }
 
-// Get the widget in the last group box at the position 'pos'
+// Never used.
+// Get the widget in the last group box at the position 'pos'.
 QWidget *PinConfig::outWidgetAt(int pos)
 {
     QLayout *groupBoxLayout = this->subConfigGroupBox->layout();
@@ -199,7 +222,7 @@ void PinConfig::apply()
     for (int i = 0; i < this->elementList.size(); ++i)
     {
         AElement *elem = this->elementList.at(i);
-        if (elem->getRadioButton()->isChecked())
+        if (elem->getRadioButton()->isChecked() && elem->getRadioButton()->isVisible())
         {
             elem->displayElem();
             return;

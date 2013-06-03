@@ -21,11 +21,12 @@
 #include "AElement.h"
 #include "PinConfig.h"
 
-AElement::AElement(PinConfig *pinConfig, QString name, QObject *parent) :
+AElement::AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent) :
     QObject(parent)
 {
     this->pinConfig = pinConfig;
     this->name = name;
+    this->transfertType = io;
 
     this->radioButton = new QRadioButton(name);
     QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayOut()));
@@ -67,6 +68,11 @@ void AElement::sendValueToArduino(int value)
 {
     this->pinConfig->sendValueToArduino(value);
     qDebug() << "Sent to Arduino: " << value;
+}
+
+AElement::TransfertType AElement::getTransfertType()
+{
+    return this->transfertType;
 }
 
 // You have to reimplement this function in the child

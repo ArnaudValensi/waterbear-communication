@@ -60,13 +60,18 @@ private:
 
     // For inConfigGroupBox
     QGroupBox *inConfigGroupBox;
+    QVBoxLayout *inConfigVbox;
+
     QGroupBox *subConfigGroupBox;
 
     int pin;
     PinController *pinController;
 
+    // Deprecated
     void createOutConfigGroupBox();
+    // Deprecated
     void createInConfigGroupBox();
+    void createConfigGroupBox();
     void clearOutConfig();
     QWidget *outWidgetAt(int pos);
 

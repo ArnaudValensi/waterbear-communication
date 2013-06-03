@@ -26,7 +26,7 @@ class ElementPushButton : public AElement
 {
     Q_OBJECT
 public:
-    ElementPushButton(PinConfig *pinConfig, QString name, QObject *parent = 0);
+    ElementPushButton(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent = 0);
     virtual ~ElementPushButton();
     virtual void displayElem();
 

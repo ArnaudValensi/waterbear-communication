@@ -30,11 +30,14 @@ class AElement : public QObject
 {
     Q_OBJECT
 public:
-    explicit AElement(PinConfig *pinConfig, QString name, QObject *parent = 0);
+    enum TransfertType { IN = 0, OUT };
+
+    explicit AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent = 0);
     virtual ~AElement();
     QString getName() const;
     QRadioButton *getRadioButton() const;
     virtual void displayElem();
+    AElement::TransfertType getTransfertType();
 
 private:
     virtual void displayConfig();
@@ -42,6 +45,7 @@ private:
     PinConfig *pinConfig;
     QString name;
     QRadioButton *radioButton;
+    TransfertType transfertType;
 
 protected:
     void setConfigLayout(QLayout *layout);

@@ -24,8 +24,8 @@
 #include <QDebug>
 #include "ElementSlider.h"
 
-ElementSlider::ElementSlider(PinConfig *pinConfig, QString name, QObject *parent)
-    : AElement(pinConfig, name, parent)
+ElementSlider::ElementSlider(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent)
+    : AElement(pinConfig, name, io, parent)
 {
 }
 
