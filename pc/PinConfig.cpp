@@ -1,5 +1,23 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ *
+ * This file is part of arduino-control-interface.
+ *
+ * arduino-control-interface is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * arduino-control-interface is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with arduino-control-interface.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
 #include <QDebug>
-#include <QLineEdit>
 #include <QMessageBox>
 #include "PinConfig.h"
 #include "GuiController.h"
@@ -63,22 +81,10 @@ void PinConfig::createOutConfigGroupBox()
 {
     this->outConfigGroupBox = new QGroupBox();
     this->outConfigVbox = new QVBoxLayout();
-
-//    this->radioOutSlider = new QRadioButton("Slider");
-//    this->radioOutPot = new QRadioButton("Pot");
-
     this->outConfigGroupBox->setLayout(this->outConfigVbox);
-//    this->outConfigVbox->addWidget(this->radioOutSlider);
-//    this->outConfigVbox->addWidget(this->radioOutPot);
 
-    //    for (int i = 0; i < this->elementList.size(); ++i)
     for (int i = 0; i < this->elementList.size(); ++i)
-    {
         this->outConfigVbox->addWidget(this->elementList.at(i)->getRadioButton());
-    }
-
-//    QObject::connect(radioOutSlider, SIGNAL(clicked(bool)), this, SLOT(displayOutSliderConfig()));
-//    QObject::connect(radioOutPot, SIGNAL(clicked(bool)), this, SLOT(displayOutPotConfig()));
 }
 
 void PinConfig::createInConfigGroupBox()
@@ -124,23 +130,6 @@ void PinConfig::postDisplayConfig()
 void PinConfig::setConfigLayout(QLayout *layout)
 {
     this->subConfigGroupBox->setLayout(layout);
-}
-
-// Deprecated
-void PinConfig::displayOutSliderConfig()
-{
-    this->subConfigGroupBox->show();
-
-    QLineEdit *minValue = new QLineEdit();
-    QLineEdit *maxValue = new QLineEdit();
-    QHBoxLayout *hbox = new QHBoxLayout();
-
-    hbox->addWidget(minValue);
-    hbox->addWidget(maxValue);
-
-    this->clearOutConfig();
-    this->subConfigGroupBox->setLayout(hbox);
-    this->buttonApply->show();
 }
 
 // Deprecated
@@ -207,7 +196,6 @@ void PinConfig::sendValueToArduino(int value)
 // Apply
 void PinConfig::apply()
 {
-    qDebug() << "apply";
     QString pinStr = this->pinNumber->text();
     bool ok;
     this->pin = pinStr.toInt(&ok);
@@ -227,80 +215,4 @@ void PinConfig::apply()
             return;
         }
     }
-}
-
-//void PinConfig::apply()
-//{
-//    qDebug() << "apply";
-//    QString pinStr = this->pinNumber->text();
-//    bool ok;
-//    this->pin = pinStr.toInt(&ok);
-//    if (!ok)
-//    {
-//        QMessageBox::warning(this->ui, "Error", "Pin number is not set.");
-//        return;
-//    }
-//    this->createPinController(this->pin);
-
-//    if (this->radioOut->isChecked())
-//    {
-//        if (this->radioOutSlider->isChecked())
-//        {
-//            this->applyOutSlider();
-//        }
-//        else if (this->radioOutPot->isChecked())
-//        {
-
-//        }
-//    }
-//    else if (this->radioIn->isChecked())
-//    {
-
-//    }
-//}
-
-void PinConfig::applyOutSlider()
-{
-    //this->pin
-    int min;
-    int max;
-
-    // TODO: Exception if null
-    QLineEdit *inputTextMin = dynamic_cast<QLineEdit *>(this->outWidgetAt(0));
-    QLineEdit *inputTextMax = dynamic_cast<QLineEdit *>(this->outWidgetAt(1));
-    if (inputTextMin && inputTextMax)
-    {
-        QVBoxLayout *vbox = new QVBoxLayout();
-        QSlider *slider = new QSlider();
-        QLCDNumber *lcd = new QLCDNumber();
-        bool ok;
-
-        min = inputTextMin->text().toInt(&ok);
-        if (!ok)
-            min = 0;
-
-        max = inputTextMax->text().toInt(&ok);
-        if (!ok)
-            max = 255;
-
-        qDebug() << "min: " << min;
-        qDebug() << "max: " << max;
-
-        slider->setMinimum(min);
-        slider->setMaximum(max);
-
-        connect(slider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
-        connect(slider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
-
-        vbox->addWidget(lcd);
-        vbox->addWidget(slider);
-        this->setLayout(vbox);
-    }
-}
-
-//-------------------------------------------
-// Depracated
-QGroupBox *PinConfig::getSubConfigGroupBox()
-{
-    return this->subConfigGroupBox;
 }

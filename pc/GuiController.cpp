@@ -30,8 +30,6 @@ GuiController::GuiController(QWidget *parent) :
     arduino(this)
 {
     ui->setupUi(this);
-//    for(int i = 0; i < 10; ++i)
-//        this->addPinControl(i);
 }
 
 GuiController::~GuiController()
@@ -78,10 +76,10 @@ void GuiController::on_dockWidgetConsole_topLevelChanged(bool floating)
     if (floating)
     {
         // TODO: does not work.
-//        QRect rect = this->ui->dockWidgetConsole->geometry();
-//        rect.setWidth(200);
-//        rect.setHeight(600);
-//        this->ui->dockWidgetConsole->setGeometry(rect);
+        //        QRect rect = this->ui->dockWidgetConsole->geometry();
+        //        rect.setWidth(200);
+        //        rect.setHeight(600);
+        //        this->ui->dockWidgetConsole->setGeometry(rect);
     }
 }
 

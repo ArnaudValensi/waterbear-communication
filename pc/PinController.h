@@ -17,7 +17,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// TODO: change ui bu controller.
+// TODO: change ui by controller.
 
 #ifndef PINCONTROLLER_H
 #define PINCONTROLLER_H
