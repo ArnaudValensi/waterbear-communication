@@ -22,7 +22,9 @@ SOURCES += main.cpp\
     GuiController.cpp \
     PinConfig.cpp \
     AElement.cpp \
-    ElementSlider.cpp
+    ElementSlider.cpp \
+    ElementPot.cpp \
+    ElementPushButton.cpp
 
 HEADERS  += \
     PinController.h \
@@ -31,6 +33,8 @@ HEADERS  += \
     GuiController.h \
     PinConfig.h \
     AElement.h \
-    ElementSlider.h
+    ElementSlider.h \
+    ElementPot.h \
+    ElementPushButton.h
 
 FORMS    += Gui.ui
