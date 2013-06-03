@@ -42,6 +42,8 @@ public:
     void postDisplayConfig();
     void setConfigLayout(QLayout *layout);
     void setLayout(QLayout *layout);
+    bool isApplyed() const;
+    AElement *getElement() const;
 
 private:
     GuiController *ui;
@@ -66,6 +68,7 @@ private:
 
     int pin;
     PinController *pinController;
+    AElement *applyedElement;
 
     // Deprecated
     void createOutConfigGroupBox();

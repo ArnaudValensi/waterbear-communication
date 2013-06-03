@@ -19,9 +19,14 @@
 
 #include <QMessageBox>
 #include <QDebug>
+#include <QSettings>
+#include <QVariant>
+#include <QFile>
+#include <QDataStream>
 #include "GuiController.h"
 #include "ui_Gui.h"
 #include "PinController.h"
+#include "AElement.h"
 
 
 GuiController::GuiController(QWidget *parent) :
@@ -101,4 +106,31 @@ void GuiController::displayArduinoMessage(QString data)
     QTextCursor c =  this->ui->textBrowserArduino->textCursor();
     c.movePosition(QTextCursor::End);
     this->ui->textBrowserArduino->setTextCursor(c);
+}
+
+void GuiController::on_pushButtonSaveConfig_clicked()
+{
+    qDebug() << "on_pushButtonSaveConfig_clicked";
+
+    PinConfig *config;
+//    QSettings settings("Waterbear Communication", "Waterbear Communication");
+    QSettings settings("./save.xml", QSettings::IniFormat);
+    QStringList configNames;
+
+    for (int i = 0; i < this->pinConfigList.size(); ++i)
+    {
+        config = this->pinConfigList.at(i);
+        if (config->isApplyed())
+        {
+            configNames.push_back(config->getElement()->getName());
+        }
+    }
+
+    settings.setValue("Elements", QVariant(configNames));
+
+//    QFile file("settings.dat");
+//    file.open(QIODevice::WriteOnly);
+
+//    QDataStream stream(&file);
+//    stream << settings;
 }

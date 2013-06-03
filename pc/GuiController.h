@@ -45,6 +45,8 @@ public:
     PinController *addPinControl(quint8 pinNumber);
 
 private:
+    void SaveConfig();
+
     Ui::Gui *ui;
     QList<PinController *> pinControllerList;
     QList<PinConfig *> pinConfigList;
@@ -54,6 +56,8 @@ private slots:
     void on_pushButtonConnect_clicked();
     void on_dockWidgetConsole_topLevelChanged(bool);
     void on_pushButtonAddPin_clicked();
+    void on_pushButtonSaveConfig_clicked();
+
 };
 
 #endif // GUI_H

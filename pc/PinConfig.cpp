@@ -37,12 +37,13 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     this->radioOut = new QRadioButton("Out");
     this->radioInOutGroup = new QButtonGroup();
     this->buttonApply = new QPushButton("Apply");
+    this->applyedElement = NULL;
 
-    AElement *slider = new ElementSlider(this, "Slider", AElement::OUT);
-    AElement *pot = new ElementPot(this, "Pot", AElement::OUT);
-    AElement *button = new ElementPushButton(this, "Button", AElement::OUT);
-    AElement *sliderIn = new ElementSlider(this, "Slider", AElement::IN);
-    this->elementList.push_back(sliderIn);
+    AElement *slider = new ElementSlider(this);
+    AElement *pot = new ElementPot(this);
+    AElement *button = new ElementPushButton(this);
+    //AElement *sliderIn = new ElementSlider(this, "Slider", AElement::IN);
+    //this->elementList.push_back(sliderIn);
     this->elementList.push_back(slider);
     this->elementList.push_back(pot);
     this->elementList.push_back(button);
@@ -211,6 +212,12 @@ void PinConfig::apply()
 {
     QString pinStr = this->pinNumber->text();
     bool ok;
+
+    if (this->isApplyed())
+    {
+        QMessageBox::warning(this->ui, "Error", "Config already set.");
+        return;
+    }
     this->pin = pinStr.toInt(&ok);
     if (!ok)
     {
@@ -225,7 +232,20 @@ void PinConfig::apply()
         if (elem->getRadioButton()->isChecked() && elem->getRadioButton()->isVisible())
         {
             elem->displayElem();
+            this->applyedElement = elem;
             return;
         }
     }
+}
+
+bool PinConfig::isApplyed() const
+{
+    if (this->applyedElement == NULL)
+        return false;
+    return true;
+}
+
+AElement *PinConfig::getElement() const
+{
+    return this->applyedElement;
 }

@@ -26,7 +26,7 @@ class ElementPot : public AElement
 {
     Q_OBJECT
 public:
-    ElementPot(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent = 0);
+    ElementPot(PinConfig *pinConfig, QObject *parent = 0);
     virtual void displayElem();
 
 private:

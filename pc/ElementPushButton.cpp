@@ -23,8 +23,8 @@
 #include <QDebug>
 #include "ElementPushButton.h"
 
-ElementPushButton::ElementPushButton(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent)
-    : AElement(pinConfig, name, io, parent)
+ElementPushButton::ElementPushButton(PinConfig *pinConfig, QObject *parent)
+    : AElement(pinConfig, "Button", AElement::OUT, parent)
 {
 }
 

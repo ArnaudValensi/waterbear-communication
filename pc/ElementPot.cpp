@@ -24,8 +24,8 @@
 #include <QDebug>
 #include "ElementPot.h"
 
-ElementPot::ElementPot(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent)
-    : AElement(pinConfig, name, io, parent)
+ElementPot::ElementPot(PinConfig *pinConfig, QObject *parent)
+    : AElement(pinConfig, "Pot", AElement::OUT, parent)
 {
 }
 
