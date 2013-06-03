@@ -48,7 +48,7 @@ public slots:
     void sendValueToArduino(int value);
 
 signals:
-    void sliderValueChanged(Arduino::Buffer);
+    void valueChanged(Arduino::Buffer);
     
 };
 

@@ -27,12 +27,15 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QObject *paren
     this->groupBox = new QGroupBox();
     this->ui->addToTab1Layout(this->groupBox);
     this->groupBox->setTitle(QString("Pin %1").arg(this->pinNumber));
+
+    Arduino *arduino = ui->getArduino();
+    QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
 }
 
 void PinController::sendValueToArduino(int value)
 {
     Arduino::Buffer buffer(this->pinNumber, value);
-    emit sliderValueChanged(buffer);
+    emit valueChanged(buffer);
 }
 
 void PinController::setLayout(QLayout *layout)

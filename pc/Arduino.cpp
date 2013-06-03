@@ -67,13 +67,13 @@ void Arduino::closePort()
 
 void Arduino::transmitCmd(Arduino::Buffer buffer)
 {
+  qDebug() << "Valeur : " << QString::number(buffer.value) << ", Pin : " << QString::number(buffer.pin);
   if (!this->isConnected)
   {
       qDebug() << "Error: Not connected to Arduino";
       return;
   }
   port->write((char *) &buffer, sizeof(buffer));
-  qDebug() << "Valeur : " << QString::number(buffer.value) << ", Pin : " << QString::number(buffer.pin);
 }
 
 void Arduino::onDataAvailable()

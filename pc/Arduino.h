@@ -39,7 +39,7 @@ public:
         Buffer(char pin, char value) : pin(pin), value(value) {}
         unsigned char pin;
         unsigned char value;
-    };
+    } __attribute__((__packed__));
 
 private:
     QextSerialPort *port;
