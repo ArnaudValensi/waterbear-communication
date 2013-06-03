@@ -29,7 +29,6 @@ ElementSlider::ElementSlider(PinConfig *pinConfig, QString name, QObject *parent
 {
 }
 
-// You have to reimplement this function in the child
 void ElementSlider::displayConfig()
 {
     this->minValue = new QLineEdit();
@@ -42,7 +41,6 @@ void ElementSlider::displayConfig()
     this->setConfigLayout(hbox);
 }
 
-// You have to reimplement this function in the child
 void ElementSlider::displayElem()
 {
     int min;

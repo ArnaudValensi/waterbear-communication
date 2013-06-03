@@ -69,6 +69,7 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     this->buttonApply->hide();
     this->subConfigGroupBox->hide();
     vbox->addStretch();
+    this->groupBox->setFixedWidth(140);
     this->groupBox->setLayout(vbox);
     this->ui->addToTab2Layout(this->groupBox);
 

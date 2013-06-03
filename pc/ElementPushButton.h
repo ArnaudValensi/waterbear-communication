@@ -20,7 +20,6 @@
 #ifndef ELEMENTPUSHBUTTON_H
 #define ELEMENTPUSHBUTTON_H
 
-#include <QObject>
 #include "AElement.h"
 
 class ElementPushButton : public AElement

@@ -29,7 +29,6 @@ ElementPot::ElementPot(PinConfig *pinConfig, QString name, QObject *parent)
 {
 }
 
-// You have to reimplement this function in the child
 void ElementPot::displayConfig()
 {
     this->minValue = new QLineEdit();
@@ -42,7 +41,6 @@ void ElementPot::displayConfig()
     this->setConfigLayout(hbox);
 }
 
-// You have to reimplement this function in the child
 void ElementPot::displayElem()
 {
     int min;

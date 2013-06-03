@@ -54,7 +54,7 @@ void GuiController::addToTab1Layout(QWidget *widget)
 
 void GuiController::addToTab2Layout(QWidget *widget)
 {
-    this->ui->tab2Layout->addWidget(widget);
+    this->ui->tab2Layout->insertWidget(this->ui->tab2Layout->count() - 2, widget);
 }
 
 void GuiController::on_pushButtonConnect_clicked()
