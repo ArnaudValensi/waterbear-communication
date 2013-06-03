@@ -139,23 +139,6 @@ void PinConfig::setConfigLayout(QLayout *layout)
     this->subConfigGroupBox->setLayout(layout);
 }
 
-// Deprecated
-void PinConfig::displayOutPotConfig()
-{
-    this->subConfigGroupBox->show();
-
-    QLineEdit *minValue = new QLineEdit();
-    //QLineEdit *maxValue = new QLineEdit();
-    QHBoxLayout *hbox = new QHBoxLayout();
-
-    hbox->addWidget(minValue);
-    //hbox->addWidget(maxValue);
-
-    this->clearOutConfig();
-    this->subConfigGroupBox->setLayout(hbox);
-    this->buttonApply->show();
-}
-
 void PinConfig::clearOutConfig()
 {
     QLayout *groupBoxLayout = this->subConfigGroupBox->layout();

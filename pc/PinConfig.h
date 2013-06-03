@@ -77,9 +77,6 @@ public slots:
     void displayInConfig();
     void displayOutConfig();
 
-    // Dprecated
-    void displayOutPotConfig();
-
     void apply();
     void sendValueToArduino(int value);
 };
