@@ -42,8 +42,8 @@ private:
     // For outConfigGroupBox
     QGroupBox *outConfigGroupBox;
     QVBoxLayout *outConfigVbox;    
-    QRadioButton *radioOutSlider;
-    QRadioButton *radioOutPot;
+//    QRadioButton *radioOutSlider;
+//    QRadioButton *radioOutPot;
 
     // For inConfigGroupBox
     QGroupBox *inConfigGroupBox;

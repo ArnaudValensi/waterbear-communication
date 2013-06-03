@@ -14,18 +14,14 @@ public:
     explicit AElement(PinConfig *pinConfig, QString name, QObject *parent = 0);
     QString getName() const;
     QRadioButton *getRadioButton() const;
-    void displayElem();
+    virtual void displayElem();
 
 private:
-    void displayConfig();
+    virtual void displayConfig();
 
     PinConfig *pinConfig;
     QString name;
     QRadioButton *radioButton;
-
-    // Test
-    QLineEdit *minValue;
-    QLineEdit *maxValue;
 
 protected:
     void setConfigLayout(QLayout *layout);

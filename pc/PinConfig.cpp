@@ -4,6 +4,7 @@
 #include "PinConfig.h"
 #include "GuiController.h"
 #include "AElement.h"
+#include "ElementPot.h"
 
 PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     QObject(parent),
@@ -17,7 +18,7 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     this->radioInOutGroup = new QButtonGroup();
     this->buttonApply = new QPushButton("Apply");
 
-    AElement *slider = new AElement(this, "Slider");
+    AElement *slider = new ElementSlider(this, "Slider");
     this->elementList.push_back(slider);
 
     this->createOutConfigGroupBox();
@@ -60,17 +61,15 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
 // This is displayed when 'out' is selected in checkbox
 void PinConfig::createOutConfigGroupBox()
 {
-    qDebug() << "createOutConfigGroupBox :)" << this->elementList.size();
-
     this->outConfigGroupBox = new QGroupBox();
     this->outConfigVbox = new QVBoxLayout();
 
 //    this->radioOutSlider = new QRadioButton("Slider");
-    this->radioOutPot = new QRadioButton("Pot");
+//    this->radioOutPot = new QRadioButton("Pot");
 
     this->outConfigGroupBox->setLayout(this->outConfigVbox);
 //    this->outConfigVbox->addWidget(this->radioOutSlider);
-    this->outConfigVbox->addWidget(this->radioOutPot);
+//    this->outConfigVbox->addWidget(this->radioOutPot);
 
     //    for (int i = 0; i < this->elementList.size(); ++i)
     for (int i = 0; i < this->elementList.size(); ++i)

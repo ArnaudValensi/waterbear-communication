@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     Arduino.cpp \
     GuiController.cpp \
     PinConfig.cpp \
-    AElement.cpp
+    AElement.cpp \
+    ElementPot.cpp
 
 HEADERS  += \
     PinController.h \
@@ -29,6 +30,7 @@ HEADERS  += \
     define_exception.h \
     GuiController.h \
     PinConfig.h \
-    AElement.h
+    AElement.h \
+    ElementPot.h
 
 FORMS    += Gui.ui

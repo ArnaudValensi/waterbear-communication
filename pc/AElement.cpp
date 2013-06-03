@@ -1,4 +1,4 @@
-#include <QLCDNumber>
+//#include <QLCDNumber>
 #include <QDebug>
 #include "AElement.h"
 #include "PinConfig.h"
@@ -49,45 +49,45 @@ void AElement::sendValueToArduino(int value)
 // You have to reimplement this function in the child
 void AElement::displayConfig()
 {
-    this->minValue = new QLineEdit();
-    this->maxValue = new QLineEdit();
-    QHBoxLayout *hbox = new QHBoxLayout();
+//    this->minValue = new QLineEdit();
+//    this->maxValue = new QLineEdit();
+//    QHBoxLayout *hbox = new QHBoxLayout();
 
-    hbox->addWidget(minValue);
-    hbox->addWidget(maxValue);
+//    hbox->addWidget(minValue);
+//    hbox->addWidget(maxValue);
 
-    this->setConfigLayout(hbox);
+//    this->setConfigLayout(hbox);
 }
 
 // You have to reimplement this function in the child
 void AElement::displayElem()
 {
-    int min;
-    int max;
+//    int min;
+//    int max;
 
-    QVBoxLayout *vbox = new QVBoxLayout();
-    QSlider *slider = new QSlider();
-    QLCDNumber *lcd = new QLCDNumber();
-    bool ok;
+//    QVBoxLayout *vbox = new QVBoxLayout();
+//    QSlider *slider = new QSlider();
+//    QLCDNumber *lcd = new QLCDNumber();
+//    bool ok;
 
-    min = this->minValue->text().toInt(&ok);
-    if (!ok)
-        min = 0;
+//    min = this->minValue->text().toInt(&ok);
+//    if (!ok)
+//        min = 0;
 
-    max = this->maxValue->text().toInt(&ok);
-    if (!ok)
-        max = 255;
+//    max = this->maxValue->text().toInt(&ok);
+//    if (!ok)
+//        max = 255;
 
-    qDebug() << "min: " << min;
-    qDebug() << "max: " << max;
+//    qDebug() << "min: " << min;
+//    qDebug() << "max: " << max;
 
-    slider->setMinimum(min);
-    slider->setMaximum(max);
+//    slider->setMinimum(min);
+//    slider->setMaximum(max);
 
-    connect(slider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
-    connect(slider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
+//    connect(slider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
+//    connect(slider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
 
-    vbox->addWidget(lcd);
-    vbox->addWidget(slider);
-    this->setDisplayLayout(vbox);
+//    vbox->addWidget(lcd);
+//    vbox->addWidget(slider);
+//    this->setDisplayLayout(vbox);
 }
