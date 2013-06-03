@@ -66,7 +66,7 @@ public slots:
     void displayOutPotConfig();
 
     void apply();
-
+    void sendValueToArduino(int value);
 };
 
 #endif // PINCONFIG_H

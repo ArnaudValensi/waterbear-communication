@@ -159,11 +159,16 @@ PinController *PinConfig::createPinController(int pin)
     return this->pinController;
 }
 
+// API
 void PinConfig::setLayout(QLayout *layout)
 {
     this->pinController->setLayout(layout);
 }
 
+void PinConfig::sendValueToArduino(int value)
+{
+    this->pinController->sendValueToArduino(value);
+}
 
 //--------------------------------------------------------------
 // Apply
@@ -228,6 +233,7 @@ void PinConfig::applyOutSlider()
         slider->setMaximum(max);
 
         connect(slider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
+        connect(slider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
 
         vbox->addWidget(lcd);
         vbox->addWidget(slider);

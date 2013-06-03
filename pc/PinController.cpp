@@ -69,8 +69,8 @@ void PinController::updateSliderRange()
 
 void PinController::sendValueToArduino(int value)
 {
-//    Arduino::Buffer buffer(this->pinNumber, value);
-//    emit sliderValueChanged(buffer);
+    Arduino::Buffer buffer(this->pinNumber, value);
+    emit sliderValueChanged(buffer);
 }
 
 void PinController::setLayout(QLayout *layout)
