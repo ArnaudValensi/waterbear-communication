@@ -1,8 +1,9 @@
-#include "PinConfig.h"
-#include "GuiController.h"
 #include <QDebug>
 #include <QLineEdit>
 #include <QMessageBox>
+#include "PinConfig.h"
+#include "GuiController.h"
+#include "AElement.h"
 
 PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     QObject(parent),
@@ -16,6 +17,8 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     this->radioInOutGroup = new QButtonGroup();
     this->buttonApply = new QPushButton("Apply");
 
+    AElement *slider = new AElement(this, "Slider");
+    this->elementList.push_back(slider);
 
     this->createOutConfigGroupBox();
     this->createInConfigGroupBox();
@@ -49,21 +52,34 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     QObject::connect(buttonApply, SIGNAL(clicked(bool)), this, SLOT(apply()));
 }
 
+//void PinConfig::createConfigGroupBox()
+//{
+
+//}
+
 // This is displayed when 'out' is selected in checkbox
 void PinConfig::createOutConfigGroupBox()
 {
+    qDebug() << "createOutConfigGroupBox :)" << this->elementList.size();
+
     this->outConfigGroupBox = new QGroupBox();
     this->outConfigVbox = new QVBoxLayout();
 
-    this->radioOutSlider = new QRadioButton("Slider");
+//    this->radioOutSlider = new QRadioButton("Slider");
     this->radioOutPot = new QRadioButton("Pot");
 
     this->outConfigGroupBox->setLayout(this->outConfigVbox);
-    this->outConfigVbox->addWidget(this->radioOutSlider);
+//    this->outConfigVbox->addWidget(this->radioOutSlider);
     this->outConfigVbox->addWidget(this->radioOutPot);
 
-    QObject::connect(radioOutSlider, SIGNAL(clicked(bool)), this, SLOT(displayOutSliderConfig()));
-    QObject::connect(radioOutPot, SIGNAL(clicked(bool)), this, SLOT(displayOutPotConfig()));
+    //    for (int i = 0; i < this->elementList.size(); ++i)
+    for (int i = 0; i < this->elementList.size(); ++i)
+    {
+        this->outConfigVbox->addWidget(this->elementList.at(i)->getRadioButton());
+    }
+
+//    QObject::connect(radioOutSlider, SIGNAL(clicked(bool)), this, SLOT(displayOutSliderConfig()));
+//    QObject::connect(radioOutPot, SIGNAL(clicked(bool)), this, SLOT(displayOutPotConfig()));
 }
 
 void PinConfig::createInConfigGroupBox()
@@ -94,6 +110,24 @@ void PinConfig::displayOutConfig()
 
 //--------------------------------------------------------------
 // Out options
+void PinConfig::preDisplayConfig()
+{
+    this->subConfigGroupBox->show();
+    this->clearOutConfig();
+    this->buttonApply->show();
+}
+
+void PinConfig::postDisplayConfig()
+{
+
+}
+
+void PinConfig::setConfigLayout(QLayout *layout)
+{
+    this->subConfigGroupBox->setLayout(layout);
+}
+
+// Deprecated
 void PinConfig::displayOutSliderConfig()
 {
     this->subConfigGroupBox->show();
@@ -110,6 +144,7 @@ void PinConfig::displayOutSliderConfig()
     this->buttonApply->show();
 }
 
+// Deprecated
 void PinConfig::displayOutPotConfig()
 {
     this->subConfigGroupBox->show();
@@ -159,7 +194,6 @@ PinController *PinConfig::createPinController(int pin)
     return this->pinController;
 }
 
-// API
 void PinConfig::setLayout(QLayout *layout)
 {
     this->pinController->setLayout(layout);
@@ -185,22 +219,46 @@ void PinConfig::apply()
     }
     this->createPinController(this->pin);
 
-    if (this->radioOut->isChecked())
+    for (int i = 0; i < this->elementList.size(); ++i)
     {
-        if (this->radioOutSlider->isChecked())
+        AElement *elem = this->elementList.at(i);
+        if (elem->getRadioButton()->isChecked())
         {
-            this->applyOutSlider();
+            elem->displayElem();
+            return;
         }
-        else if (this->radioOutPot->isChecked())
-        {
-
-        }
-    }
-    else if (this->radioIn->isChecked())
-    {
-
     }
 }
+
+//void PinConfig::apply()
+//{
+//    qDebug() << "apply";
+//    QString pinStr = this->pinNumber->text();
+//    bool ok;
+//    this->pin = pinStr.toInt(&ok);
+//    if (!ok)
+//    {
+//        QMessageBox::warning(this->ui, "Error", "Pin number is not set.");
+//        return;
+//    }
+//    this->createPinController(this->pin);
+
+//    if (this->radioOut->isChecked())
+//    {
+//        if (this->radioOutSlider->isChecked())
+//        {
+//            this->applyOutSlider();
+//        }
+//        else if (this->radioOutPot->isChecked())
+//        {
+
+//        }
+//    }
+//    else if (this->radioIn->isChecked())
+//    {
+
+//    }
+//}
 
 void PinConfig::applyOutSlider()
 {
@@ -239,4 +297,11 @@ void PinConfig::applyOutSlider()
         vbox->addWidget(slider);
         this->setLayout(vbox);
     }
+}
+
+//-------------------------------------------
+// Depracated
+QGroupBox *PinConfig::getSubConfigGroupBox()
+{
+    return this->subConfigGroupBox;
 }

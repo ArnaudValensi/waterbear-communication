@@ -9,16 +9,22 @@
 #include <QButtonGroup>
 #include <QPushButton>
 #include <QSlider>
+#include <QMap>
 //#include "PinController.h"
 
 class GuiController;
 class PinController;
+class AElement;
 
 class PinConfig : public QObject
 {
     Q_OBJECT
 public:
     explicit PinConfig(GuiController *ui, QObject *parent = 0);
+    void preDisplayConfig();
+    void postDisplayConfig();
+    void setConfigLayout(QLayout *layout);
+    void setLayout(QLayout *layout);
 
 private:
     GuiController *ui;
@@ -30,6 +36,8 @@ private:
     QVBoxLayout *vbox;
     //QWidget *outConfig;
     QPushButton *buttonApply;
+    //QList<AElement *> elementList;
+    QList<AElement *> elementList;
 
     // For outConfigGroupBox
     QGroupBox *outConfigGroupBox;
@@ -53,11 +61,6 @@ private:
     void applyOutSlider();
     PinController *createPinController(int pin);
 
-protected:
-    void setLayout(QLayout *layout);
-
-signals:
-    
 public slots:
     void displayInConfig();
     void displayOutConfig();
@@ -67,6 +70,9 @@ public slots:
 
     void apply();
     void sendValueToArduino(int value);
+
+    // Dprecated
+    QGroupBox *getSubConfigGroupBox();
 };
 
 #endif // PINCONFIG_H

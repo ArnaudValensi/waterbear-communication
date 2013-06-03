@@ -20,13 +20,15 @@ SOURCES += main.cpp\
     PinController.cpp \
     Arduino.cpp \
     GuiController.cpp \
-    PinConfig.cpp
+    PinConfig.cpp \
+    AElement.cpp
 
 HEADERS  += \
     PinController.h \
     Arduino.h \
     define_exception.h \
     GuiController.h \
-    PinConfig.h
+    PinConfig.h \
+    AElement.h
 
 FORMS    += Gui.ui
