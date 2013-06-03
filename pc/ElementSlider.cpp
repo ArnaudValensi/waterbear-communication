@@ -22,7 +22,7 @@
 #include <QVBoxLayout>
 #include <QSlider>
 #include <QDebug>
-#include "ElementPot.h"
+#include "ElementSlider.h"
 
 ElementSlider::ElementSlider(PinConfig *pinConfig, QString name, QObject *parent)
     : AElement(pinConfig, name, parent)
