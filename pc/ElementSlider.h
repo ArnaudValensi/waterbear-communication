@@ -17,8 +17,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#ifndef ELEMENTPOT_H
-#define ELEMENTPOT_H
+#ifndef ELEMENTSLIDER_H
+#define ELEMENTSLIDER_H
 
 #include "AElement.h"
 
@@ -36,4 +36,4 @@ private:
 
 };
 
-#endif // ELEMENTPOT_H
+#endif // ELEMENTSLIDER_H
