@@ -34,7 +34,6 @@ class PinController : public QGroupBox
     Q_OBJECT
 public:
     explicit PinController(GuiController *ui, quint8 pinNumber, QWidget *parent = 0);
-//    void setLayout(QLayout *layout);
     int getPinNumber() const;
 
 private:

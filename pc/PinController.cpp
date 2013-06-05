@@ -61,16 +61,10 @@ void PinController::mouseMoveEvent(QMouseEvent *event)
 
 void PinController::mouseReleaseEvent(QMouseEvent *event)
 {
-    if(event->buttons() != Qt::LeftButton)
-        return;
-
-    qDebug() << "before release";
+    // TODO: protect against the right click
 
     QHBoxLayout *layout = this->ui->getTab1Layout();
     QList<PinController *> pinControllerList = this->ui->getPinControllerList();
-
-    qDebug() << "gui pin list: " << pinControllerList.size();
-    qDebug() << "mouse x: " << this->mapToParent(event->pos()).x();
 
     int index = pinControllerList.indexOf(this);
     int mouseX = this->mapToParent(event->pos()).x();
@@ -79,10 +73,6 @@ void PinController::mouseReleaseEvent(QMouseEvent *event)
 
     if (newIndex > listSize)
         newIndex = listSize;
-//    if (index < newIndex)
-//        --newIndex;
-
-    qDebug() << "index: " << index << ", newIndex: " << newIndex;
 
     PinController *pinController = pinControllerList.at(index);
     pinControllerList.removeAt(index);
@@ -92,10 +82,7 @@ void PinController::mouseReleaseEvent(QMouseEvent *event)
     while ((item = layout->takeAt(0)) != NULL)
         layout->removeItem(item);
 
-
-    qDebug() << "loop:";
     foreach (PinController *p, pinControllerList) {
-        qDebug() << "  pin: " << p->getPinNumber();
         layout->addWidget(p);
     }
 
