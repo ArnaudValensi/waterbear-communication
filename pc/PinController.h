@@ -26,6 +26,7 @@
 #include <QGroupBox>
 #include "GuiController.h"
 #include "Arduino.h"
+#include "AElement.h"
 
 class GuiController;
 
@@ -35,6 +36,7 @@ class PinController : public QGroupBox
 public:
     explicit PinController(GuiController *ui, quint8 pinNumber, QWidget *parent = 0);
     int getPinNumber() const;
+    void addElement(AElement *elem);
 
 private:
     static int const fixedWidth = 130;

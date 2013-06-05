@@ -18,15 +18,20 @@
  * ***** END LICENSE BLOCK ***** */
 
 #include <QMessageBox>
+#include "GuiController.h"
+#include "ui_Gui.h"
+#include "PinController.h"
+#include "AElement.h"
+#include "ElementSlider.h"
+#include "ElementPot.h"
+#include "ElementPushButton.h"
+
+#include <QInputDialog>
 #include <QDebug>
 #include <QSettings>
 #include <QVariant>
 #include <QFile>
 #include <QDataStream>
-#include "GuiController.h"
-#include "ui_Gui.h"
-#include "PinController.h"
-#include "AElement.h"
 
 
 GuiController::GuiController(QWidget *parent) :
@@ -47,6 +52,32 @@ GuiController::~GuiController()
 PinController *GuiController::addPinControl(quint8 pinNumber)
 {
     PinController *pin = new PinController(this, pinNumber);
+
+    pinControllerList.push_back(pin);
+    return pin;
+}
+
+PinController *GuiController::addPinControl()
+{
+    PinController *pin;
+    bool ok;
+    int pinNum;
+    QString text = QInputDialog::getText(this, "Pin number:",
+                                         "Enter a pin Number:", QLineEdit::Normal,
+                                         "1", &ok);
+    if (ok && !text.isEmpty())
+    {
+        pinNum = text.toInt(&ok);
+        if (!ok)
+            QMessageBox::warning(this, "Error", "Pin number must be a number.");
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Invalid pin number.");
+        return NULL;
+    }
+
+    pin = new PinController(this, pinNum);
 
     pinControllerList.push_back(pin);
     return pin;
@@ -143,4 +174,24 @@ void GuiController::on_pushButtonSaveConfig_clicked()
 
 //    QDataStream stream(&file);
 //    stream << settings;
+}
+
+void GuiController::on_actionSlider_triggered()
+{
+    qDebug() << "actionSlider triggered";
+
+    AElement *slider = new ElementSlider(this);
+    PinController *pin = this->addPinControl();
+
+    pin->addElement(slider);
+}
+
+void GuiController::on_actionPotar_triggered()
+{
+
+}
+
+void GuiController::on_actionButton_triggered()
+{
+
 }

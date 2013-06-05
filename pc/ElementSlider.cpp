@@ -29,6 +29,11 @@ ElementSlider::ElementSlider(PinConfig *pinConfig, QObject *parent)
 {
 }
 
+ElementSlider::ElementSlider(QObject *parent)
+    : AElement("Slider", AElement::OUT, parent)
+{
+}
+
 void ElementSlider::displayConfig()
 {
     this->minValue = new QLineEdit();
@@ -43,21 +48,21 @@ void ElementSlider::displayConfig()
 
 void ElementSlider::displayElem()
 {
-    int min;
-    int max;
+    int min = 0;
+    int max = 255;
 
     QVBoxLayout *vbox = new QVBoxLayout();
     QSlider *slider = new QSlider();
     QLCDNumber *lcd = new QLCDNumber();
     bool ok;
 
-    min = this->minValue->text().toInt(&ok);
-    if (!ok)
-        min = 0;
+//    min = this->minValue->text().toInt(&ok);
+//    if (!ok)
+//        min = 0;
 
-    max = this->maxValue->text().toInt(&ok);
-    if (!ok)
-        max = 255;
+//    max = this->maxValue->text().toInt(&ok);
+//    if (!ok)
+//        max = 255;
 
     qDebug() << "min: " << min;
     qDebug() << "max: " << max;

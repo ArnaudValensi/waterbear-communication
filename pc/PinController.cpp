@@ -18,6 +18,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 #include "PinController.h"
+#include "AElement.h"
 
 #include <QMouseEvent>
 #include <QDebug>
@@ -44,6 +45,12 @@ void PinController::sendValueToArduino(int value)
 int PinController::getPinNumber() const
 {
     return this->pinNumber;
+}
+
+void PinController::addElement(AElement *elem)
+{
+    elem->displayOut();
+    this->setLayout(elem->getDisplayLayout());
 }
 
 void PinController::mousePressEvent(QMouseEvent *event)

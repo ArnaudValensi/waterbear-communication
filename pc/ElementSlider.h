@@ -27,6 +27,7 @@ class ElementSlider : public AElement
     Q_OBJECT
 public:
     ElementSlider(PinConfig *pinConfig, QObject *parent = 0);
+    ElementSlider(QObject *parent = 0);
     virtual void displayElem();
 
 private:

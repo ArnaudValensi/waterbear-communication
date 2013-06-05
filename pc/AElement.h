@@ -23,6 +23,7 @@
 #include <QObject>
 #include <QRadioButton>
 #include <QLineEdit>
+#include <QLayout>
 
 class PinConfig;
 
@@ -32,12 +33,15 @@ class AElement : public QObject
 public:
     enum TransfertType { IN = 0, OUT };
 
+    // Deprecated
     explicit AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent = 0);
+    explicit AElement(QString name, TransfertType io, QObject *parent = 0);
     virtual ~AElement();
     QString getName() const;
     QRadioButton *getRadioButton() const;
     virtual void displayElem();
     AElement::TransfertType getTransfertType();
+    QLayout *getDisplayLayout() const;
 
 private:
     virtual void displayConfig();
@@ -46,6 +50,7 @@ private:
     QString name;
     QRadioButton *radioButton;
     TransfertType transfertType;
+    QLayout *displayLayout;
 
 protected:
     void setConfigLayout(QLayout *layout);

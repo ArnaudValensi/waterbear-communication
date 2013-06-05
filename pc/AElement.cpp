@@ -21,10 +21,22 @@
 #include "AElement.h"
 #include "PinConfig.h"
 
+// Deprecated
 AElement::AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent) :
     QObject(parent)
 {
     this->pinConfig = pinConfig;
+    this->name = name;
+    this->transfertType = io;
+
+    this->radioButton = new QRadioButton(name);
+    QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayOut()));
+}
+
+AElement::AElement(QString name, TransfertType io, QObject *parent) :
+    QObject(parent)
+{
+//    this->pinConfig = pinConfig;
     this->name = name;
     this->transfertType = io;
 
@@ -49,24 +61,30 @@ QRadioButton *AElement::getRadioButton() const
 
 void AElement::displayOut()
 {
-    this->pinConfig->preDisplayConfig();
-    this->displayConfig();
-    this->pinConfig->postDisplayConfig();
+//    this->pinConfig->preDisplayConfig();
+    this->displayElem();
+//    this->pinConfig->postDisplayConfig();
 }
 
 void AElement::setConfigLayout(QLayout *layout)
 {
-    this->pinConfig->setConfigLayout(layout);
+//    this->pinConfig->setConfigLayout(layout);
 }
 
 void AElement::setDisplayLayout(QLayout *layout)
 {
-    this->pinConfig->setLayout(layout);
+//    this->pinConfig->setLayout(layout);
+    this->displayLayout = layout;
+}
+
+QLayout *AElement::getDisplayLayout() const
+{
+    return this->displayLayout;
 }
 
 void AElement::sendValueToArduino(int value)
 {
-    this->pinConfig->sendValueToArduino(value);
+//    this->pinConfig->sendValueToArduino(value);
     qDebug() << "Sent to Arduino: " << value;
 }
 

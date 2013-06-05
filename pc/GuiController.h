@@ -42,6 +42,7 @@ public:
     void addToTab2Layout(QWidget *widget);
     void displayArduinoMessage(QString data);
     PinController *addPinControl(quint8 pinNumber);
+    PinController *addPinControl();
     Arduino *getArduino();
     QHBoxLayout *getTab1Layout() const;
     QList<PinController *> &getPinControllerList();
@@ -60,6 +61,9 @@ private slots:
     void on_pushButtonAddPin_clicked();
     void on_pushButtonSaveConfig_clicked();
 
+    void on_actionSlider_triggered();
+    void on_actionPotar_triggered();
+    void on_actionButton_triggered();
 };
 
 #endif // GUI_H
