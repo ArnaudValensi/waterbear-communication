@@ -22,6 +22,8 @@
 
 #include <QMouseEvent>
 #include <QDebug>
+#include <QMenu>
+#include <QDialog>
 
 PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *parent) :
     QGroupBox(parent),
@@ -31,6 +33,8 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
     this->setFixedWidth(this->fixedWidth);
     this->ui->addToTab1Layout(this);
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
+
+    this->createActions();
 
     Arduino *arduino = ui->getArduino();
     QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
@@ -49,7 +53,10 @@ int PinController::getPinNumber() const
 
 void PinController::addElement(AElement *elem)
 {
+    this->elem = elem;
     elem->displayOut();
+    // Deprecated
+    elem->displayConfig();
     this->setLayout(elem->getDisplayLayout());
 }
 
@@ -94,4 +101,31 @@ void PinController::mouseReleaseEvent(QMouseEvent *event)
     }
 
     this->updateGeometry();
+}
+
+void PinController::contextMenuEvent(QContextMenuEvent * event)
+{
+    QMenu menu(this);
+    menu.addAction(editAct);
+    menu.exec(event->globalPos());
+}
+
+void PinController::createActions()
+{
+    editAct = new QAction(tr("&Edit"), this);
+    editAct->setShortcuts(QKeySequence::Preferences);
+    editAct->setStatusTip(tr("Edit the element"));
+    connect(editAct, SIGNAL(triggered()), this, SLOT(editElement()));
+}
+
+void PinController::editElement()
+{
+    qDebug() << "Edit";
+    //this->elem->getConfigLayout()->show();
+
+//    QDialog *secondWindow = new QDialog(this);
+//    secondWindow->setLayout(this->elem->getConfigLayout());
+//    secondWindow->show();
+//    secondWindow->activateWindow();
+    this->elem->openConfigWindow();
 }

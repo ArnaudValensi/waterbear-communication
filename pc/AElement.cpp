@@ -18,6 +18,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 #include <QDebug>
+#include <QDialog>
 #include "AElement.h"
 #include "PinConfig.h"
 
@@ -28,6 +29,7 @@ AElement::AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject
     this->pinConfig = pinConfig;
     this->name = name;
     this->transfertType = io;
+    this->configWindow = NULL;
 
     this->radioButton = new QRadioButton(name);
     QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayOut()));
@@ -59,6 +61,7 @@ QRadioButton *AElement::getRadioButton() const
     return this->radioButton;
 }
 
+// TODO: Maybe can be replaced by the direct call of displayElem()
 void AElement::displayOut()
 {
 //    this->pinConfig->preDisplayConfig();
@@ -66,9 +69,30 @@ void AElement::displayOut()
 //    this->pinConfig->postDisplayConfig();
 }
 
+void AElement::openConfigWindow()
+{
+    if (!this->configWindow)
+    {
+        this->configWindow = new QDialog();
+        this->configWindow->setLayout(this->configLayout);
+    }
+    this->configWindow->show();
+    this->configWindow->activateWindow();
+}
+
+void AElement::closeConfigWindow()
+{
+    this->configWindow->close();
+}
+
 void AElement::setConfigLayout(QLayout *layout)
 {
 //    this->pinConfig->setConfigLayout(layout);
+    QPushButton *apply = new QPushButton("OK");
+    layout->addWidget(apply);
+    connect(apply, SIGNAL(clicked()), this, SLOT(onApply()));
+
+    this->configLayout = layout;
 }
 
 void AElement::setDisplayLayout(QLayout *layout)
@@ -80,6 +104,11 @@ void AElement::setDisplayLayout(QLayout *layout)
 QLayout *AElement::getDisplayLayout() const
 {
     return this->displayLayout;
+}
+
+QLayout *AElement::getConfigLayout() const
+{
+    return this->configLayout;
 }
 
 void AElement::sendValueToArduino(int value)
@@ -101,6 +130,11 @@ void AElement::displayConfig()
 
 // You have to reimplement this function in the child
 void AElement::displayElem()
+{
+
+}
+
+void AElement::onApply()
 {
 
 }

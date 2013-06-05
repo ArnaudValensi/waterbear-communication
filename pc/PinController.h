@@ -46,14 +46,20 @@ private:
     GuiController *ui;
     //QGroupBox *groupBox;
     QPoint offset;
+    QAction *editAct;
+    AElement *elem;
+
+    void createActions();
 
 protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+    void contextMenuEvent(QContextMenuEvent * event);
 
 public slots:
     void sendValueToArduino(int value);
+    void editElement();
 
 signals:
     void valueChanged(Arduino::Buffer);

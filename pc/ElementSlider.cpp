@@ -18,15 +18,22 @@
  * ***** END LICENSE BLOCK ***** */
 
 #include <QLCDNumber>
-#include <QHBoxLayout>
+//#include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSlider>
 #include <QDebug>
+#include <QLabel>
+#include <QPushButton>
 #include "ElementSlider.h"
 
 ElementSlider::ElementSlider(PinConfig *pinConfig, QObject *parent)
     : AElement(pinConfig, "Slider", AElement::OUT, parent)
 {
+    this->minValue = NULL;
+    this->maxValue = NULL;
+    this->displayVBox = NULL;
+    this->slider = NULL;
+    this->lcd = NULL;
 }
 
 ElementSlider::ElementSlider(QObject *parent)
@@ -34,14 +41,33 @@ ElementSlider::ElementSlider(QObject *parent)
 {
 }
 
+ElementSlider::~ElementSlider()
+{
+//    delete this->minValue;
+//    delete this->displayVBox;
+//    delete this->displayVBox;
+//    delete this->slider;
+//    delete this->lcd;
+}
+
 void ElementSlider::displayConfig()
 {
     this->minValue = new QLineEdit();
     this->maxValue = new QLineEdit();
-    QHBoxLayout *hbox = new QHBoxLayout();
+    QVBoxLayout *hbox = new QVBoxLayout();
+//    QPushButton *apply = new QPushButton("OK");
 
+//    this->minValue->setText(QString(this->slider->minimum()));
+//    this->maxValue->setText(QString(this->slider->maximum()));
+
+    // TODO: free
+    hbox->addWidget(new QLabel("Min:"));
     hbox->addWidget(minValue);
+    hbox->addWidget(new QLabel("Max:"));
     hbox->addWidget(maxValue);
+//    hbox->addWidget(apply);
+
+//    connect(apply, SIGNAL(clicked()), this, SLOT(onApply()));
 
     this->setConfigLayout(hbox);
 }
@@ -51,18 +77,9 @@ void ElementSlider::displayElem()
     int min = 0;
     int max = 255;
 
-    QVBoxLayout *vbox = new QVBoxLayout();
-    QSlider *slider = new QSlider();
-    QLCDNumber *lcd = new QLCDNumber();
-    bool ok;
-
-//    min = this->minValue->text().toInt(&ok);
-//    if (!ok)
-//        min = 0;
-
-//    max = this->maxValue->text().toInt(&ok);
-//    if (!ok)
-//        max = 255;
+    this->displayVBox = new QVBoxLayout();
+    this->slider = new QSlider();
+    this->lcd = new QLCDNumber();
 
     qDebug() << "min: " << min;
     qDebug() << "max: " << max;
@@ -73,7 +90,27 @@ void ElementSlider::displayElem()
     connect(slider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
     connect(slider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
 
-    vbox->addWidget(lcd);
-    vbox->addWidget(slider);
-    this->setDisplayLayout(vbox);
+    displayVBox->addWidget(lcd);
+    displayVBox->addWidget(slider);
+    this->setDisplayLayout(displayVBox);
+}
+
+void ElementSlider::onApply()
+{
+    bool ok;
+    int min;
+    int max;
+
+    min = this->minValue->text().toInt(&ok);
+    if (!ok)
+        min = 0;
+
+    max = this->maxValue->text().toInt(&ok);
+    if (!ok)
+        max = 255;
+
+    slider->setMinimum(min);
+    slider->setMaximum(max);
+
+    this->closeConfigWindow();
 }

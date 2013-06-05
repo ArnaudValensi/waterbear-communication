@@ -22,12 +22,18 @@
 
 #include "AElement.h"
 
+class QLineEdit;
+class QVBoxLayout;
+class QSlider;
+class QLCDNumber;
+
 class ElementSlider : public AElement
 {
     Q_OBJECT
 public:
     ElementSlider(PinConfig *pinConfig, QObject *parent = 0);
     ElementSlider(QObject *parent = 0);
+    ~ElementSlider();
     virtual void displayElem();
 
 private:
@@ -35,6 +41,12 @@ private:
 
     QLineEdit *minValue;
     QLineEdit *maxValue;
+    QVBoxLayout *displayVBox;
+    QSlider *slider;
+    QLCDNumber *lcd;
+
+private slots:
+    void onApply();
 
 };
 

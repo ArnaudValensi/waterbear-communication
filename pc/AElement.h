@@ -26,6 +26,7 @@
 #include <QLayout>
 
 class PinConfig;
+class QDialog;
 
 class AElement : public QObject
 {
@@ -37,20 +38,24 @@ public:
     explicit AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent = 0);
     explicit AElement(QString name, TransfertType io, QObject *parent = 0);
     virtual ~AElement();
+    void closeConfigWindow();
+    virtual void displayElem();
+    virtual void displayConfig();
+    AElement::TransfertType getTransfertType();
     QString getName() const;
     QRadioButton *getRadioButton() const;
-    virtual void displayElem();
-    AElement::TransfertType getTransfertType();
     QLayout *getDisplayLayout() const;
+    QLayout *getConfigLayout() const;
 
 private:
-    virtual void displayConfig();
 
     PinConfig *pinConfig;
     QString name;
     QRadioButton *radioButton;
     TransfertType transfertType;
     QLayout *displayLayout;
+    QLayout *configLayout;
+    QDialog *configWindow;
 
 protected:
     void setConfigLayout(QLayout *layout);
@@ -59,6 +64,9 @@ protected:
 public slots:
     void displayOut();
     void sendValueToArduino(int value = 0);
+    void openConfigWindow();
+    virtual void onApply();
+
 
 };
 
