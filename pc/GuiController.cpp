@@ -40,6 +40,7 @@ GuiController::GuiController(QWidget *parent) :
     arduino(this)
 {
     ui->setupUi(this);
+
 }
 
 GuiController::~GuiController()
