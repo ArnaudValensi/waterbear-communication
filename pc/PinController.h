@@ -29,21 +29,28 @@
 
 class GuiController;
 
-class PinController : public QObject
+class PinController : public QGroupBox
 {
     Q_OBJECT
 public:
-    explicit PinController(GuiController *ui, quint8 pinNumber, QObject *parent = 0);
-    void setLayout(QLayout *layout);
+    explicit PinController(GuiController *ui, quint8 pinNumber, QWidget *parent = 0);
+//    void setLayout(QLayout *layout);
+    int getPinNumber() const;
 
 private:
+    static int const fixedWidth = 130;
     static quint8 const defaultMin = 0;
     static quint8 const defaultMax = 255;
     quint8 pinNumber;
     GuiController *ui;
-    QGroupBox *groupBox;
+    //QGroupBox *groupBox;
+    QPoint offset;
 
-        
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+
 public slots:
     void sendValueToArduino(int value);
 

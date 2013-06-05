@@ -40,9 +40,11 @@ public:
     ~GuiController();
     void addToTab1Layout(QWidget *widget);
     void addToTab2Layout(QWidget *widget);
-    Arduino *getArduino();
     void displayArduinoMessage(QString data);
     PinController *addPinControl(quint8 pinNumber);
+    Arduino *getArduino();
+    QHBoxLayout *getTab1Layout() const;
+    QList<PinController *> &getPinControllerList();
 
 private:
     void SaveConfig();

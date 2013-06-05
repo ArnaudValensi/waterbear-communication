@@ -19,14 +19,17 @@
 
 #include "PinController.h"
 
-PinController::PinController(GuiController *ui, quint8 pinNumber, QObject *parent) :
-    QObject(parent),
+#include <QMouseEvent>
+#include <QDebug>
+
+PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *parent) :
+    QGroupBox(parent),
     pinNumber(pinNumber),
     ui(ui)
 {
-    this->groupBox = new QGroupBox();
-    this->ui->addToTab1Layout(this->groupBox);
-    this->groupBox->setTitle(QString("Pin %1").arg(this->pinNumber));
+    this->setFixedWidth(this->fixedWidth);
+    this->ui->addToTab1Layout(this);
+    this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
     Arduino *arduino = ui->getArduino();
     QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
@@ -38,7 +41,63 @@ void PinController::sendValueToArduino(int value)
     emit valueChanged(buffer);
 }
 
-void PinController::setLayout(QLayout *layout)
+int PinController::getPinNumber() const
 {
-    this->groupBox->setLayout(layout);
+    return this->pinNumber;
+}
+
+void PinController::mousePressEvent(QMouseEvent *event)
+{
+    offset = event->pos();
+}
+
+void PinController::mouseMoveEvent(QMouseEvent *event)
+{
+    if(event->buttons() & Qt::LeftButton)
+    {
+        this->move(this->mapToParent(event->pos() - offset));
+    }
+}
+
+void PinController::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(event->buttons() != Qt::LeftButton)
+        return;
+
+    qDebug() << "before release";
+
+    QHBoxLayout *layout = this->ui->getTab1Layout();
+    QList<PinController *> pinControllerList = this->ui->getPinControllerList();
+
+    qDebug() << "gui pin list: " << pinControllerList.size();
+    qDebug() << "mouse x: " << this->mapToParent(event->pos()).x();
+
+    int index = pinControllerList.indexOf(this);
+    int mouseX = this->mapToParent(event->pos()).x();
+    int newIndex = mouseX / PinController::fixedWidth;
+    int listSize = pinControllerList.size();
+
+    if (newIndex > listSize)
+        newIndex = listSize;
+//    if (index < newIndex)
+//        --newIndex;
+
+    qDebug() << "index: " << index << ", newIndex: " << newIndex;
+
+    PinController *pinController = pinControllerList.at(index);
+    pinControllerList.removeAt(index);
+    pinControllerList.insert(newIndex, pinController);
+
+    QLayoutItem* item;
+    while ((item = layout->takeAt(0)) != NULL)
+        layout->removeItem(item);
+
+
+    qDebug() << "loop:";
+    foreach (PinController *p, pinControllerList) {
+        qDebug() << "  pin: " << p->getPinNumber();
+        layout->addWidget(p);
+    }
+
+    this->updateGeometry();
 }

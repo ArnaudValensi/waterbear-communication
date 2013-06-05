@@ -52,9 +52,19 @@ PinController *GuiController::addPinControl(quint8 pinNumber)
     return pin;
 }
 
+QList<PinController *> &GuiController::getPinControllerList()
+{
+    return this->pinControllerList;
+}
+
 void GuiController::addToTab1Layout(QWidget *widget)
 {
     this->ui->tab1Layout->addWidget(widget);
+}
+
+QHBoxLayout *GuiController::getTab1Layout() const
+{
+    return this->ui->tab1Layout;
 }
 
 void GuiController::addToTab2Layout(QWidget *widget)
