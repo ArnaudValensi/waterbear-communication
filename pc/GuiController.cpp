@@ -98,10 +98,10 @@ QHBoxLayout *GuiController::getTab1Layout() const
     return this->ui->tab1Layout;
 }
 
-void GuiController::addToTab2Layout(QWidget *widget)
-{
-    this->ui->tab2Layout->insertWidget(this->ui->tab2Layout->count() - 2, widget);
-}
+//void GuiController::addToTab2Layout(QWidget *widget)
+//{
+//    this->ui->tab2Layout->insertWidget(this->ui->tab2Layout->count() - 2, widget);
+//}
 
 void GuiController::on_pushButtonConnect_clicked()
 {
@@ -129,12 +129,12 @@ void GuiController::on_dockWidgetConsole_topLevelChanged(bool floating)
     }
 }
 
-void GuiController::on_pushButtonAddPin_clicked()
-{
-    PinConfig *pinConfig = new PinConfig(this);
+//void GuiController::on_pushButtonAddPin_clicked()
+//{
+//    PinConfig *pinConfig = new PinConfig(this);
 
-    pinConfigList.push_back(pinConfig);
-}
+//    pinConfigList.push_back(pinConfig);
+//}
 
 Arduino *GuiController::getArduino()
 {

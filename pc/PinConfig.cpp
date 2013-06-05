@@ -75,7 +75,7 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     vbox->addStretch();
     this->groupBox->setFixedWidth(140);
     this->groupBox->setLayout(vbox);
-    this->ui->addToTab2Layout(this->groupBox);
+//    this->ui->addToTab2Layout(this->groupBox);
 
     QObject::connect(radioIn, SIGNAL(clicked(bool)), this, SLOT(displayInConfig()));
     QObject::connect(radioOut, SIGNAL(clicked(bool)), this, SLOT(displayOutConfig()));
