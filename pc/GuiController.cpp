@@ -69,7 +69,10 @@ PinController *GuiController::addPinControl()
     {
         pinNum = text.toInt(&ok);
         if (!ok)
+        {
             QMessageBox::warning(this, "Error", "Pin number must be a number.");
+            return NULL;
+        }
     }
     else
     {
@@ -183,7 +186,8 @@ void GuiController::on_actionSlider_triggered()
     AElement *slider = new ElementSlider(this);
     PinController *pin = this->addPinControl();
 
-    pin->addElement(slider);
+    if (pin)
+        pin->addElement(slider);
 }
 
 void GuiController::on_actionPotar_triggered()

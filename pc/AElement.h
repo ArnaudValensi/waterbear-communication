@@ -60,12 +60,13 @@ private:
 protected:
     void setConfigLayout(QLayout *layout);
     void setDisplayLayout(QLayout *layout);
+    virtual void onApply();
 
 public slots:
     void displayOut();
     void sendValueToArduino(int value = 0);
     void openConfigWindow();
-    virtual void onApply();
+    void onApplyProc();
 
 
 };

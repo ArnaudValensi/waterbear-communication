@@ -87,10 +87,10 @@ void AElement::closeConfigWindow()
 
 void AElement::setConfigLayout(QLayout *layout)
 {
-//    this->pinConfig->setConfigLayout(layout);
+    // Add a 'OK' button and connect it to onApply() function
     QPushButton *apply = new QPushButton("OK");
     layout->addWidget(apply);
-    connect(apply, SIGNAL(clicked()), this, SLOT(onApply()));
+    connect(apply, SIGNAL(clicked()), this, SLOT(onApplyProc()));
 
     this->configLayout = layout;
 }
@@ -120,6 +120,12 @@ void AElement::sendValueToArduino(int value)
 AElement::TransfertType AElement::getTransfertType()
 {
     return this->transfertType;
+}
+
+void AElement::onApplyProc()
+{
+    this->onApply();
+    this->closeConfigWindow();
 }
 
 // You have to reimplement this function in the child

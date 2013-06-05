@@ -111,6 +111,4 @@ void ElementSlider::onApply()
 
     slider->setMinimum(min);
     slider->setMaximum(max);
-
-    this->closeConfigWindow();
 }
