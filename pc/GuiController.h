@@ -46,7 +46,7 @@ public:
     PinController *addPinControl();
     Arduino *getArduino();
     QHBoxLayout *getTab1Layout() const;
-    QList<PinController *> &getPinControllerList();
+    QList<PinController *> *getPinControllerList();
 
 private:
     void SaveConfig();

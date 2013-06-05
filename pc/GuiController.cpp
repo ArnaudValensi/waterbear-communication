@@ -87,9 +87,9 @@ PinController *GuiController::addPinControl()
     return pin;
 }
 
-QList<PinController *> &GuiController::getPinControllerList()
+QList<PinController *> *GuiController::getPinControllerList()
 {
-    return this->pinControllerList;
+    return &this->pinControllerList;
 }
 
 void GuiController::addToTab1Layout(QWidget *widget)

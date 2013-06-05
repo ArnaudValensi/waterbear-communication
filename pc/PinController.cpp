@@ -78,25 +78,25 @@ void PinController::mouseReleaseEvent(QMouseEvent *event)
     // TODO: protect against the right click
 
     QHBoxLayout *layout = this->ui->getTab1Layout();
-    QList<PinController *> pinControllerList = this->ui->getPinControllerList();
+    QList<PinController *> *pinControllerList = this->ui->getPinControllerList();
 
-    int index = pinControllerList.indexOf(this);
+    int index = pinControllerList->indexOf(this);
     int mouseX = this->mapToParent(event->pos()).x();
     int newIndex = mouseX / PinController::fixedWidth;
-    int listSize = pinControllerList.size();
+    int listSize = pinControllerList->size();
 
     if (newIndex > listSize)
         newIndex = listSize;
 
-    PinController *pinController = pinControllerList.at(index);
-    pinControllerList.removeAt(index);
-    pinControllerList.insert(newIndex, pinController);
+    PinController *pinController = pinControllerList->at(index);
+    pinControllerList->removeAt(index);
+    pinControllerList->insert(newIndex, pinController);
 
     QLayoutItem* item;
     while ((item = layout->takeAt(0)) != NULL)
         layout->removeItem(item);
 
-    foreach (PinController *p, pinControllerList) {
+    foreach (PinController *p, *pinControllerList) {
         layout->addWidget(p);
     }
 
