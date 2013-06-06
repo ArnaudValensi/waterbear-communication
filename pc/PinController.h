@@ -24,6 +24,8 @@
 
 #include <QObject>
 #include <QGroupBox>
+#include <QVariant>
+#include <QDataStream>
 #include "GuiController.h"
 #include "Arduino.h"
 #include "AElement.h"
@@ -34,9 +36,13 @@ class PinController : public QGroupBox
 {
     Q_OBJECT
 public:
-    explicit PinController(GuiController *ui, quint8 pinNumber, QWidget *parent = 0);
+    explicit PinController(GuiController *ui = NULL, quint8 pinNumber = 0, QWidget *parent = 0);
+    PinController(PinController const &other);
+    ~PinController();
     int getPinNumber() const;
     void addElement(AElement *elem);
+    void print();
+    static void initSerialization();
 
 private:
     static int const fixedWidth = 130;
@@ -50,6 +56,8 @@ private:
     AElement *elem;
 
     void createActions();
+    friend QDataStream &operator<<(QDataStream &out, const PinController &value);
+    friend QDataStream &operator>>(QDataStream &in, PinController &value);
 
 protected:
     void mousePressEvent(QMouseEvent *event);
@@ -65,5 +73,9 @@ signals:
     void valueChanged(Arduino::Buffer);
     
 };
+
+Q_DECLARE_METATYPE(PinController)
+QDataStream &operator<<(QDataStream &out, const PinController &value);
+QDataStream &operator>>(QDataStream &in, PinController &value);
 
 #endif // PINCONTROLLER_H

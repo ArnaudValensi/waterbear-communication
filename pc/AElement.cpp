@@ -26,6 +26,8 @@
 AElement::AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent) :
     QObject(parent)
 {
+    qDebug() << "AElement Constructor";
+
     this->pinConfig = pinConfig;
     this->name = name;
     this->transfertType = io;
@@ -38,6 +40,8 @@ AElement::AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject
 AElement::AElement(QString name, TransfertType io, QObject *parent) :
     QObject(parent)
 {
+    qDebug() << "AElement Copy Constructor";
+
 //    this->pinConfig = pinConfig;
     this->name = name;
     this->transfertType = io;
@@ -143,4 +147,30 @@ void AElement::displayElem()
 void AElement::onApply()
 {
 
+}
+
+void AElement::initSerialization()
+{
+    qRegisterMetaTypeStreamOperators<AElement*>("AElement");
+
+    qMetaTypeId<AElement*>();               // Teste la validité de la classe Contact
+}
+
+QDataStream &operator<<(QDataStream &out, const AElement *&value)
+{
+    qDebug() << "[AElement] QDataStream out: pin: " << value->name;
+
+    out << value->name;
+
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, AElement *&value)
+{
+    value = new AElement();
+    in >> value->name;
+
+    qDebug() << "[AElement] QDataStream in: pin: " << value->name;
+
+    return in;
 }

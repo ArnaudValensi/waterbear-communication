@@ -40,6 +40,7 @@ GuiController::GuiController(QWidget *parent) :
     arduino(this)
 {
     ui->setupUi(this);
+    PinController::initSerialization();
 
 }
 
@@ -153,6 +154,7 @@ void GuiController::displayArduinoMessage(QString data)
     this->ui->textBrowserArduino->setTextCursor(c);
 }
 
+// Deprecated
 void GuiController::on_pushButtonSaveConfig_clicked()
 {
     qDebug() << "on_pushButtonSaveConfig_clicked";
@@ -193,10 +195,38 @@ void GuiController::on_actionSlider_triggered()
 
 void GuiController::on_actionPotar_triggered()
 {
+    qDebug() << "on_actionPotar_triggered";
 
+    AElement *pot = new ElementPot(this);
+    PinController *pin = this->addPinControl();
+
+    if (pin)
+        pin->addElement(pot);
 }
 
 void GuiController::on_actionButton_triggered()
 {
 
+}
+
+void GuiController::on_actionSave_triggered()
+{
+    qDebug() << "Save, " << this->pinControllerList.size() << " elems.";
+
+    PinController *config = this->pinControllerList.first();
+    QSettings settings("./save.xml", QSettings::IniFormat);
+    settings.setValue("Elements", qVariantFromValue(*config));
+
+    PinController result = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
+    result.print();
+}
+
+void GuiController::on_actionLoad_triggered()
+{
+    qDebug() << "Load";
+
+    QSettings settings("./save.xml", QSettings::IniFormat);
+
+    PinController result = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
+    result.print();
 }

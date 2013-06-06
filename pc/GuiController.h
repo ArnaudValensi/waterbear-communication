@@ -53,6 +53,7 @@ private:
 
     Ui::Gui *ui;
     QList<PinController *> pinControllerList;
+    // Deprecated
     QList<PinConfig *> pinConfigList;
     Arduino arduino;
 
@@ -65,6 +66,8 @@ private slots:
     void on_actionSlider_triggered();
     void on_actionPotar_triggered();
     void on_actionButton_triggered();
+    void on_actionSave_triggered();
+    void on_actionLoad_triggered();
 };
 
 #endif // GUI_H

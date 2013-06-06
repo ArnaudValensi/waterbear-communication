@@ -17,15 +17,27 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+#include "ElementPot.h"
+
 #include <QLCDNumber>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QDial>
 #include <QDebug>
-#include "ElementPot.h"
+#include <QLabel>
 
 ElementPot::ElementPot(PinConfig *pinConfig, QObject *parent)
     : AElement(pinConfig, "Pot", AElement::OUT, parent)
+{
+    this->minValue = NULL;
+    this->maxValue = NULL;
+    this->displayVBox = NULL;
+    this->pot = NULL;
+    this->lcd = NULL;
+}
+
+ElementPot::ElementPot(QObject *parent)
+    : AElement("Pot", AElement::OUT, parent)
 {
 }
 
@@ -33,9 +45,11 @@ void ElementPot::displayConfig()
 {
     this->minValue = new QLineEdit();
     this->maxValue = new QLineEdit();
-    QHBoxLayout *hbox = new QHBoxLayout();
+    QVBoxLayout *hbox = new QVBoxLayout();
 
+    hbox->addWidget(new QLabel("Min:"));
     hbox->addWidget(minValue);
+    hbox->addWidget(new QLabel("Max:"));
     hbox->addWidget(maxValue);
 
     this->setConfigLayout(hbox);
@@ -43,21 +57,12 @@ void ElementPot::displayConfig()
 
 void ElementPot::displayElem()
 {
-    int min;
-    int max;
+    int min = 0;
+    int max = 255;
 
-    QVBoxLayout *vbox = new QVBoxLayout();
-    QDial *pot = new QDial();
-    QLCDNumber *lcd = new QLCDNumber();
-    bool ok;
-
-    min = this->minValue->text().toInt(&ok);
-    if (!ok)
-        min = 0;
-
-    max = this->maxValue->text().toInt(&ok);
-    if (!ok)
-        max = 255;
+    this->displayVBox = new QVBoxLayout();
+    this->pot = new QDial();
+    this->lcd = new QLCDNumber();
 
     qDebug() << "min: " << min;
     qDebug() << "max: " << max;
@@ -68,7 +73,25 @@ void ElementPot::displayElem()
     connect(pot, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
     connect(pot, SIGNAL(valueChanged(int)), this, SLOT(sendValueToArduino(int)));
 
-    vbox->addWidget(lcd);
-    vbox->addWidget(pot);
-    this->setDisplayLayout(vbox);
+    displayVBox->addWidget(lcd);
+    displayVBox->addWidget(pot);
+    this->setDisplayLayout(displayVBox);
+}
+
+void ElementPot::onApply()
+{
+    bool ok;
+    int min;
+    int max;
+
+    min = this->minValue->text().toInt(&ok);
+    if (!ok)
+        min = 0;
+
+    max = this->maxValue->text().toInt(&ok);
+    if (!ok)
+        max = 255;
+
+    pot->setMinimum(min);
+    pot->setMaximum(max);
 }

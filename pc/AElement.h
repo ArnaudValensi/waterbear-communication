@@ -24,6 +24,8 @@
 #include <QRadioButton>
 #include <QLineEdit>
 #include <QLayout>
+#include <QVariant>
+#include <QDataStream>
 
 class PinConfig;
 class QDialog;
@@ -36,7 +38,7 @@ public:
 
     // Deprecated
     explicit AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent = 0);
-    explicit AElement(QString name, TransfertType io, QObject *parent = 0);
+    explicit AElement(QString name = "Unknown", TransfertType io = OUT, QObject *parent = 0);
     virtual ~AElement();
     void closeConfigWindow();
     virtual void displayElem();
@@ -46,6 +48,7 @@ public:
     QRadioButton *getRadioButton() const;
     QLayout *getDisplayLayout() const;
     QLayout *getConfigLayout() const;
+    static void initSerialization();
 
 private:
 
@@ -56,6 +59,8 @@ private:
     QLayout *displayLayout;
     QLayout *configLayout;
     QDialog *configWindow;
+    friend QDataStream &operator<<(QDataStream &out, const AElement *&value);
+    friend QDataStream &operator>>(QDataStream &in, AElement *&value);
 
 protected:
     void setConfigLayout(QLayout *layout);
@@ -70,5 +75,9 @@ public slots:
 
 
 };
+
+Q_DECLARE_METATYPE(AElement*)
+QDataStream &operator<<(QDataStream &out, const AElement *&value);
+QDataStream &operator>>(QDataStream &in, AElement *&value);
 
 #endif // AELEMENT_H

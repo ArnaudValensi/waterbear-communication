@@ -25,19 +25,61 @@
 #include <QMenu>
 #include <QDialog>
 
-PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *parent) :
-    QGroupBox(parent),
-    pinNumber(pinNumber),
-    ui(ui)
+PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *parent)
+    : QGroupBox(parent),
+      pinNumber(pinNumber),
+      ui(ui)
 {
+    qDebug() << "PinController Constructor";
+
+    this->elem = NULL;
     this->setFixedWidth(this->fixedWidth);
-    this->ui->addToTab1Layout(this);
+    if (this->ui)
+    {
+        this->ui->addToTab1Layout(this);
+
+        Arduino *arduino = ui->getArduino();
+        QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
+    }
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
     this->createActions();
+}
 
-    Arduino *arduino = ui->getArduino();
-    QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
+PinController::PinController(PinController const &other)
+    : QGroupBox()
+{
+    qDebug() << "PinController Copy Constructor";
+
+    this->elem = NULL;
+    this->ui = other.ui;
+    this->pinNumber = other.pinNumber;
+    if (other.elem)
+    {
+        qDebug() << "PinController Copy elem";
+
+        this->elem = other.elem;
+    }
+    else
+        qDebug() << "PinController Copy pas elem";
+
+
+    this->setFixedWidth(this->fixedWidth);
+    if (this->ui)
+    {
+        this->ui->addToTab1Layout(this);
+
+        Arduino *arduino = ui->getArduino();
+        QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
+    }
+    this->setTitle(QString("Pin %1").arg(this->pinNumber));
+
+    this->createActions();
+}
+
+PinController::~PinController()
+{
+
 }
 
 void PinController::sendValueToArduino(int value)
@@ -77,6 +119,9 @@ void PinController::mouseReleaseEvent(QMouseEvent *event)
 {
     // TODO: protect against the right click
 
+    if (!this->ui)
+        return;
+
     QHBoxLayout *layout = this->ui->getTab1Layout();
     QList<PinController *> *pinControllerList = this->ui->getPinControllerList();
 
@@ -106,16 +151,16 @@ void PinController::mouseReleaseEvent(QMouseEvent *event)
 void PinController::contextMenuEvent(QContextMenuEvent * event)
 {
     QMenu menu(this);
-    menu.addAction(editAct);
+    menu.addAction(this->editAct);
     menu.exec(event->globalPos());
 }
 
 void PinController::createActions()
 {
-    editAct = new QAction(tr("&Edit"), this);
-    editAct->setShortcuts(QKeySequence::Preferences);
-    editAct->setStatusTip(tr("Edit the element"));
-    connect(editAct, SIGNAL(triggered()), this, SLOT(editElement()));
+    this->editAct = new QAction(tr("&Edit"), this);
+    this->editAct->setShortcuts(QKeySequence::Preferences);
+    this->editAct->setStatusTip(tr("Edit the element"));
+    connect(this->editAct, SIGNAL(triggered()), this, SLOT(editElement()));
 }
 
 void PinController::editElement()
@@ -128,4 +173,38 @@ void PinController::editElement()
 //    secondWindow->show();
 //    secondWindow->activateWindow();
     this->elem->openConfigWindow();
+}
+
+void PinController::print()
+{
+    qDebug() << "[PinController] pinNum" << this->pinNumber;
+    if (this->elem)
+        qDebug() << "[Elem]          name  " << this->elem->getName();
+}
+
+void PinController::initSerialization()
+{
+    qRegisterMetaTypeStreamOperators<PinController>("PinController");
+
+    qMetaTypeId<PinController>();               // Teste la validité de la classe Contact
+}
+
+QDataStream &operator<<(QDataStream &out, const PinController &value)
+{
+    qDebug() << "[PinController] QDataStream out: pin: " << value.pinNumber;
+
+    out << value.pinNumber
+        << value.elem;
+
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, PinController &value)
+{
+    in >> value.pinNumber
+       >> value.elem;
+
+    qDebug() << "[PinController] QDataStream in: pin: " << value.pinNumber;
+
+    return in;
 }

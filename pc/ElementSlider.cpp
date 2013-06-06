@@ -84,6 +84,12 @@ void ElementSlider::displayElem()
     qDebug() << "min: " << min;
     qDebug() << "max: " << max;
 
+
+//    QPalette Pal = this->lcd->palette();
+//    Pal.setColor(QPalette::Normal, QPalette::Window, Qt::black);
+//    this->lcd->setPalette(Pal);
+//    this->lcd->setStyleSheet("QLCDNumber { color : black; }");
+
     slider->setMinimum(min);
     slider->setMaximum(max);
 
