@@ -61,30 +61,32 @@ PinController *GuiController::addPinControl(quint8 pinNumber)
 
 PinController *GuiController::addPinControl()
 {
+    static int pinNum = 0;
     PinController *pin;
-    bool ok;
-    int pinNum;
-    QString text = QInputDialog::getText(this, "Pin number:",
-                                         "Enter a pin Number:", QLineEdit::Normal,
-                                         "1", &ok);
-    if (ok && !text.isEmpty())
-    {
-        pinNum = text.toInt(&ok);
-        if (!ok)
-        {
-            QMessageBox::warning(this, "Error", "Pin number must be a number.");
-            return NULL;
-        }
-    }
-    else
-    {
-        QMessageBox::warning(this, "Error", "Invalid pin number.");
-        return NULL;
-    }
+//    bool ok;
+//    int pinNum;
+//    QString text = QInputDialog::getText(this, "Pin number:",
+//                                         "Enter a pin Number:", QLineEdit::Normal,
+//                                         "1", &ok);
+//    if (ok && !text.isEmpty())
+//    {
+//        pinNum = text.toInt(&ok);
+//        if (!ok)
+//        {
+//            QMessageBox::warning(this, "Error", "Pin number must be a number.");
+//            return NULL;
+//        }
+//    }
+//    else
+//    {
+//        QMessageBox::warning(this, "Error", "Invalid pin number.");
+//        return NULL;
+//    }
 
     pin = new PinController(this, pinNum);
-
     pinControllerList.push_back(pin);
+    ++pinNum;
+
     return pin;
 }
 
