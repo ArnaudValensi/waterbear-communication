@@ -188,8 +188,17 @@ void GuiController::on_actionLoad_triggered()
 {
     qDebug() << "Load";
 
-    QSettings settings("./save.ini", QSettings::IniFormat);
+    // Remove old elements.
+    PinController *item;
+    while (!this->pinControllerList.isEmpty())
+    {
+        item = this->pinControllerList.first();
+        this->pinControllerList.removeFirst();
+        delete item;
+    }
 
+    // Load configuration from file.
+    QSettings settings("./save.ini", QSettings::IniFormat);
     int size = settings.beginReadArray("PinControllers");
     for (int i = 0; i < size; ++i)
     {
