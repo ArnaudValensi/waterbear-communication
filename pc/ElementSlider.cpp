@@ -127,6 +127,7 @@ void ElementSlider::save()
 
     this->persistantData.push_back(this->slider->minimum());
     this->persistantData.push_back(this->slider->maximum());
+    this->persistantData.push_back(this->slider->value());
 }
 
 void ElementSlider::load()
@@ -135,10 +136,12 @@ void ElementSlider::load()
 
     int min = this->persistantData.at(0).toInt();
     int max = this->persistantData.at(1).toInt();
+    int value = this->persistantData.at(2).toInt();
 
     qDebug() << "min: " << min;
     qDebug() << "max: " << max;
 
     this->slider->setMinimum(min);
     this->slider->setMaximum(max);
+    this->slider->setValue(value);
 }
