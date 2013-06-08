@@ -41,30 +41,24 @@ public:
     ~GuiController();
     // TODO: change name
     void addToTab1Layout(QWidget *widget);
-//    void addToTab2Layout(QWidget *widget);
     void displayArduinoMessage(QString data);
     PinController *addPinControl(quint8 pinNumber);
     PinController *addPinControl();
     Arduino *getArduino();
     QHBoxLayout *getTab1Layout() const;
     QList<PinController *> *getPinControllerList();
-//    static ElementFactory *getElementFactory();
 
 private:
     void SaveConfig();
 
     Ui::Gui *ui;
     QList<PinController *> pinControllerList;
-    // Deprecated
-    QList<PinConfig *> pinConfigList;
     Arduino arduino;
     ElementFactory *elemFactory;
 
 private slots:
     void on_pushButtonConnect_clicked();
     void on_dockWidgetConsole_topLevelChanged(bool);
-//    void on_pushButtonAddPin_clicked();
-    void on_pushButtonSaveConfig_clicked();
 
     void on_actionSlider_triggered();
     void on_actionPotar_triggered();

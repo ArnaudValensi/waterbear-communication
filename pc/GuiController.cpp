@@ -65,25 +65,6 @@ PinController *GuiController::addPinControl()
 {
     static int pinNum = 0;
     PinController *pin;
-//    bool ok;
-//    int pinNum;
-//    QString text = QInputDialog::getText(this, "Pin number:",
-//                                         "Enter a pin Number:", QLineEdit::Normal,
-//                                         "1", &ok);
-//    if (ok && !text.isEmpty())
-//    {
-//        pinNum = text.toInt(&ok);
-//        if (!ok)
-//        {
-//            QMessageBox::warning(this, "Error", "Pin number must be a number.");
-//            return NULL;
-//        }
-//    }
-//    else
-//    {
-//        QMessageBox::warning(this, "Error", "Invalid pin number.");
-//        return NULL;
-//    }
 
     pin = new PinController(this, pinNum);
     pinControllerList.push_back(pin);
@@ -106,11 +87,6 @@ QHBoxLayout *GuiController::getTab1Layout() const
 {
     return this->ui->tab1Layout;
 }
-
-//void GuiController::addToTab2Layout(QWidget *widget)
-//{
-//    this->ui->tab2Layout->insertWidget(this->ui->tab2Layout->count() - 2, widget);
-//}
 
 void GuiController::on_pushButtonConnect_clicked()
 {
@@ -138,13 +114,6 @@ void GuiController::on_dockWidgetConsole_topLevelChanged(bool floating)
     }
 }
 
-//void GuiController::on_pushButtonAddPin_clicked()
-//{
-//    PinConfig *pinConfig = new PinConfig(this);
-
-//    pinConfigList.push_back(pinConfig);
-//}
-
 Arduino *GuiController::getArduino()
 {
     return &this->arduino;
@@ -158,39 +127,6 @@ void GuiController::displayArduinoMessage(QString data)
     this->ui->textBrowserArduino->setTextCursor(c);
 }
 
-//ElementFactory *GuiController::getElementFactory()
-//{
-//    return &GuiControlle::elemFactory;
-//}
-
-// Deprecated
-void GuiController::on_pushButtonSaveConfig_clicked()
-{
-    qDebug() << "on_pushButtonSaveConfig_clicked";
-
-//    PinConfig *config;
-////    QSettings settings("Waterbear Communication", "Waterbear Communication");
-//    QSettings settings("./save.xml", QSettings::IniFormat);
-//    QStringList configNames;
-
-//    for (int i = 0; i < this->pinConfigList.size(); ++i)
-//    {
-//        config = this->pinConfigList.at(i);
-//        if (config->isApplyed())
-//        {
-//            configNames.push_back(config->getElement()->getName());
-//        }
-//    }
-
-//    settings.setValue("Elements", QVariant(configNames));
-
-////    QFile file("settings.dat");
-////    file.open(QIODevice::WriteOnly);
-
-////    QDataStream stream(&file);
-////    stream << settings;
-}
-
 void GuiController::on_actionSlider_triggered()
 {
     qDebug() << "actionSlider triggered";
@@ -201,8 +137,6 @@ void GuiController::on_actionSlider_triggered()
     if (pin)
     {
         pin->addElement(slider);
-//        pin->test.setCoords(1, 2, 3, 4);
-//        pin->test2 = "TESTTT";
     }
 }
 
@@ -232,34 +166,6 @@ void GuiController::on_actionSave_triggered()
         QSettings settings("./save.xml", QSettings::IniFormat);
         settings.setValue("Elements", qVariantFromValue(*config));
     }
-//    QDataStream s;
-//    s << qVariantFromValue(*config);
-//    QVariant qvar = qVariantFromValue(*config);
-//    PinController *pin = qvar.value<PinController*>();
-//    pin->print();
-//    PinController pin = qvar.value<PinController>();
-//    pin.print();
-
-//    QDataStream s;
-//    s << pin;
-
-//    qDebug() << "========================";
-
-//    PinController newPin;//= new PinController();
-//    s >> newPin;
-
-//    qDebug() << "========================";
-
-//    QDataStream t;
-//    t << "truc";
-//    QString res;
-//    t >> res;
-//    qDebug() << "res: " << res;
-
-//    newPin.print();
-
-//    qDebug() << " QVariant: " << pin;
-//    qDebug() << " QDatastream: " << s;
 
     QSettings settings("./save.xml", QSettings::IniFormat);
     PinController result = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
@@ -272,9 +178,10 @@ void GuiController::on_actionLoad_triggered()
 
     QSettings settings("./save.xml", QSettings::IniFormat);
 
-    PinController pin = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
-    pin.print();
+    PinController tmp = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
+    PinController *pin = new PinController(tmp);
+    pin->print();
 
-    pin.setUi(this);
-    this->pinControllerList.push_back(&pin);
+    pin->setUi(this);
+    this->pinControllerList.push_back(pin);
 }

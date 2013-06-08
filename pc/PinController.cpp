@@ -34,7 +34,6 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
 {
     qDebug() << "PinController Constructor";
 
-//    this->test = new QRect();
     this->elem = NULL;
     this->setFixedWidth(this->fixedWidth);
     if (this->ui)
@@ -54,8 +53,6 @@ PinController::PinController(PinController const &other)
 {
     qDebug() << "PinController Copy Constructor";
 
-//    this->test = other.test;
-//    this->test2 = other.test2;
     this->elem = NULL;
     this->ui = other.ui;
     this->pinNumber = other.pinNumber;
@@ -93,8 +90,9 @@ void PinController::setUi(GuiController *ui)
         return;
 
     this->ui = ui;
-    this->ui->addToTab1Layout(this);
     this->addElement(this->elem);
+    this->ui->addToTab1Layout(this);
+    this->updateGeometry();
 
     Arduino *arduino = ui->getArduino();
     QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
@@ -184,19 +182,9 @@ void PinController::createActions()
 void PinController::editElement()
 {
     qDebug() << "Edit";
-    //this->elem->getConfigLayout()->show();
 
-//    QDialog *secondWindow = new QDialog(this);
-//    secondWindow->setLayout(this->elem->getConfigLayout());
-//    secondWindow->show();
-//    secondWindow->activateWindow();
     this->elem->openConfigWindow();
 }
-
-//ElementFactory *PinController::getElementFactory()
-//{
-//    return this->ui->getElementFactory();
-//}
 
 void PinController::print()
 {
@@ -209,9 +197,6 @@ void PinController::print()
 void PinController::initSerialization()
 {
     qRegisterMetaTypeStreamOperators<PinController>("PinController");
-//    qRegisterMetaType<ElementSlider*>("ElementSlider*");
-//    qRegisterMetaTypeStreamOperators<PinController*>("PinController");
-//    qRegisterMetaTypeStreamOperators<QRect>("QRect");
 
     qDebug() << "PinController ID: " << qMetaTypeId<PinController>();
 //    qDebug() << "ElementSlider ID: " << qMetaTypeId<ElementSlider>();
@@ -228,8 +213,6 @@ QDataStream &operator<<(QDataStream &out, const PinController &value)
 
 
     out << value.pinNumber;
-//        << value.elem
-//    out << value.test2;
     out << *value.elem;
 
     return out;

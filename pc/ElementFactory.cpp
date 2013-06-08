@@ -4,6 +4,11 @@ ElementFactory::ElementFactory()
 {
 }
 
+ElementFactory::~ElementFactory()
+{
+    // TODO: Free list.
+}
+
 AElement *ElementFactory::createById(int id)
 {
     if (this->builderMap.contains(id))

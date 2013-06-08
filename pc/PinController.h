@@ -53,10 +53,6 @@ public:
     void setUi(GuiController *ui);
     void print();
     static void initSerialization();
-//    ElementFactory *getElementFactory();
-
-//    QRect test;
-//    QString test2;
 
 private:
     static int const fixedWidth = 130;
@@ -64,7 +60,6 @@ private:
     static quint8 const defaultMax = 255;
     quint8 pinNumber;
     GuiController *ui;
-    //QGroupBox *groupBox;
     QPoint offset;
     QAction *editAct;
     AElement *elem;

@@ -26,6 +26,7 @@ class ElementFactory
 {
 public:
     ElementFactory();
+    ~ElementFactory();
 
     template <class U>
     void registerElem();
