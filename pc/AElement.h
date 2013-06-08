@@ -69,6 +69,8 @@ private:
     friend QDataStream &operator<<(QDataStream &out, const AElement *&value);
     friend QDataStream &operator>>(QDataStream &in, AElement *&value);
     friend QDataStream &operator<<(QDataStream &out, const AElement &value);
+    friend QDataStream &operator>>(QDataStream &in, AElement &value);
+
 //    friend QDataStream &operator>>(QDataStream &in, AElement *&value);
 //    friend void operator <<(QVariant &data, const AElement *&target);
 //    friend void operator >>(const QVariant &data, AElement *&target);
@@ -94,6 +96,7 @@ public slots:
 Q_DECLARE_METATYPE(AElement*)
 QDataStream &operator<<(QDataStream &out, const AElement *&value);
 QDataStream &operator>>(QDataStream &in, AElement *&value);
+QDataStream &operator>>(QDataStream &in, AElement &value);
 
 //void operator <<(QVariant &data, const AElement *&target);
 //void operator >>(const QVariant &data, AElement *&target);

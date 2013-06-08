@@ -193,26 +193,18 @@ void AElement::initSerialization()
 
 QDataStream &operator<<(QDataStream &out, const AElement &value)
 {
-    qDebug() << "[AElement] QDataStream out: pin: " << value.name;
+    qDebug() << "1 [AElement] QDataStream out: pin: " << value.name;
 
+    const_cast<AElement *>(&value)->save();
     out << value.name;
+    out << value.getPersistantData();
 
     return out;
 }
 
-//QDataStream &operator>>(QDataStream &in, AElement &value)
-//{
-//    value = new AElement();
-//    in >> value.name;
-
-//    qDebug() << "[AElement] QDataStream in: pin: " << value.name;
-
-//    return in;
-//}
-
 QDataStream &operator<<(QDataStream &out, const AElement *&value)
 {
-    qDebug() << "[AElement] QDataStream out: pin: " << value->name;
+    qDebug() << "[2 AElement] QDataStream out: pin: " << value->name;
 
     const_cast<AElement *>(value)->save();
 
@@ -221,14 +213,32 @@ QDataStream &operator<<(QDataStream &out, const AElement *&value)
     return out;
 }
 
-QDataStream &operator>>(QDataStream &in, AElement *&value)
+
+QDataStream &operator>>(QDataStream &in, AElement &value)
 {
-    QList<QVariant> &data = value->getPersistantData();
-    value = new AElement();
-    in >> value->name;
+    qDebug() << "3 [AElement >>] QDataStream";
+
+    QList<QVariant> &data = value.getPersistantData();
+    QString name;
+//    in >> name;
     in >> data;
 
-    qDebug() << "[AElement] QDataStream in: pin: " << value->name;
+//    qDebug() << "[AElement] QDataStream in: pin: " << name;
+    qDebug() << "           QDataStream in: data: " << data.first();
+
+    return in;
+}
+
+QDataStream &operator>>(QDataStream &in, AElement *&value)
+{
+    qDebug() << "4 [AElement >>] QDataStream";
+
+    QList<QVariant> &data = value->getPersistantData();
+//    value = new AElement();
+//    in >> value->name;
+    in >> data;
+
+//    qDebug() << "[AElement] QDataStream in: pin: " << value->name;
     qDebug() << "           QDataStream in: data: " << data.first();
 
     return in;

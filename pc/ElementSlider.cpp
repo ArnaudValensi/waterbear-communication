@@ -122,8 +122,10 @@ void ElementSlider::onApply()
 void ElementSlider::save()
 {
     qDebug() << "Save Slider";
+    qDebug() << "min: " << this->slider->minimum();
+    qDebug() << "max: " << this->slider->maximum();
 
-    this->persistantData.push_back(QVariant(this->slider->minimum()));
+    this->persistantData.push_back(this->slider->minimum());
     this->persistantData.push_back(this->slider->maximum());
 }
 
@@ -133,6 +135,9 @@ void ElementSlider::load()
 
     int min = this->persistantData.at(0).toInt();
     int max = this->persistantData.at(1).toInt();
+
+    qDebug() << "min: " << min;
+    qDebug() << "max: " << max;
 
     this->slider->setMinimum(min);
     this->slider->setMaximum(max);

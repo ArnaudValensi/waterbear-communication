@@ -95,7 +95,7 @@ void PinController::setUi(GuiController *ui)
     else
     {
         this->addElement(this->elem);
-//        this->elem->load();
+        this->elem->load();
     }
     this->ui->addToTab1Layout(this);
     this->updateGeometry();
@@ -234,15 +234,17 @@ QDataStream &operator>>(QDataStream &in, PinController &value)
     in >> elemName;
 
 //    ElementSlider *elem = 0;
-    AElement *elem = 0;
+//    AElement *elem = 0;
 
     int elemId = QMetaType::type((elemName + "*").toStdString().c_str());
     if (elemId != QMetaType::UnknownType)
     {
         qDebug() << "elemId: " << elemId;
         value.elem = ElementFactorySingleton::getInstance()->createById(elemId);
-        if (!elem)
+        if (!value.elem)
             qDebug() << "Error: elem NULL";
+
+        in >> value.elem;
     }
     else
         qDebug() << "QMetaType unknown";
