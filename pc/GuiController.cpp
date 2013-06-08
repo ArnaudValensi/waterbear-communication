@@ -160,11 +160,23 @@ void GuiController::on_actionSave_triggered()
 {
     qDebug() << "Save, " << this->pinControllerList.size() << " elems.";
 
-    PinController *config = this->pinControllerList.first();
+    //PinController *config = this->pinControllerList.first();
+
+//    {
+//        QSettings settings("./save.ini", QSettings::IniFormat);
+////        settings.setValue("Elements", qVariantFromValue(*config));
+//        settings.setValue("Elements", qVariantFromValue(this->pinControllerList));
+//    }
 
     {
         QSettings settings("./save.ini", QSettings::IniFormat);
-        settings.setValue("Elements", qVariantFromValue(*config));
+        settings.beginWriteArray("PinControllers");
+        for (int i = 0; i < this->pinControllerList.size(); ++i)
+        {
+            settings.setArrayIndex(i);
+            settings.setValue("Elements", qVariantFromValue(*this->pinControllerList.at(i)));
+        }
+        settings.endArray();
     }
 
 //    QSettings settings("./save.ini", QSettings::IniFormat);
@@ -178,10 +190,17 @@ void GuiController::on_actionLoad_triggered()
 
     QSettings settings("./save.ini", QSettings::IniFormat);
 
-    PinController tmp = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
-    PinController *pin = new PinController(tmp);
-    pin->print();
+    int size = settings.beginReadArray("PinControllers");
+    for (int i = 0; i < size; ++i)
+    {
+        settings.setArrayIndex(i);
 
-    pin->setUi(this);
-    this->pinControllerList.push_back(pin);
+        PinController tmp = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
+        PinController *pin = new PinController(tmp);
+        pin->print();
+
+        pin->setUi(this);
+        this->pinControllerList.push_back(pin);
+    }
+    settings.endArray();
 }
