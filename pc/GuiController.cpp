@@ -163,20 +163,20 @@ void GuiController::on_actionSave_triggered()
     PinController *config = this->pinControllerList.first();
 
     {
-        QSettings settings("./save.xml", QSettings::IniFormat);
+        QSettings settings("./save.ini", QSettings::IniFormat);
         settings.setValue("Elements", qVariantFromValue(*config));
     }
 
-    QSettings settings("./save.xml", QSettings::IniFormat);
-    PinController result = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
-    result.print();
+//    QSettings settings("./save.ini", QSettings::IniFormat);
+//    PinController result = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
+//    result.print();
 }
 
 void GuiController::on_actionLoad_triggered()
 {
     qDebug() << "Load";
 
-    QSettings settings("./save.xml", QSettings::IniFormat);
+    QSettings settings("./save.ini", QSettings::IniFormat);
 
     PinController tmp = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
     PinController *pin = new PinController(tmp);
