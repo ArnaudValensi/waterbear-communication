@@ -135,9 +135,7 @@ void GuiController::on_actionSlider_triggered()
     PinController *pin = this->addPinControl();
 
     if (pin)
-    {
         pin->addElement(slider);
-    }
 }
 
 void GuiController::on_actionPotar_triggered()
@@ -160,28 +158,14 @@ void GuiController::on_actionSave_triggered()
 {
     qDebug() << "Save, " << this->pinControllerList.size() << " elems.";
 
-    //PinController *config = this->pinControllerList.first();
-
-//    {
-//        QSettings settings("./save.ini", QSettings::IniFormat);
-////        settings.setValue("Elements", qVariantFromValue(*config));
-//        settings.setValue("Elements", qVariantFromValue(this->pinControllerList));
-//    }
-
+    QSettings settings("./save.ini", QSettings::IniFormat);
+    settings.beginWriteArray("PinControllers");
+    for (int i = 0; i < this->pinControllerList.size(); ++i)
     {
-        QSettings settings("./save.ini", QSettings::IniFormat);
-        settings.beginWriteArray("PinControllers");
-        for (int i = 0; i < this->pinControllerList.size(); ++i)
-        {
-            settings.setArrayIndex(i);
-            settings.setValue("Elements", qVariantFromValue(*this->pinControllerList.at(i)));
-        }
-        settings.endArray();
+        settings.setArrayIndex(i);
+        settings.setValue("Elements", qVariantFromValue(*this->pinControllerList.at(i)));
     }
-
-//    QSettings settings("./save.ini", QSettings::IniFormat);
-//    PinController result = settings.value("Elements", qVariantFromValue(PinController())).value<PinController>();
-//    result.print();
+    settings.endArray();
 }
 
 void GuiController::on_actionLoad_triggered()
