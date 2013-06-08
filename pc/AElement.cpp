@@ -21,30 +21,42 @@
 #include <QDialog>
 #include "AElement.h"
 #include "PinConfig.h"
+//#include "ElementSlider.h"
 
 // Deprecated
-AElement::AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent) :
-    QObject(parent)
+//AElement::AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent) :
+//    QObject(parent)
+//{
+//    qDebug() << "AElement Constructor";
+
+//    this->pinConfig = pinConfig;
+//    this->name = name;
+//    this->transfertType = io;
+//    this->configWindow = NULL;
+
+//    this->radioButton = new QRadioButton(name);
+//    QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayOut()));
+//}
+
+AElement::AElement(QString name, TransfertType io, QObject *parent)
+    : QObject(parent)
 {
     qDebug() << "AElement Constructor";
 
-    this->pinConfig = pinConfig;
     this->name = name;
     this->transfertType = io;
-    this->configWindow = NULL;
 
     this->radioButton = new QRadioButton(name);
     QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayOut()));
 }
 
-AElement::AElement(QString name, TransfertType io, QObject *parent) :
-    QObject(parent)
+AElement::AElement(AElement const &other)
+    : QObject(0)
 {
     qDebug() << "AElement Copy Constructor";
 
-//    this->pinConfig = pinConfig;
-    this->name = name;
-    this->transfertType = io;
+    this->name = other.name;
+    this->transfertType = other.transfertType;
 
     this->radioButton = new QRadioButton(name);
     QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayOut()));
@@ -151,16 +163,39 @@ void AElement::onApply()
 
 void AElement::initSerialization()
 {
+//    qRegisterMetaTypeStreamOperators<AElement>("AElement");
+//    qMetaTypeId<AElement>();
+
     qRegisterMetaTypeStreamOperators<AElement*>("AElement");
+//    qRegisterMetaTypeStreamOperators<ElementSlider*>("ElementSlider");
 
     qMetaTypeId<AElement*>();               // Teste la validité de la classe Contact
 }
+
+QDataStream &operator<<(QDataStream &out, const AElement &value)
+{
+    qDebug() << "[AElement] QDataStream out: pin: " << value.name;
+
+    out << value.name;
+
+    return out;
+}
+
+//QDataStream &operator>>(QDataStream &in, AElement &value)
+//{
+//    value = new AElement();
+//    in >> value.name;
+
+//    qDebug() << "[AElement] QDataStream in: pin: " << value.name;
+
+//    return in;
+//}
 
 QDataStream &operator<<(QDataStream &out, const AElement *&value)
 {
     qDebug() << "[AElement] QDataStream out: pin: " << value->name;
 
-    out << value->name;
+    out << value->name.toStdString().c_str();
 
     return out;
 }
@@ -174,3 +209,19 @@ QDataStream &operator>>(QDataStream &in, AElement *&value)
 
     return in;
 }
+
+//void operator <<(QVariant &data, const AElement *&target)
+//{
+//    QVariantMap map;
+//    map["Name"] << target->name;
+//    data << map;
+//}
+
+//void operator >>(const QVariant &data, AElement *&target)
+//{
+//    QVariantMap map;
+//    target = new AElement();
+
+//    data >> map;
+//    map[ "Name" ] >> target->name;
+//}

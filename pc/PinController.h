@@ -26,9 +26,18 @@
 #include <QGroupBox>
 #include <QVariant>
 #include <QDataStream>
+#include <QRect>
 #include "GuiController.h"
 #include "Arduino.h"
 #include "AElement.h"
+#include "ElementFactory.h"
+
+//Q_DECLARE_METATYPE(QRect*)
+//QDataStream &operator<<(QDataStream &out, const QRect *&value);
+//QDataStream &operator>>(QDataStream &in, QRect *&value);
+//QDataStream &operator<<(QDataStream &out, const QRect *value);
+//QDataStream &operator<<(QDataStream &out, const QRect &value);
+//QDataStream &operator>>(QDataStream &in, QRect &value);
 
 class GuiController;
 
@@ -36,13 +45,18 @@ class PinController : public QGroupBox
 {
     Q_OBJECT
 public:
-    explicit PinController(GuiController *ui = NULL, quint8 pinNumber = 0, QWidget *parent = 0);
+    explicit PinController(GuiController *ui = NULL, quint8 pinNumber = 23, QWidget *parent = 0);
     PinController(PinController const &other);
     ~PinController();
     int getPinNumber() const;
     void addElement(AElement *elem);
+    void setUi(GuiController *ui);
     void print();
     static void initSerialization();
+//    ElementFactory *getElementFactory();
+
+//    QRect test;
+//    QString test2;
 
 private:
     static int const fixedWidth = 130;

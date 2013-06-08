@@ -31,8 +31,9 @@ class ElementSlider : public AElement
 {
     Q_OBJECT
 public:
-    ElementSlider(PinConfig *pinConfig, QObject *parent = 0);
+//    ElementSlider(PinConfig *pinConfig, QObject *parent = 0);
     ElementSlider(QObject *parent = 0);
+    ElementSlider(ElementSlider const &other);
     ~ElementSlider();
     virtual void displayElem();
 
@@ -49,5 +50,7 @@ private slots:
     void onApply();
 
 };
+
+Q_DECLARE_METATYPE(ElementSlider*)
 
 #endif // ELEMENTSLIDER_H

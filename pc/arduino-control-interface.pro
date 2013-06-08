@@ -20,21 +20,22 @@ SOURCES += main.cpp\
     PinController.cpp \
     Arduino.cpp \
     GuiController.cpp \
-    PinConfig.cpp \
     AElement.cpp \
     ElementSlider.cpp \
-    ElementPot.cpp \
-    ElementPushButton.cpp
+    ElementFactory.cpp
+#    ElementPot.cpp \
+#    ElementPushButton.cpp
 
 HEADERS  += \
     PinController.h \
     Arduino.h \
     define_exception.h \
     GuiController.h \
-    PinConfig.h \
     AElement.h \
     ElementSlider.h \
-    ElementPot.h \
-    ElementPushButton.h
+    ElementFactory.h \
+    Singleton.hpp
+#    ElementPot.h \
+#    ElementPushButton.h
 
 FORMS    += Gui.ui

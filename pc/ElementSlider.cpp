@@ -26,9 +26,21 @@
 #include <QPushButton>
 #include "ElementSlider.h"
 
-ElementSlider::ElementSlider(PinConfig *pinConfig, QObject *parent)
-    : AElement(pinConfig, "Slider", AElement::OUT, parent)
+//ElementSlider::ElementSlider(PinConfig *pinConfig, QObject *parent)
+//    : AElement(pinConfig, "ElementSlider", AElement::OUT, parent)
+//{
+//    qDebug() << "ElementSlider Constructor";
+//    this->minValue = NULL;
+//    this->maxValue = NULL;
+//    this->displayVBox = NULL;
+//    this->slider = NULL;
+//    this->lcd = NULL;
+//}
+
+ElementSlider::ElementSlider(QObject *parent)
+    : AElement("ElementSlider", AElement::OUT, parent)
 {
+    qDebug() << "ElementSlider Constructor";
     this->minValue = NULL;
     this->maxValue = NULL;
     this->displayVBox = NULL;
@@ -36,9 +48,21 @@ ElementSlider::ElementSlider(PinConfig *pinConfig, QObject *parent)
     this->lcd = NULL;
 }
 
-ElementSlider::ElementSlider(QObject *parent)
-    : AElement("Slider", AElement::OUT, parent)
+ElementSlider::ElementSlider(ElementSlider const &other)
+    : AElement("ElementSlider", AElement::OUT, 0)
 {
+    qDebug() << "ElementSlider Constructor Copy";
+    (void) other;
+    this->minValue = NULL;
+    this->maxValue = NULL;
+    this->displayVBox = NULL;
+    this->slider = NULL;
+    this->lcd = NULL;
+//    this->minValue = other.minValue;
+//    this->maxValue = other.maxValue;
+//    this->displayVBox = other.displayVBox;
+//    this->slider = other.slider;
+//    this->lcd = other.lcd;
 }
 
 ElementSlider::~ElementSlider()

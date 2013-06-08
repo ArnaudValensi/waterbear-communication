@@ -19,11 +19,13 @@
 
 #include "PinController.h"
 #include "AElement.h"
+#include "ElementSlider.h"
 
 #include <QMouseEvent>
 #include <QDebug>
 #include <QMenu>
 #include <QDialog>
+#include <QMetaType>
 
 PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *parent)
     : QGroupBox(parent),
@@ -32,6 +34,7 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
 {
     qDebug() << "PinController Constructor";
 
+//    this->test = new QRect();
     this->elem = NULL;
     this->setFixedWidth(this->fixedWidth);
     if (this->ui)
@@ -51,12 +54,14 @@ PinController::PinController(PinController const &other)
 {
     qDebug() << "PinController Copy Constructor";
 
+//    this->test = other.test;
+//    this->test2 = other.test2;
     this->elem = NULL;
     this->ui = other.ui;
     this->pinNumber = other.pinNumber;
     if (other.elem)
     {
-        qDebug() << "PinController Copy elem";
+        qDebug() << "PinController Copy elem: " << other.elem->getName();
 
         this->elem = other.elem;
     }
@@ -80,6 +85,19 @@ PinController::PinController(PinController const &other)
 PinController::~PinController()
 {
 
+}
+
+void PinController::setUi(GuiController *ui)
+{
+    if (!ui)
+        return;
+
+    this->ui = ui;
+    this->ui->addToTab1Layout(this);
+    this->addElement(this->elem);
+
+    Arduino *arduino = ui->getArduino();
+    QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
 }
 
 void PinController::sendValueToArduino(int value)
@@ -175,36 +193,124 @@ void PinController::editElement()
     this->elem->openConfigWindow();
 }
 
+//ElementFactory *PinController::getElementFactory()
+//{
+//    return this->ui->getElementFactory();
+//}
+
 void PinController::print()
 {
-    qDebug() << "[PinController] pinNum" << this->pinNumber;
+    qDebug() << "--[PinController] pinNum" << this->pinNumber;
     if (this->elem)
-        qDebug() << "[Elem]          name  " << this->elem->getName();
+        qDebug() << "--[Elem]          name  " << this->elem->getName();
+//    qDebug() << "--[PinController] test2" << this->test2;
 }
 
 void PinController::initSerialization()
 {
     qRegisterMetaTypeStreamOperators<PinController>("PinController");
+//    qRegisterMetaType<ElementSlider*>("ElementSlider*");
+//    qRegisterMetaTypeStreamOperators<PinController*>("PinController");
+//    qRegisterMetaTypeStreamOperators<QRect>("QRect");
 
-    qMetaTypeId<PinController>();               // Teste la validité de la classe Contact
+    qDebug() << "PinController ID: " << qMetaTypeId<PinController>();
+//    qDebug() << "ElementSlider ID: " << qMetaTypeId<ElementSlider>();
+//    qMetaTypeId<PinController*>();               // Teste la validité de la classe Contact
+//    qMetaTypeId<QRect>();               // Teste la validité de la classe Contact
 }
 
 QDataStream &operator<<(QDataStream &out, const PinController &value)
 {
-    qDebug() << "[PinController] QDataStream out: pin: " << value.pinNumber;
+    qDebug() << "[PinController <<] pin: " << value.pinNumber;
+//    qDebug() << "                   value.test: " << value.test2;
 
-    out << value.pinNumber
-        << value.elem;
+//    qDebug() << "[PinController <<] ElementSlider ID: " << qMetaTypeId<ElementSlider>();
+
+
+    out << value.pinNumber;
+//        << value.elem
+//    out << value.test2;
+    out << *value.elem;
 
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, PinController &value)
 {
-    in >> value.pinNumber
-       >> value.elem;
+    qDebug() << "==================";
 
-    qDebug() << "[PinController] QDataStream in: pin: " << value.pinNumber;
+    QString elemName;
+
+    in >> value.pinNumber;
+    in >> elemName;
+
+//    ElementSlider *elem = 0;
+    AElement *elem = 0;
+
+    int elemId = QMetaType::type((elemName + "*").toStdString().c_str());
+    if (elemId != QMetaType::UnknownType)
+    {
+        qDebug() << "elemId: " << elemId;
+        value.elem = ElementFactorySingleton::getInstance()->createById(elemId);
+        if (!elem)
+            qDebug() << "Error: elem NULL";
+    }
+    else
+        qDebug() << "QMetaType unknown";
+
+    qDebug() << "[PinController >>] QDataStream in: pin: " << value.pinNumber;
+//    qDebug() << "                   value.test: " << value.test2;
+    qDebug() << "                   elemName: " << value.elem->getName();
+    qDebug() << "                   elemId: " << elemId;
 
     return in;
 }
+
+//QDataStream &operator<<(QDataStream &out, const QRect *value)
+//{
+//    qDebug() << "[QRect <<] << " << *value;
+
+//    out << *value;
+
+//    return out;
+//}
+
+//QDataStream &operator<<(QDataStream &out, const QRect *&value)
+//{
+//    qDebug() << "[QRect <<] << " << *value;
+
+//    out << *value;
+
+//    return out;
+//}
+
+//QDataStream &operator>>(QDataStream &in, QRect *&value)
+//{
+//    value = new QRect();
+
+//    in >> value;
+
+//    qDebug() << "[QRect >>] >> " << *value;
+
+//    return in;
+//}
+
+//QDataStream &operator<<(QDataStream &out, const QRect &value)
+//{
+//    qDebug() << "[QRect <<] << " << value;
+
+//    out << value;
+
+//    return out;
+//}
+
+//QDataStream &operator>>(QDataStream &in, QRect &value)
+//{
+////    value = new QRect();
+
+//    in >> value;
+
+//    qDebug() << "[QRect >>] >> " << value;
+
+//    return in;
+//}

@@ -24,6 +24,7 @@
 #include "PinController.h"
 #include "PinConfig.h"
 #include "Arduino.h"
+#include "ElementFactory.h"
 
 namespace Ui {
 class Gui;
@@ -47,6 +48,7 @@ public:
     Arduino *getArduino();
     QHBoxLayout *getTab1Layout() const;
     QList<PinController *> *getPinControllerList();
+//    static ElementFactory *getElementFactory();
 
 private:
     void SaveConfig();
@@ -56,6 +58,7 @@ private:
     // Deprecated
     QList<PinConfig *> pinConfigList;
     Arduino arduino;
+    ElementFactory *elemFactory;
 
 private slots:
     void on_pushButtonConnect_clicked();

@@ -37,8 +37,9 @@ public:
     enum TransfertType { IN = 0, OUT };
 
     // Deprecated
-    explicit AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent = 0);
+//    explicit AElement(PinConfig *pinConfig, QString name, TransfertType io, QObject *parent = 0);
     explicit AElement(QString name = "Unknown", TransfertType io = OUT, QObject *parent = 0);
+    AElement(AElement const &other);
     virtual ~AElement();
     void closeConfigWindow();
     virtual void displayElem();
@@ -61,7 +62,10 @@ private:
     QDialog *configWindow;
     friend QDataStream &operator<<(QDataStream &out, const AElement *&value);
     friend QDataStream &operator>>(QDataStream &in, AElement *&value);
-
+    friend QDataStream &operator<<(QDataStream &out, const AElement &value);
+//    friend QDataStream &operator>>(QDataStream &in, AElement *&value);
+//    friend void operator <<(QVariant &data, const AElement *&target);
+//    friend void operator >>(const QVariant &data, AElement *&target);
 protected:
     void setConfigLayout(QLayout *layout);
     void setDisplayLayout(QLayout *layout);
@@ -76,8 +80,14 @@ public slots:
 
 };
 
+//Q_DECLARE_METATYPE(AElement)
+//QDataStream &operator<<(QDataStream &out, const AElement &value);
+//QDataStream &operator>>(QDataStream &in, AElement &value);
 Q_DECLARE_METATYPE(AElement*)
 QDataStream &operator<<(QDataStream &out, const AElement *&value);
 QDataStream &operator>>(QDataStream &in, AElement *&value);
+
+//void operator <<(QVariant &data, const AElement *&target);
+//void operator >>(const QVariant &data, AElement *&target);
 
 #endif // AELEMENT_H

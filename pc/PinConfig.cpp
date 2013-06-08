@@ -40,8 +40,8 @@ PinConfig::PinConfig(GuiController *ui, QObject *parent) :
     this->applyedElement = NULL;
 
     AElement *slider = new ElementSlider(this);
-    AElement *pot = new ElementPot(this);
-    AElement *button = new ElementPushButton(this);
+//    AElement *pot = new ElementPot(this);
+//    AElement *button = new ElementPushButton(this);
     //AElement *sliderIn = new ElementSlider(this, "Slider", AElement::IN);
     //this->elementList.push_back(sliderIn);
     this->elementList.push_back(slider);
