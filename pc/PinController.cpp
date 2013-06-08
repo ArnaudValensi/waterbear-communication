@@ -90,7 +90,13 @@ void PinController::setUi(GuiController *ui)
         return;
 
     this->ui = ui;
-    this->addElement(this->elem);
+    if (this->elem == NULL)
+        qDebug() << "Error: this->elem == NULL";
+    else
+    {
+        this->addElement(this->elem);
+//        this->elem->load();
+    }
     this->ui->addToTab1Layout(this);
     this->updateGeometry();
 
@@ -112,7 +118,7 @@ int PinController::getPinNumber() const
 void PinController::addElement(AElement *elem)
 {
     this->elem = elem;
-    elem->displayOut();
+    elem->displayProc();
     // Deprecated
     elem->displayConfig();
     this->setLayout(elem->getDisplayLayout());

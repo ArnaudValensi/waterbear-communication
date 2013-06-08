@@ -36,6 +36,8 @@ public:
     ElementSlider(ElementSlider const &other);
     ~ElementSlider();
     virtual void displayElem();
+    virtual void save();
+    virtual void load();
 
 private:
     virtual void displayConfig();

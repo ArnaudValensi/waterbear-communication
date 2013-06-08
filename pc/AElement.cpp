@@ -47,7 +47,7 @@ AElement::AElement(QString name, TransfertType io, QObject *parent)
     this->transfertType = io;
 
     this->radioButton = new QRadioButton(name);
-    QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayOut()));
+    QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayProc()));
 }
 
 AElement::AElement(AElement const &other)
@@ -59,7 +59,7 @@ AElement::AElement(AElement const &other)
     this->transfertType = other.transfertType;
 
     this->radioButton = new QRadioButton(name);
-    QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayOut()));
+    QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayProc()));
 }
 
 AElement::~AElement()
@@ -78,11 +78,10 @@ QRadioButton *AElement::getRadioButton() const
 }
 
 // TODO: Maybe can be replaced by the direct call of displayElem()
-void AElement::displayOut()
+void AElement::displayProc()
 {
-//    this->pinConfig->preDisplayConfig();
+//    this->load();
     this->displayElem();
-//    this->pinConfig->postDisplayConfig();
 }
 
 void AElement::openConfigWindow()
@@ -127,6 +126,16 @@ QLayout *AElement::getConfigLayout() const
     return this->configLayout;
 }
 
+QList<QVariant> const &AElement::getPersistantData() const
+{
+    return this->persistantData;
+}
+
+QList<QVariant> &AElement::getPersistantData()
+{
+    return this->persistantData;
+}
+
 void AElement::sendValueToArduino(int value)
 {
 //    this->pinConfig->sendValueToArduino(value);
@@ -157,6 +166,16 @@ void AElement::displayElem()
 }
 
 void AElement::onApply()
+{
+
+}
+
+void AElement::save()
+{
+
+}
+
+void AElement::load()
 {
 
 }
@@ -195,17 +214,22 @@ QDataStream &operator<<(QDataStream &out, const AElement *&value)
 {
     qDebug() << "[AElement] QDataStream out: pin: " << value->name;
 
-    out << value->name.toStdString().c_str();
+    const_cast<AElement *>(value)->save();
 
+    out << value->name.toStdString().c_str();
+    out << value->getPersistantData();
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, AElement *&value)
 {
+    QList<QVariant> &data = value->getPersistantData();
     value = new AElement();
     in >> value->name;
+    in >> data;
 
     qDebug() << "[AElement] QDataStream in: pin: " << value->name;
+    qDebug() << "           QDataStream in: data: " << data.first();
 
     return in;
 }

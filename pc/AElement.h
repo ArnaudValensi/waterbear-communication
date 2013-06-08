@@ -26,10 +26,14 @@
 #include <QLayout>
 #include <QVariant>
 #include <QDataStream>
+#include <QList>
+#include <QVariant>
+
 
 class PinConfig;
 class QDialog;
 
+// TODO: put the virtual member functions in pure.
 class AElement : public QObject
 {
     Q_OBJECT
@@ -49,8 +53,10 @@ public:
     QRadioButton *getRadioButton() const;
     QLayout *getDisplayLayout() const;
     QLayout *getConfigLayout() const;
+    const QList<QVariant> &getPersistantData() const;
+    QList<QVariant> &getPersistantData();
     static void initSerialization();
-
+    virtual void load();
 private:
 
     PinConfig *pinConfig;
@@ -67,12 +73,14 @@ private:
 //    friend void operator <<(QVariant &data, const AElement *&target);
 //    friend void operator >>(const QVariant &data, AElement *&target);
 protected:
+    QList<QVariant> persistantData;
     void setConfigLayout(QLayout *layout);
     void setDisplayLayout(QLayout *layout);
     virtual void onApply();
+    virtual void save();
 
 public slots:
-    void displayOut();
+    void displayProc();
     void sendValueToArduino(int value = 0);
     void openConfigWindow();
     void onApplyProc();

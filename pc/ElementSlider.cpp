@@ -18,7 +18,6 @@
  * ***** END LICENSE BLOCK ***** */
 
 #include <QLCDNumber>
-//#include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSlider>
 #include <QDebug>
@@ -26,16 +25,6 @@
 #include <QPushButton>
 #include "ElementSlider.h"
 
-//ElementSlider::ElementSlider(PinConfig *pinConfig, QObject *parent)
-//    : AElement(pinConfig, "ElementSlider", AElement::OUT, parent)
-//{
-//    qDebug() << "ElementSlider Constructor";
-//    this->minValue = NULL;
-//    this->maxValue = NULL;
-//    this->displayVBox = NULL;
-//    this->slider = NULL;
-//    this->lcd = NULL;
-//}
 
 ElementSlider::ElementSlider(QObject *parent)
     : AElement("ElementSlider", AElement::OUT, parent)
@@ -67,11 +56,7 @@ ElementSlider::ElementSlider(ElementSlider const &other)
 
 ElementSlider::~ElementSlider()
 {
-//    delete this->minValue;
-//    delete this->displayVBox;
-//    delete this->displayVBox;
-//    delete this->slider;
-//    delete this->lcd;
+
 }
 
 void ElementSlider::displayConfig()
@@ -79,19 +64,11 @@ void ElementSlider::displayConfig()
     this->minValue = new QLineEdit();
     this->maxValue = new QLineEdit();
     QVBoxLayout *hbox = new QVBoxLayout();
-//    QPushButton *apply = new QPushButton("OK");
 
-//    this->minValue->setText(QString(this->slider->minimum()));
-//    this->maxValue->setText(QString(this->slider->maximum()));
-
-    // TODO: free
     hbox->addWidget(new QLabel("Min:"));
     hbox->addWidget(minValue);
     hbox->addWidget(new QLabel("Max:"));
     hbox->addWidget(maxValue);
-//    hbox->addWidget(apply);
-
-//    connect(apply, SIGNAL(clicked()), this, SLOT(onApply()));
 
     this->setConfigLayout(hbox);
 }
@@ -107,7 +84,6 @@ void ElementSlider::displayElem()
 
     qDebug() << "min: " << min;
     qDebug() << "max: " << max;
-
 
 //    QPalette Pal = this->lcd->palette();
 //    Pal.setColor(QPalette::Normal, QPalette::Window, Qt::black);
@@ -141,4 +117,23 @@ void ElementSlider::onApply()
 
     slider->setMinimum(min);
     slider->setMaximum(max);
+}
+
+void ElementSlider::save()
+{
+    qDebug() << "Save Slider";
+
+    this->persistantData.push_back(QVariant(this->slider->minimum()));
+    this->persistantData.push_back(this->slider->maximum());
+}
+
+void ElementSlider::load()
+{
+    qDebug() << "Load Slider";
+
+    int min = this->persistantData.at(0).toInt();
+    int max = this->persistantData.at(1).toInt();
+
+    this->slider->setMinimum(min);
+    this->slider->setMaximum(max);
 }
