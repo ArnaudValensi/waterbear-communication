@@ -205,3 +205,8 @@ void GuiController::on_actionLoad_triggered()
     }
     settings.endArray();
 }
+
+void GuiController::on_actionClose_triggered()
+{
+    this->close();
+}

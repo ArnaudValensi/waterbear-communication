@@ -65,6 +65,7 @@ private slots:
     void on_actionButton_triggered();
     void on_actionSave_triggered();
     void on_actionLoad_triggered();
+    void on_actionClose_triggered();
 };
 
 #endif // GUI_H
