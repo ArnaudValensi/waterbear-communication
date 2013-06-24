@@ -20,6 +20,7 @@
 #include <QMessageBox>
 #include "GuiController.h"
 #include "ui_Gui.h"
+#include "ui_About.h"
 #include "PinController.h"
 #include "AElement.h"
 #include "ElementSlider.h"
@@ -211,18 +212,12 @@ void GuiController::on_actionClose_triggered()
     this->close();
 }
 
-//void GuiController::on_actionConsole_toggled(bool checked)
-//{
-//    if (checked)
-//        this->ui->dockWidgetConsole->show();
-//    else
-//        this->ui->dockWidgetConsole->hide();
-//}
+void GuiController::on_actionAbout_triggered()
+{
+    QDialog *about = new QDialog(0,0);
 
-//void GuiController::on_dockWidgetConsole_visibilityChanged(bool visible)
-//{
-//    if (visible)
-//        this->ui->actionConsole->setChecked(true);
-//    else
-//        this->ui->actionConsole->setChecked(false);
-//}
+    Ui_DialogAbout aboutUi;
+    aboutUi.setupUi(about);
+
+    about->show();
+}

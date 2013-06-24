@@ -38,4 +38,5 @@ HEADERS  += \
     ElementPot.h \
     ElementPushButton.h
 
-FORMS    += Gui.ui
+FORMS    += Gui.ui \
+    About.ui
