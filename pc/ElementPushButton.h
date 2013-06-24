@@ -26,9 +26,12 @@ class ElementPushButton : public AElement
 {
     Q_OBJECT
 public:
-    ElementPushButton(PinConfig *pinConfig, QObject *parent = 0);
+    ElementPushButton(QObject *parent = 0);
+    ElementPushButton(ElementPushButton const &other);
     virtual ~ElementPushButton();
     virtual void displayElem();
+    virtual void save();
+    virtual void load();
 
 private:
     virtual void displayConfig();
@@ -38,6 +41,8 @@ private:
 
 public slots:
     void sendValue();
+    void onApply();
+
 };
 
 #endif // ELEMENTPUSHBUTTON_H

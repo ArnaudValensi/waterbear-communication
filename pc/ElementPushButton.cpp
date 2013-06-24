@@ -23,9 +23,19 @@
 #include <QDebug>
 #include "ElementPushButton.h"
 
-ElementPushButton::ElementPushButton(PinConfig *pinConfig, QObject *parent)
-    : AElement(pinConfig, "Button", AElement::OUT, parent)
+ElementPushButton::ElementPushButton(QObject *parent)
+    : AElement("Button", AElement::OUT, parent)
 {
+    this->lineEditValue = NULL;
+    this->value = 0;
+}
+
+ElementPushButton::ElementPushButton(ElementPushButton const &other)
+    : AElement("Button", AElement::OUT, 0)
+{
+    (void) other;
+    this->lineEditValue = NULL;
+    this->value = 0;
 }
 
 ElementPushButton::~ElementPushButton()
@@ -46,11 +56,6 @@ void ElementPushButton::displayElem()
 {
     QVBoxLayout *vbox = new QVBoxLayout();
     QPushButton *button = new QPushButton();
-    bool ok;
-
-    value = this->lineEditValue->text().toInt(&ok);
-    if (!ok)
-        value = 0;
 
     qDebug() << "val: " << value;
 
@@ -68,3 +73,30 @@ void ElementPushButton::sendValue()
     this->sendValueToArduino(this->value);
 }
 
+void ElementPushButton::onApply()
+{
+    bool ok;
+
+    this->value = this->lineEditValue->text().toInt(&ok);
+    if (!ok)
+        this->value = 0;
+}
+
+void ElementPushButton::save()
+{
+    qDebug() << "Save PushButton";
+    qDebug() << "value: " << this->value;
+
+    this->persistantData.push_back(this->value);
+}
+
+void ElementPushButton::load()
+{
+    qDebug() << "Load PushButton";
+
+    int value = this->persistantData.at(0).toInt();
+
+    qDebug() << "value: " << this->value;
+
+    this->value = value;
+}

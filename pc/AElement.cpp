@@ -45,6 +45,7 @@ AElement::AElement(QString name, TransfertType io, QObject *parent)
 
     this->name = name;
     this->transfertType = io;
+    this->configWindow = NULL;
 
     this->radioButton = new QRadioButton(name);
     QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayProc()));
@@ -57,6 +58,7 @@ AElement::AElement(AElement const &other)
 
     this->name = other.name;
     this->transfertType = other.transfertType;
+    this->configWindow = other.configWindow;
 
     this->radioButton = new QRadioButton(name);
     QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayProc()));

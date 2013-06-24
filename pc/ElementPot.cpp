@@ -26,8 +26,8 @@
 #include <QDebug>
 #include <QLabel>
 
-ElementPot::ElementPot(PinConfig *pinConfig, QObject *parent)
-    : AElement(pinConfig, "Pot", AElement::OUT, parent)
+ElementPot::ElementPot(QObject *parent)
+    : AElement("Pot", AElement::OUT, parent)
 {
     this->minValue = NULL;
     this->maxValue = NULL;
@@ -36,9 +36,20 @@ ElementPot::ElementPot(PinConfig *pinConfig, QObject *parent)
     this->lcd = NULL;
 }
 
-ElementPot::ElementPot(QObject *parent)
-    : AElement("Pot", AElement::OUT, parent)
+ElementPot::ElementPot(ElementPot const &other)
+    : AElement("Pot", AElement::OUT, 0)
 {
+    (void) other;
+    this->minValue = NULL;
+    this->maxValue = NULL;
+    this->displayVBox = NULL;
+    this->pot = NULL;
+    this->lcd = NULL;
+}
+
+ElementPot::~ElementPot()
+{
+
 }
 
 void ElementPot::displayConfig()
@@ -94,4 +105,32 @@ void ElementPot::onApply()
 
     pot->setMinimum(min);
     pot->setMaximum(max);
+}
+
+void ElementPot::save()
+{
+    qDebug() << "Save pot";
+    qDebug() << "min: " << this->pot->minimum();
+    qDebug() << "max: " << this->pot->maximum();
+    qDebug() << "value: " << this->pot->value();
+
+    this->persistantData.push_back(this->pot->minimum());
+    this->persistantData.push_back(this->pot->maximum());
+    this->persistantData.push_back(this->pot->value());
+}
+
+void ElementPot::load()
+{
+    qDebug() << "Load pot";
+
+    int min = this->persistantData.at(0).toInt();
+    int max = this->persistantData.at(1).toInt();
+    int value = this->persistantData.at(2).toInt();
+
+    qDebug() << "min: " << min;
+    qDebug() << "max: " << max;
+
+    this->pot->setMinimum(min);
+    this->pot->setMaximum(max);
+    this->pot->setValue(value);
 }

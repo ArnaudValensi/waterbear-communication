@@ -31,9 +31,12 @@ class ElementPot : public AElement
 {
     Q_OBJECT
 public:
-    ElementPot(PinConfig *pinConfig, QObject *parent = 0);
     ElementPot(QObject *parent = 0);
+    ElementPot(const ElementPot &other);
+    ~ElementPot();
     virtual void displayElem();
+    virtual void save();
+    virtual void load();
 
 private:
     virtual void displayConfig();

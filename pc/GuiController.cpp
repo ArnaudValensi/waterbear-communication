@@ -44,6 +44,8 @@ GuiController::GuiController(QWidget *parent) :
 
     this->elemFactory = ElementFactorySingleton::getInstance();
     this->elemFactory->registerElem<ElementSlider>();
+    this->elemFactory->registerElem<ElementPot>();
+    this->elemFactory->registerElem<ElementPushButton>();
 }
 
 GuiController::~GuiController()
@@ -142,16 +144,22 @@ void GuiController::on_actionPotar_triggered()
 {
     qDebug() << "on_actionPotar_triggered";
 
-//    AElement *pot = new ElementPot(this);
-//    PinController *pin = this->addPinControl();
+    AElement *pot = new ElementPot(this);
+    PinController *pin = this->addPinControl();
 
-//    if (pin)
-//        pin->addElement(pot);
+    if (pin)
+        pin->addElement(pot);
 }
 
 void GuiController::on_actionButton_triggered()
 {
+    qDebug() << "on_actionButton_triggered";
 
+    AElement *button = new ElementPushButton(this);
+    PinController *pin = this->addPinControl();
+
+    if (pin)
+        pin->addElement(button);
 }
 
 void GuiController::on_actionSave_triggered()
