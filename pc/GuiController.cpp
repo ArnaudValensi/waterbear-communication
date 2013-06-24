@@ -33,6 +33,7 @@
 #include <QVariant>
 #include <QFile>
 #include <QDataStream>
+#include <QFileDialog>
 
 
 GuiController::GuiController(QWidget *parent) :
@@ -165,9 +166,15 @@ void GuiController::on_actionButton_triggered()
 
 void GuiController::on_actionSave_triggered()
 {
+    QString fileName = QFileDialog::getSaveFileName(this,
+        tr("Save Layout"), "",
+        tr("Config File (*.ini);;All Files (*)"));
+    if (fileName.isEmpty())
+        return;
+
     qDebug() << "Save, " << this->pinControllerList.size() << " elems.";
 
-    QSettings settings("./save.ini", QSettings::IniFormat);
+    QSettings settings(fileName, QSettings::IniFormat);
     settings.beginWriteArray("PinControllers");
     for (int i = 0; i < this->pinControllerList.size(); ++i)
     {
@@ -181,6 +188,12 @@ void GuiController::on_actionLoad_triggered()
 {
     qDebug() << "Load";
 
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("Load Layout"), "",
+        tr("Config File (*.ini);;All Files (*)"));
+    if (fileName.isEmpty())
+        return;
+
     // Remove old elements.
     PinController *item;
     while (!this->pinControllerList.isEmpty())
@@ -191,7 +204,7 @@ void GuiController::on_actionLoad_triggered()
     }
 
     // Load configuration from file.
-    QSettings settings("./save.ini", QSettings::IniFormat);
+    QSettings settings(fileName, QSettings::IniFormat);
     int size = settings.beginReadArray("PinControllers");
     for (int i = 0; i < size; ++i)
     {
