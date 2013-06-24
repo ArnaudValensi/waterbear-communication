@@ -211,18 +211,18 @@ void GuiController::on_actionClose_triggered()
     this->close();
 }
 
-void GuiController::on_actionConsole_toggled(bool checked)
-{
-    if (checked)
-        this->ui->dockWidgetConsole->show();
-    else
-        this->ui->dockWidgetConsole->hide();
-}
+//void GuiController::on_actionConsole_toggled(bool checked)
+//{
+//    if (checked)
+//        this->ui->dockWidgetConsole->show();
+//    else
+//        this->ui->dockWidgetConsole->hide();
+//}
 
-void GuiController::on_dockWidgetConsole_visibilityChanged(bool visible)
-{
-    if (visible)
-        this->ui->actionConsole->setChecked(true);
-    else
-        this->ui->actionConsole->setChecked(false);
-}
+//void GuiController::on_dockWidgetConsole_visibilityChanged(bool visible)
+//{
+//    if (visible)
+//        this->ui->actionConsole->setChecked(true);
+//    else
+//        this->ui->actionConsole->setChecked(false);
+//}

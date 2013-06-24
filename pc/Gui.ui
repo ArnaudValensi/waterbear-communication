@@ -202,5 +202,38 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>dockWidgetConsole</sender>
+   <signal>visibilityChanged(bool)</signal>
+   <receiver>actionConsole</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>523</x>
+     <y>537</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionConsole</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>dockWidgetConsole</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>523</x>
+     <y>537</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

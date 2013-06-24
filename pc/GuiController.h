@@ -66,8 +66,6 @@ private slots:
     void on_actionSave_triggered();
     void on_actionLoad_triggered();
     void on_actionClose_triggered();
-    void on_actionConsole_toggled(bool arg1);
-    void on_dockWidgetConsole_visibilityChanged(bool visible);
 };
 
 #endif // GUI_H
