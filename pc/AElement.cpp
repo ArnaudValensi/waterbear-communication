@@ -43,6 +43,7 @@ AElement::AElement(QString name, TransfertType io, QObject *parent)
 {
     qDebug() << "AElement Constructor";
 
+    this->configWindow = NULL;
     this->name = name;
     this->transfertType = io;
     this->configWindow = NULL;
