@@ -68,7 +68,7 @@
     <pixmap resource="ressources/pictures.qrc">:/main/waterbear-256.png</pixmap>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser">
+  <widget class="QTextBrowser" name="textBrowserMain">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -133,7 +133,7 @@ p, li { white-space: pre-wrap; }
     <string notr="true">background-color:#dddddd;</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser_2">
+  <widget class="QTextBrowser" name="textBrowserBottom">
    <property name="geometry">
     <rect>
      <x>10</x>
