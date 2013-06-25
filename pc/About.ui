@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>DialogAbout</class>
  <widget class="QDialog" name="DialogAbout">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,8 +13,30 @@
     <height>350</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>799</width>
+    <height>350</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>799</width>
+    <height>350</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>About Waterbear Communication</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="ressources/pictures.qrc">
+    <normaloff>:/main/waterbear-256x256.png</normaloff>:/main/waterbear-256x256.png</iconset>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
