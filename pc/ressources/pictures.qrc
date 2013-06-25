@@ -2,6 +2,7 @@
     <qresource prefix="/main">
         <file>waterbear-256.png</file>
         <file>waterbear-256_croped.png</file>
+        <file>waterbear-256x256.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>handsean.ttf</file>

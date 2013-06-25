@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="ressources/pictures.qrc">
-    <normaloff>:/main/waterbear-256_croped.png</normaloff>:/main/waterbear-256_croped.png</iconset>
+    <normaloff>:/main/waterbear-256x256.png</normaloff>:/main/waterbear-256x256.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -88,7 +88,7 @@
      <x>0</x>
      <y>0</y>
      <width>1047</width>
-     <height>19</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
