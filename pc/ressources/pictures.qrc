@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/main">
+        <file>waterbear-256.png</file>
+        <file>waterbear-256_croped.png</file>
+    </qresource>
+</RCC>

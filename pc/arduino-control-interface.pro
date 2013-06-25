@@ -40,3 +40,6 @@ HEADERS  += \
 
 FORMS    += Gui.ui \
     About.ui
+
+RESOURCES += \
+    ressources/pictures.qrc
