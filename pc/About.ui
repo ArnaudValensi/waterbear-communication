@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>About Waterbear Communication</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="labelTitle">
    <property name="geometry">
     <rect>
      <x>320</x>

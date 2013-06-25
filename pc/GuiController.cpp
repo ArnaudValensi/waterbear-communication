@@ -231,6 +231,7 @@ void GuiController::on_actionAbout_triggered()
 
     Ui_DialogAbout aboutUi;
     aboutUi.setupUi(about);
+//    aboutUi.labelTitle->setFont(QFont(":/ressources/handsean.ttf", 27));
 
     about->show();
 }

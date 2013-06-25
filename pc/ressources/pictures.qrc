@@ -3,4 +3,7 @@
         <file>waterbear-256.png</file>
         <file>waterbear-256_croped.png</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file>handsean.ttf</file>
+    </qresource>
 </RCC>
