@@ -40,3 +40,5 @@ HEADERS  += \
 
 FORMS    += Gui.ui \
     About.ui
+
+RESOURCES +=
