@@ -27,6 +27,7 @@
 #include <QVariant>
 #include <QDataStream>
 #include <QRect>
+#include <QSizeGrip>
 #include "GuiController.h"
 #include "Arduino.h"
 #include "AElement.h"
@@ -63,6 +64,8 @@ private:
     QPoint offset;
     QAction *editAct;
     AElement *elem;
+    bool resizing;
+//    QSizeGrip *sizeGrip;
 
     void createActions();
     friend QDataStream &operator<<(QDataStream &out, const PinController &value);
@@ -73,6 +76,8 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void contextMenuEvent(QContextMenuEvent * event);
+    void enterEvent(QEvent * event);
+    void leaveEvent(QEvent * event);
 
 public slots:
     void sendValueToArduino(int value);

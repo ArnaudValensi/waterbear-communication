@@ -46,6 +46,9 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
     this->createActions();
+
+    this->resizing = false;
+//    this->sizeGrip = new QSizeGrip(this);
 }
 
 PinController::PinController(PinController const &other)
@@ -133,7 +136,32 @@ void PinController::mouseMoveEvent(QMouseEvent *event)
 {
     if(event->buttons() & Qt::LeftButton)
     {
-        this->move(this->mapToParent(event->pos() - offset));
+        if (this->resizing)
+        {
+            QPoint p = event->pos();
+            QSize newSize = QSize(p.rx(), p.ry());
+            this->resize(newSize);
+        }
+        else
+            this->move(this->mapToParent(event->pos() - offset));
+    }
+
+//    qDebug() << "pos: " << event->pos();
+
+    if (this->size().width() - event->pos().rx() < 8 &&
+        this->size().height() - event->pos().ry() < 8)
+    {
+        qDebug() << "Corner enter";
+        this->setCursor(Qt::SizeFDiagCursor);
+        this->resizing = true;
+
+    }
+    // TODO: not very good.
+    else
+    {
+//        qDebug() << "Corner leave";
+        this->setCursor(Qt::SizeAllCursor);
+//        this->resizing = false;
     }
 }
 
@@ -172,14 +200,38 @@ void PinController::mouseReleaseEvent(QMouseEvent *event)
 
         this->updateGeometry();
     }
-    else
-    {
-        // Strategie manual
-        return;
-    }
+//    else
+//    {
+//        // Strategie manual
+//        return;
+//    }
+//    this->setCursor(Qt::ArrowCursor);
+
+//    if ()
+//    emit leaveEvent();
 }
 
-void PinController::contextMenuEvent(QContextMenuEvent * event)
+void PinController::enterEvent(QEvent *event)
+{
+    qDebug() << "Enter event";
+
+    (void) event;
+
+    this->setCursor(Qt::SizeAllCursor);
+    this->setMouseTracking(true);
+}
+
+void PinController::leaveEvent(QEvent * event)
+{
+    qDebug() << "Leave event";
+
+    (void) event;
+
+    this->setMouseTracking(false);
+    this->resizing = false;
+}
+
+void PinController::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
     menu.addAction(this->editAct);
