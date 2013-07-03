@@ -1,4 +1,4 @@
-arduino-control-interface
-=========================
+waterbear-communication
+=======================
 
-Cross-platform and configurable graphic user interface to control an Arduino.
+Allow to easily create graphic user interfaces to communicate with embed systems.
