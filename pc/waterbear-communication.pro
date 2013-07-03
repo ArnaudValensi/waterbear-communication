@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = arduino-control-interface
+TARGET = waterbear-communication
 TEMPLATE = app
 
 INCLUDEPATH += "$$_PRO_FILE_PWD_/../../librairie/qextserialport/src"
