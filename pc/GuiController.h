@@ -47,6 +47,7 @@ public:
     Arduino *getArduino();
     QHBoxLayout *getTab1Layout() const;
     QList<PinController *> *getPinControllerList();
+    bool isGridAuto();
 
 private:
     void SaveConfig();
@@ -54,6 +55,7 @@ private:
     Ui::Gui *ui;
     QList<PinController *> pinControllerList;
     Arduino arduino;
+    bool gridAuto;
     ElementFactory *elemFactory;
 
 private slots:
@@ -67,6 +69,7 @@ private slots:
     void on_actionLoad_triggered();
     void on_actionClose_triggered();
     void on_actionAbout_triggered();
+    void on_actionGrid_auto_triggered();
 };
 
 #endif // GUI_H

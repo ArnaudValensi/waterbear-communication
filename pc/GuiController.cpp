@@ -39,7 +39,8 @@
 GuiController::GuiController(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Gui),
-    arduino(this)
+    arduino(this),
+    gridAuto(true)
 {
     ui->setupUi(this);
     PinController::initSerialization();
@@ -90,6 +91,11 @@ void GuiController::addToTab1Layout(QWidget *widget)
 QHBoxLayout *GuiController::getTab1Layout() const
 {
     return this->ui->tab1Layout;
+}
+
+bool GuiController::isGridAuto()
+{
+    return this->gridAuto;
 }
 
 void GuiController::on_pushButtonConnect_clicked()
@@ -234,4 +240,9 @@ void GuiController::on_actionAbout_triggered()
 //    aboutUi.labelTitle->setFont(QFont(":/ressources/handsean.ttf", 27));
 
     about->show();
+}
+
+void GuiController::on_actionGrid_auto_triggered()
+{
+    this->gridAuto = this->ui->actionGrid_auto->isChecked();
 }

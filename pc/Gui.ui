@@ -88,7 +88,7 @@
      <x>0</x>
      <y>0</y>
      <width>1047</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -127,6 +127,8 @@
    <addaction name="actionSlider"/>
    <addaction name="actionPotar"/>
    <addaction name="actionButton"/>
+   <addaction name="separator"/>
+   <addaction name="actionGrid_auto"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidgetConsole">
@@ -201,6 +203,17 @@
   <action name="actionLoad">
    <property name="text">
     <string>Load</string>
+   </property>
+  </action>
+  <action name="actionGrid_auto">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Grid auto</string>
    </property>
   </action>
  </widget>

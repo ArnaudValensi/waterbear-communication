@@ -144,30 +144,39 @@ void PinController::mouseReleaseEvent(QMouseEvent *event)
     if (!this->ui)
         return;
 
-    QHBoxLayout *layout = this->ui->getTab1Layout();
-    QList<PinController *> *pinControllerList = this->ui->getPinControllerList();
+    if (this->ui->isGridAuto())
+    {
+        // Strategie auto
+        QHBoxLayout *layout = this->ui->getTab1Layout();
+        QList<PinController *> *pinControllerList = this->ui->getPinControllerList();
 
-    int index = pinControllerList->indexOf(this);
-    int mouseX = this->mapToParent(event->pos()).x();
-    int newIndex = mouseX / PinController::fixedWidth;
-    int listSize = pinControllerList->size();
+        int index = pinControllerList->indexOf(this);
+        int mouseX = this->mapToParent(event->pos()).x();
+        int newIndex = mouseX / PinController::fixedWidth;
+        int listSize = pinControllerList->size();
 
-    if (newIndex > listSize)
-        newIndex = listSize;
+        if (newIndex > listSize)
+            newIndex = listSize;
 
-    PinController *pinController = pinControllerList->at(index);
-    pinControllerList->removeAt(index);
-    pinControllerList->insert(newIndex, pinController);
+        PinController *pinController = pinControllerList->at(index);
+        pinControllerList->removeAt(index);
+        pinControllerList->insert(newIndex, pinController);
 
-    QLayoutItem* item;
-    while ((item = layout->takeAt(0)) != NULL)
-        layout->removeItem(item);
+        QLayoutItem* item;
+        while ((item = layout->takeAt(0)) != NULL)
+            layout->removeItem(item);
 
-    foreach (PinController *p, *pinControllerList) {
-        layout->addWidget(p);
+        foreach (PinController *p, *pinControllerList) {
+            layout->addWidget(p);
+        }
+
+        this->updateGeometry();
     }
-
-    this->updateGeometry();
+    else
+    {
+        // Strategie manual
+        return;
+    }
 }
 
 void PinController::contextMenuEvent(QContextMenuEvent * event)
