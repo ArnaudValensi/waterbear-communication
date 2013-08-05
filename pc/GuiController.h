@@ -70,6 +70,7 @@ private slots:
     void on_actionClose_triggered();
     void on_actionAbout_triggered();
     void on_actionGrid_auto_triggered();
+    void on_actionConnect_triggered();
 };
 
 #endif // GUI_H
