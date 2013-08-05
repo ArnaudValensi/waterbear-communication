@@ -22,8 +22,9 @@
 #include "Serial.h"
 #include "GuiController.h"
 
-Serial::Serial(GuiController *controller, QObject *parent) :
+Serial::Serial(QString portStr, GuiController *controller, QObject *parent) :
     Communication(parent),
+    portStr(portStr),
     port(NULL),
     isConnected(false),
     controller(controller)
@@ -36,12 +37,11 @@ Serial::~Serial()
         port->close(); //we close the port at the end of the program
 }
 
-void Serial::init(QString portStr)
+void Serial::init()
 {
     if (this->isConnected)
         port->close();
-
-    port = new QextSerialPort(portStr); //we create the port
+    port = new QextSerialPort(this->portStr); //we create the port
 
     connect(port, SIGNAL(readyRead()), this, SLOT(onDataAvailable()));
 

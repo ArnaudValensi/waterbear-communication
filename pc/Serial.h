@@ -31,12 +31,13 @@ class Serial : public Communication
 {
     Q_OBJECT
 public:
-    explicit Serial(GuiController *controller, QObject *parent = 0);
+    explicit Serial(QString portStr, GuiController *controller, QObject *parent = 0);
     ~Serial();
-    virtual void init(QString portStr);
+    virtual void init();
     virtual void close();
 
 private:
+    QString portStr;
     QextSerialPort *port;
     bool isConnected;
     GuiController *controller;

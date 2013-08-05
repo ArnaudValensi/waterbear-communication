@@ -22,8 +22,8 @@
 
 #include <QMainWindow>
 #include "PinController.h"
-#include "PinConfig.h"
-#include "Serial.h"
+//#include "PinConfig.h"
+#include "Communication.h"
 #include "ElementFactory.h"
 
 namespace Ui {
@@ -44,7 +44,7 @@ public:
     void displayConsoleMessage(QString data);
     PinController *addPinControl(quint8 pinNumber);
     PinController *addPinControl();
-    Serial *getSerial();
+    Communication *getCommunication();
     QHBoxLayout *getTab1Layout() const;
     QList<PinController *> *getPinControllerList();
     bool isGridAuto();
@@ -54,7 +54,7 @@ private:
 
     Ui::Gui *ui;
     QList<PinController *> pinControllerList;
-    Serial serial;
+    Communication *communication;
     bool gridAuto;
     ElementFactory *elemFactory;
 

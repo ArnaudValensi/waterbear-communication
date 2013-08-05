@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QDialog>
+#include <QPushButton>
 #include "AElement.h"
 #include "PinController.h"
 //#include "ElementSlider.h"

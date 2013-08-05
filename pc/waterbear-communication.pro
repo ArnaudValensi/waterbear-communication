@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     ElementPot.cpp \
     ElementPushButton.cpp \
     Communication.cpp \
-    Serial.cpp
+    Serial.cpp \
+    UDP.cpp
 
 HEADERS  += \
     PinController.h \
@@ -38,7 +39,8 @@ HEADERS  += \
     ElementPot.h \
     ElementPushButton.h \
     Communication.h \
-    Serial.h
+    Serial.h \
+    UDP.h
 
 FORMS    += Gui.ui \
     About.ui \

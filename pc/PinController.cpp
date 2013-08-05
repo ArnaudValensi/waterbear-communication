@@ -40,8 +40,8 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
     {
         this->ui->addToTab1Layout(this);
 
-        Serial *serial = ui->getSerial();
-        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), serial, SLOT(transmitCmd(Communication::Buffer)));
+        Communication *com = ui->getCommunication();
+        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), com, SLOT(transmitCmd(Communication::Buffer)));
     }
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
@@ -71,8 +71,8 @@ PinController::PinController(PinController const &other)
     {
         this->ui->addToTab1Layout(this);
 
-        Serial *serial = ui->getSerial();
-        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), serial, SLOT(transmitCmd(Communication::Buffer)));
+        Communication *com = ui->getCommunication();
+        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), com, SLOT(transmitCmd(Communication::Buffer)));
     }
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
@@ -100,8 +100,8 @@ void PinController::setUi(GuiController *ui)
     this->ui->addToTab1Layout(this);
     this->updateGeometry();
 
-    Serial *serial = ui->getSerial();
-    QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), serial, SLOT(transmitCmd(Communication::Buffer)));
+    Communication *com = ui->getCommunication();
+    QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), com, SLOT(transmitCmd(Communication::Buffer)));
 }
 
 void PinController::sendValueToDevice(int value)

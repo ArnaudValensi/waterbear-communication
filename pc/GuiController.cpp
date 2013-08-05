@@ -26,6 +26,7 @@
 #include "ElementSlider.h"
 #include "ElementPot.h"
 #include "ElementPushButton.h"
+#include "UDP.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -39,7 +40,8 @@
 GuiController::GuiController(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Gui),
-    serial(this),
+//    serial(this),
+    communication(NULL),
     gridAuto(true)
 {
     ui->setupUi(this);
@@ -102,7 +104,9 @@ void GuiController::on_pushButtonConnect_clicked()
 {
     try
     {
-        this->serial.init(ui->lineEditPort->text());
+//        this->serial.init(ui->lineEditPort->text());
+        this->communication = new UDP("127.0.0.1", 7754, this, this);
+        this->communication->init();
         QMessageBox::information(this, "Connected", "Connected to the device.");
     }
     catch (SerialError& e)
@@ -124,9 +128,9 @@ void GuiController::on_dockWidgetConsole_topLevelChanged(bool floating)
     }
 }
 
-Serial *GuiController::getSerial()
+Communication *GuiController::getCommunication()
 {
-    return &this->serial;
+    return this->communication;
 }
 
 void GuiController::displayConsoleMessage(QString data)
