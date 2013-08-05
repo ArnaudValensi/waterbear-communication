@@ -20,7 +20,7 @@
 #include <QDebug>
 #include <QDialog>
 #include "AElement.h"
-#include "PinConfig.h"
+#include "PinController.h"
 //#include "ElementSlider.h"
 
 // Deprecated
@@ -47,6 +47,7 @@ AElement::AElement(QString name, TransfertType io, QObject *parent)
     this->name = name;
     this->transfertType = io;
     this->configWindow = NULL;
+    this->pin = NULL;
 
     this->radioButton = new QRadioButton(name);
     QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayProc()));
@@ -60,6 +61,7 @@ AElement::AElement(AElement const &other)
     this->name = other.name;
     this->transfertType = other.transfertType;
     this->configWindow = other.configWindow;
+    this->pin = other.pin;
 
     this->radioButton = new QRadioButton(name);
     QObject::connect(radioButton, SIGNAL(clicked(bool)), this, SLOT(displayProc()));
@@ -68,6 +70,11 @@ AElement::AElement(AElement const &other)
 AElement::~AElement()
 {
 
+}
+
+void AElement::setPinController(PinController *pin)
+{
+    this->pin = pin;
 }
 
 QString AElement::getName() const
@@ -141,8 +148,8 @@ QList<QVariant> &AElement::getPersistantData()
 
 void AElement::sendValueToArduino(int value)
 {
-//    this->pinConfig->sendValueToArduino(value);
-    qDebug() << "Sent to Arduino: " << value;
+    qDebug() << "Sending to Arduino: " << value;
+    this->pin->sendValueToArduino(value);
 }
 
 AElement::TransfertType AElement::getTransfertType()

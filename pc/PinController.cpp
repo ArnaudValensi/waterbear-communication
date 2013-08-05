@@ -41,7 +41,7 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
         this->ui->addToTab1Layout(this);
 
         Arduino *arduino = ui->getArduino();
-        QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
+        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), arduino, SLOT(transmitCmd(Communication::Buffer)));
     }
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
@@ -72,7 +72,7 @@ PinController::PinController(PinController const &other)
         this->ui->addToTab1Layout(this);
 
         Arduino *arduino = ui->getArduino();
-        QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
+        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), arduino, SLOT(transmitCmd(Communication::Buffer)));
     }
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
@@ -101,12 +101,12 @@ void PinController::setUi(GuiController *ui)
     this->updateGeometry();
 
     Arduino *arduino = ui->getArduino();
-    QObject::connect(this, SIGNAL(valueChanged(Arduino::Buffer)), arduino, SLOT(transmitCmd(Arduino::Buffer)));
+    QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), arduino, SLOT(transmitCmd(Communication::Buffer)));
 }
 
 void PinController::sendValueToArduino(int value)
 {
-    Arduino::Buffer buffer(this->pinNumber, value);
+    Communication::Buffer buffer(this->pinNumber, value);
     emit valueChanged(buffer);
 }
 
@@ -122,6 +122,7 @@ void PinController::addElement(AElement *elem)
     // Deprecated
     elem->displayConfig();
     this->setLayout(elem->getDisplayLayout());
+    elem->setPinController(this);
 }
 
 void PinController::mousePressEvent(QMouseEvent *event)

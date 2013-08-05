@@ -102,7 +102,7 @@ void GuiController::on_pushButtonConnect_clicked()
 {
     try
     {
-        this->arduino.initPort(ui->lineEditPort->text());
+        this->arduino.init(ui->lineEditPort->text());
         QMessageBox::information(this, "Connected", "Connected to the device.");
     }
     catch (ArduinoError& e)

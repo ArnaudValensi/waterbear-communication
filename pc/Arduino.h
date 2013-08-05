@@ -23,23 +23,18 @@
 #include <QObject>
 #include <qextserialport.h>
 #include "define_exception.h"
+#include "Communication.h"
 
 class GuiController;
 
-class Arduino : public QObject
+class Arduino : public Communication
 {
     Q_OBJECT
 public:
     explicit Arduino(GuiController *controller, QObject *parent = 0);
     ~Arduino();
-    void initPort(QString portStr);
-    void closePort();
-    struct Buffer
-    {
-        Buffer(char pin, char value) : pin(pin), value(value) {}
-        unsigned char pin;
-        unsigned char value;
-    } __attribute__((__packed__));
+    virtual void init(QString portStr);
+    virtual void close();
 
 private:
     QextSerialPort *port;
@@ -49,7 +44,7 @@ private:
 signals:
     
 public slots:
-    void transmitCmd(Arduino::Buffer);
+    virtual void transmitCmd(Communication::Buffer);
     void onDataAvailable();
     
 };

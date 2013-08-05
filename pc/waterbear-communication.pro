@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     ElementSlider.cpp \
     ElementFactory.cpp \
     ElementPot.cpp \
-    ElementPushButton.cpp
+    ElementPushButton.cpp \
+    Communication.cpp
 
 HEADERS  += \
     PinController.h \
@@ -36,7 +37,8 @@ HEADERS  += \
     ElementFactory.h \
     Singleton.hpp \
     ElementPot.h \
-    ElementPushButton.h
+    ElementPushButton.h \
+    Communication.h
 
 FORMS    += Gui.ui \
     About.ui \

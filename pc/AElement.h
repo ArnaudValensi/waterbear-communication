@@ -30,7 +30,7 @@
 #include <QVariant>
 
 
-class PinConfig;
+class PinController;
 class QDialog;
 
 // TODO: put the virtual member functions in pure.
@@ -45,6 +45,7 @@ public:
     explicit AElement(QString name = "Unknown", TransfertType io = OUT, QObject *parent = 0);
     AElement(AElement const &other);
     virtual ~AElement();
+    void setPinController(PinController *pin);
     void closeConfigWindow();
     virtual void displayElem();
     virtual void displayConfig();
@@ -59,13 +60,14 @@ public:
     virtual void load();
 private:
 
-    PinConfig *pinConfig;
+    //PinConfig *pinConfig;
     QString name;
     QRadioButton *radioButton;
     TransfertType transfertType;
     QLayout *displayLayout;
     QLayout *configLayout;
     QDialog *configWindow;
+    PinController *pin;
     friend QDataStream &operator<<(QDataStream &out, const AElement *&value);
     friend QDataStream &operator>>(QDataStream &in, AElement *&value);
     friend QDataStream &operator<<(QDataStream &out, const AElement &value);

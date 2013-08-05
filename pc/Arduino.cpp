@@ -23,7 +23,7 @@
 #include "GuiController.h"
 
 Arduino::Arduino(GuiController *controller, QObject *parent) :
-    QObject(parent),
+    Communication(parent),
     port(NULL),
     isConnected(false),
     controller(controller)
@@ -36,7 +36,7 @@ Arduino::~Arduino()
         port->close(); //we close the port at the end of the program
 }
 
-void Arduino::initPort(QString portStr)
+void Arduino::init(QString portStr)
 {
     if (this->isConnected)
         port->close();
@@ -59,13 +59,13 @@ void Arduino::initPort(QString portStr)
     this->isConnected = true;
 }
 
-void Arduino::closePort()
+void Arduino::close()
 {
     if (this->isConnected)
         port->close();
 }
 
-void Arduino::transmitCmd(Arduino::Buffer buffer)
+void Arduino::transmitCmd(Communication::Buffer buffer)
 {
   qDebug() << "Valeur : " << QString::number(buffer.value) << ", Pin : " << QString::number(buffer.pin);
   if (!this->isConnected)
@@ -74,6 +74,7 @@ void Arduino::transmitCmd(Arduino::Buffer buffer)
       return;
   }
   port->write((char *) &buffer, sizeof(buffer));
+  qDebug() << "Sent";
 }
 
 void Arduino::onDataAvailable()

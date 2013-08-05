@@ -79,7 +79,7 @@ public slots:
     void editElement();
 
 signals:
-    void valueChanged(Arduino::Buffer);
+    void valueChanged(Communication::Buffer);
     
 };
 
