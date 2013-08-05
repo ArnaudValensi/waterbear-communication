@@ -31,6 +31,7 @@ class Gui;
 }
 
 class PinController;
+class ConnectionController;
 
 class GuiController : public QMainWindow
 {
@@ -57,11 +58,11 @@ private:
     Communication *communication;
     bool gridAuto;
     ElementFactory *elemFactory;
+    ConnectionController *controllerConnect;
 
 private slots:
     void on_pushButtonConnect_clicked();
     void on_dockWidgetConsole_topLevelChanged(bool);
-
     void on_actionSlider_triggered();
     void on_actionPotar_triggered();
     void on_actionButton_triggered();
@@ -71,6 +72,8 @@ private slots:
     void on_actionAbout_triggered();
     void on_actionGrid_auto_triggered();
     void on_actionConnect_triggered();
+    void initCommunication(Communication::Type);
+    void transmitCmd(Communication::Buffer);
 };
 
 #endif // GUI_H

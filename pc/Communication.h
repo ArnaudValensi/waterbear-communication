@@ -10,6 +10,7 @@ public:
     explicit Communication(QObject *parent = 0);
     virtual void init() = 0;
     virtual void close() = 0;
+    enum Type { SERIAL = 0, UDP };
     struct Buffer
     {
         Buffer(char pin, char value) : pin(pin), value(value) {}

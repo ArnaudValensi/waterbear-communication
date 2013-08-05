@@ -21,13 +21,13 @@
 #include "GuiController.h"
 #include "ui_Gui.h"
 #include "ui_About.h"
-#include "ui_Connection.h"
 #include "PinController.h"
 #include "AElement.h"
 #include "ElementSlider.h"
 #include "ElementPot.h"
 #include "ElementPushButton.h"
 #include "UDP.h"
+#include "ConnectionController.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -43,10 +43,15 @@ GuiController::GuiController(QWidget *parent) :
     ui(new Ui::Gui),
 //    serial(this),
     communication(NULL),
-    gridAuto(true)
+    gridAuto(true),
+    controllerConnect(NULL)
 {
     ui->setupUi(this);
     PinController::initSerialization();
+
+    this->controllerConnect = new ConnectionController(this);
+    connect(this->controllerConnect, SIGNAL(connect(Communication::Type)),
+            this, SLOT(initCommunication(Communication::Type)));
 
     this->elemFactory = ElementFactorySingleton::getInstance();
     this->elemFactory->registerElem<ElementSlider>();
@@ -99,21 +104,6 @@ QHBoxLayout *GuiController::getTab1Layout() const
 bool GuiController::isGridAuto()
 {
     return this->gridAuto;
-}
-
-void GuiController::on_pushButtonConnect_clicked()
-{
-    try
-    {
-//        this->serial.init(ui->lineEditPort->text());
-        this->communication = new UDP("127.0.0.1", 7754, this, this);
-        this->communication->init();
-        QMessageBox::information(this, "Connected", "Connected to the device.");
-    }
-    catch (SerialError& e)
-    {
-        QMessageBox::warning(this, "Serial", e.what());
-    }
 }
 
 void GuiController::on_dockWidgetConsole_topLevelChanged(bool floating)
@@ -254,8 +244,45 @@ void GuiController::on_actionGrid_auto_triggered()
 
 void GuiController::on_actionConnect_triggered()
 {
-    QDialog *connect = new QDialog(0,0);
-    Ui_DialogConnection connectUi;
-    connectUi.setupUi(connect);
-    connect->show();
+    this->controllerConnect->show();
+}
+
+
+void GuiController::on_pushButtonConnect_clicked()
+{
+    try
+    {
+//        this->serial.init(ui->lineEditPort->text());
+        this->communication = new UDP("127.0.0.1", 7754, this, this);
+        this->communication->init();
+        QMessageBox::information(this, "Connected", "Connected to the device.");
+    }
+    catch (SerialError& e)
+    {
+        QMessageBox::warning(this, "Serial", e.what());
+    }
+}
+
+void GuiController::initCommunication(Communication::Type type)
+{
+    if (type == Communication::SERIAL)
+    {
+        this->communication = new Serial(this->controllerConnect->getSerialPort(),
+                                      this, this);
+        this->communication->init();
+        QMessageBox::information(this, "Connected", "Connected to the device.");
+    }
+    else if (type == Communication::UDP)
+    {
+        this->communication = new UDP(this->controllerConnect->getIp(),
+                                         this->controllerConnect->getIpPort(),
+                                         this, this);
+        this->communication->init();
+        QMessageBox::information(this, "Connected", "Connected to the device.");
+    }
+}
+
+void GuiController::transmitCmd(Communication::Buffer buffer)
+{
+    this->communication->transmitCmd(buffer);
 }

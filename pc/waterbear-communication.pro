@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     ElementPushButton.cpp \
     Communication.cpp \
     Serial.cpp \
-    UDP.cpp
+    UDP.cpp \
+    ConnectionController.cpp
 
 HEADERS  += \
     PinController.h \
@@ -40,7 +41,8 @@ HEADERS  += \
     ElementPushButton.h \
     Communication.h \
     Serial.h \
-    UDP.h
+    UDP.h \
+    ConnectionController.h
 
 FORMS    += Gui.ui \
     About.ui \
