@@ -1,19 +1,19 @@
 /* ***** BEGIN LICENSE BLOCK *****
  *
- * This file is part of arduino-control-interface.
+ * This file is part of waterbear-communication.
  *
- * arduino-control-interface is free software: you can redistribute it and/or modify
+ * waterbear-communication is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * arduino-control-interface is distributed in the hope that it will be useful,
+ * waterbear-communication is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with arduino-control-interface.  If not, see <http://www.gnu.org/licenses/>.
+ * along with waterbear-communication.  If not, see <http://www.gnu.org/licenses/>.
  *
  * ***** END LICENSE BLOCK ***** */
 
@@ -40,8 +40,8 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
     {
         this->ui->addToTab1Layout(this);
 
-        Arduino *arduino = ui->getArduino();
-        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), arduino, SLOT(transmitCmd(Communication::Buffer)));
+        Serial *serial = ui->getSerial();
+        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), serial, SLOT(transmitCmd(Communication::Buffer)));
     }
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
@@ -71,8 +71,8 @@ PinController::PinController(PinController const &other)
     {
         this->ui->addToTab1Layout(this);
 
-        Arduino *arduino = ui->getArduino();
-        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), arduino, SLOT(transmitCmd(Communication::Buffer)));
+        Serial *serial = ui->getSerial();
+        QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), serial, SLOT(transmitCmd(Communication::Buffer)));
     }
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
@@ -100,11 +100,11 @@ void PinController::setUi(GuiController *ui)
     this->ui->addToTab1Layout(this);
     this->updateGeometry();
 
-    Arduino *arduino = ui->getArduino();
-    QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), arduino, SLOT(transmitCmd(Communication::Buffer)));
+    Serial *serial = ui->getSerial();
+    QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), serial, SLOT(transmitCmd(Communication::Buffer)));
 }
 
-void PinController::sendValueToArduino(int value)
+void PinController::sendValueToDevice(int value)
 {
     Communication::Buffer buffer(this->pinNumber, value);
     emit valueChanged(buffer);

@@ -203,7 +203,7 @@ void PinConfig::setLayout(QLayout *layout)
 
 void PinConfig::sendValueToArduino(int value)
 {
-    this->pinController->sendValueToArduino(value);
+    this->pinController->sendValueToDevice(value);
 }
 
 //--------------------------------------------------------------
