@@ -21,6 +21,7 @@
 #include "GuiController.h"
 #include "ui_Gui.h"
 #include "ui_About.h"
+#include "ui_Connection.h"
 #include "PinController.h"
 #include "AElement.h"
 #include "ElementSlider.h"
@@ -245,4 +246,12 @@ void GuiController::on_actionAbout_triggered()
 void GuiController::on_actionGrid_auto_triggered()
 {
     this->gridAuto = this->ui->actionGrid_auto->isChecked();
+}
+
+void GuiController::on_actionConnect_triggered()
+{
+    QDialog *connect = new QDialog(0,0);
+    Ui_DialogConnection connectUi;
+    connectUi.setupUi(connect);
+    connect->show();
 }
