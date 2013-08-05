@@ -18,17 +18,17 @@ else: unix: LIBS +=  -L"$$_PRO_FILE_PWD_/../../librairie/qextserialport" -lQt5Ex
 
 SOURCES += main.cpp\
     PinController.cpp \
-    Arduino.cpp \
     GuiController.cpp \
     AElement.cpp \
     ElementSlider.cpp \
     ElementFactory.cpp \
     ElementPot.cpp \
-    ElementPushButton.cpp
+    ElementPushButton.cpp \
+    Communication.cpp \
+    Serial.cpp
 
 HEADERS  += \
     PinController.h \
-    Arduino.h \
     define_exception.h \
     GuiController.h \
     AElement.h \
@@ -36,7 +36,9 @@ HEADERS  += \
     ElementFactory.h \
     Singleton.hpp \
     ElementPot.h \
-    ElementPushButton.h
+    ElementPushButton.h \
+    Communication.h \
+    Serial.h
 
 FORMS    += Gui.ui \
     About.ui \

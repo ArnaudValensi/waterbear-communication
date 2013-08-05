@@ -105,7 +105,7 @@
    <widget class="QWidget" name="dockWidgetContents_3">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QTextBrowser" name="textBrowserArduino"/>
+      <widget class="QTextBrowser" name="textBrowserConsole"/>
      </item>
     </layout>
    </widget>

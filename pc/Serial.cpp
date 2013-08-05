@@ -1,42 +1,42 @@
 /* ***** BEGIN LICENSE BLOCK *****
  *
- * This file is part of arduino-control-interface.
+ * This file is part of waterbear-communication.
  *
- * arduino-control-interface is free software: you can redistribute it and/or modify
+ * waterbear-communication is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * arduino-control-interface is distributed in the hope that it will be useful,
+ * waterbear-communication is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with arduino-control-interface.  If not, see <http://www.gnu.org/licenses/>.
+ * along with waterbear-communication.  If not, see <http://www.gnu.org/licenses/>.
  *
  * ***** END LICENSE BLOCK ***** */
 
 #include <QMessageBox>
 #include <QDebug>
-#include "Arduino.h"
+#include "Serial.h"
 #include "GuiController.h"
 
-Arduino::Arduino(GuiController *controller, QObject *parent) :
-    QObject(parent),
+Serial::Serial(GuiController *controller, QObject *parent) :
+    Communication(parent),
     port(NULL),
     isConnected(false),
     controller(controller)
 {
 }
 
-Arduino::~Arduino()
+Serial::~Serial()
 {
     if (this->isConnected)
         port->close(); //we close the port at the end of the program
 }
 
-void Arduino::initPort(QString portStr)
+void Serial::init(QString portStr)
 {
     if (this->isConnected)
         port->close();
@@ -47,7 +47,7 @@ void Arduino::initPort(QString portStr)
 
     port->open(QIODevice::ReadWrite | QIODevice::Unbuffered); //we open the port
     if(!port->isOpen())
-        throw ArduinoError("Unable to open the port!");
+        throw SerialError("Unable to open the port!");
 
     //we set the port properties
     port->setBaudRate(BAUD9600);//modify the port settings on your own
@@ -59,26 +59,27 @@ void Arduino::initPort(QString portStr)
     this->isConnected = true;
 }
 
-void Arduino::closePort()
+void Serial::close()
 {
     if (this->isConnected)
         port->close();
 }
 
-void Arduino::transmitCmd(Arduino::Buffer buffer)
+void Serial::transmitCmd(Communication::Buffer buffer)
 {
   qDebug() << "Valeur : " << QString::number(buffer.value) << ", Pin : " << QString::number(buffer.pin);
   if (!this->isConnected)
   {
-      qDebug() << "Error: Not connected to Arduino";
+      qDebug() << "Error: Not connected to serial device";
       return;
   }
   port->write((char *) &buffer, sizeof(buffer));
+  qDebug() << "Sent";
 }
 
-void Arduino::onDataAvailable()
+void Serial::onDataAvailable()
 {
     QByteArray data = port->readAll();
 
-    this->controller->displayArduinoMessage(QString(data));
+    this->controller->displayConsoleMessage(QString(data));
 }

@@ -1,19 +1,19 @@
 /* ***** BEGIN LICENSE BLOCK *****
  *
- * This file is part of arduino-control-interface.
+ * This file is part of waterbear-communication.
  *
- * arduino-control-interface is free software: you can redistribute it and/or modify
+ * waterbear-communication is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * arduino-control-interface is distributed in the hope that it will be useful,
+ * waterbear-communication is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with arduino-control-interface.  If not, see <http://www.gnu.org/licenses/>.
+ * along with waterbear-communication.  If not, see <http://www.gnu.org/licenses/>.
  *
  * ***** END LICENSE BLOCK ***** */
 
@@ -40,7 +40,7 @@
 GuiController::GuiController(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Gui),
-    arduino(this),
+    serial(this),
     gridAuto(true)
 {
     ui->setupUi(this);
@@ -103,12 +103,12 @@ void GuiController::on_pushButtonConnect_clicked()
 {
     try
     {
-        this->arduino.initPort(ui->lineEditPort->text());
+        this->serial.init(ui->lineEditPort->text());
         QMessageBox::information(this, "Connected", "Connected to the device.");
     }
-    catch (ArduinoError& e)
+    catch (SerialError& e)
     {
-        QMessageBox::warning(this, "Arduino", e.what());
+        QMessageBox::warning(this, "Serial", e.what());
     }
 }
 
@@ -125,17 +125,17 @@ void GuiController::on_dockWidgetConsole_topLevelChanged(bool floating)
     }
 }
 
-Arduino *GuiController::getArduino()
+Serial *GuiController::getSerial()
 {
-    return &this->arduino;
+    return &this->serial;
 }
 
-void GuiController::displayArduinoMessage(QString data)
+void GuiController::displayConsoleMessage(QString data)
 {
-    this->ui->textBrowserArduino->insertPlainText(data);
-    QTextCursor c =  this->ui->textBrowserArduino->textCursor();
+    this->ui->textBrowserConsole->insertPlainText(data);
+    QTextCursor c =  this->ui->textBrowserConsole->textCursor();
     c.movePosition(QTextCursor::End);
-    this->ui->textBrowserArduino->setTextCursor(c);
+    this->ui->textBrowserConsole->setTextCursor(c);
 }
 
 void GuiController::on_actionSlider_triggered()
