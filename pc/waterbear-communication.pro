@@ -39,7 +39,8 @@ HEADERS  += \
     ElementPushButton.h
 
 FORMS    += Gui.ui \
-    About.ui
+    About.ui \
+    Connection.ui
 
 RESOURCES += \
     ressources/pictures.qrc
