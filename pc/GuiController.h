@@ -61,7 +61,6 @@ private:
     ConnectionController *controllerConnect;
 
 private slots:
-    void on_pushButtonConnect_clicked();
     void on_dockWidgetConsole_topLevelChanged(bool);
     void on_actionSlider_triggered();
     void on_actionPotar_triggered();

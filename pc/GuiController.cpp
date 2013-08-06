@@ -247,22 +247,6 @@ void GuiController::on_actionConnect_triggered()
     this->controllerConnect->show();
 }
 
-
-void GuiController::on_pushButtonConnect_clicked()
-{
-    try
-    {
-//        this->serial.init(ui->lineEditPort->text());
-        this->communication = new UDP("127.0.0.1", 7754, this, this);
-        this->communication->init();
-        QMessageBox::information(this, "Connected", "Connected to the device.");
-    }
-    catch (SerialError& e)
-    {
-        QMessageBox::warning(this, "Serial", e.what());
-    }
-}
-
 void GuiController::initCommunication(Communication::Type type)
 {
     if (type == Communication::SERIAL)
