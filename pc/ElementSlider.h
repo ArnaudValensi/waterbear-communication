@@ -25,7 +25,6 @@
 class QLineEdit;
 class QVBoxLayout;
 class QSlider;
-class QLCDNumber;
 
 class ElementSlider : public AElement
 {
@@ -46,7 +45,6 @@ private:
     QLineEdit *maxValue;
     QVBoxLayout *displayVBox;
     QSlider *slider;
-    QLCDNumber *lcd;
 
 private slots:
     void onApply();

@@ -17,7 +17,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#include <QLCDNumber>
 #include <QVBoxLayout>
 #include <QSlider>
 #include <QDebug>
@@ -34,7 +33,6 @@ ElementSlider::ElementSlider(QObject *parent)
     this->maxValue = NULL;
     this->displayVBox = NULL;
     this->slider = NULL;
-    this->lcd = NULL;
 }
 
 ElementSlider::ElementSlider(ElementSlider const &other)
@@ -46,7 +44,6 @@ ElementSlider::ElementSlider(ElementSlider const &other)
     this->maxValue = NULL;
     this->displayVBox = NULL;
     this->slider = NULL;
-    this->lcd = NULL;
 //    this->minValue = other.minValue;
 //    this->maxValue = other.maxValue;
 //    this->displayVBox = other.displayVBox;
@@ -80,7 +77,6 @@ void ElementSlider::displayElem()
 
     this->displayVBox = new QVBoxLayout();
     this->slider = new QSlider();
-    this->lcd = new QLCDNumber();
 
     qDebug() << "min: " << min;
     qDebug() << "max: " << max;
@@ -93,10 +89,8 @@ void ElementSlider::displayElem()
     slider->setMinimum(min);
     slider->setMaximum(max);
 
-    connect(slider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
     connect(slider, SIGNAL(valueChanged(int)), this, SLOT(sendValueToDevice(int)));
 
-    displayVBox->addWidget(lcd);
     displayVBox->addWidget(slider);
     this->setDisplayLayout(displayVBox);
 }

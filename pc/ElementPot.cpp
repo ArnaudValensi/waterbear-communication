@@ -19,7 +19,6 @@
 
 #include "ElementPot.h"
 
-#include <QLCDNumber>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QDial>
