@@ -27,16 +27,13 @@
 ElementLCD::ElementLCD(QObject *parent)
     : AElement("LCD", AElement::OUT, parent)
 {
-    //this->lineEditValue = NULL;
-    //this->value = 0;
+
 }
 
 ElementLCD::ElementLCD(ElementLCD const &other)
     : AElement("LCD", AElement::OUT, 0)
 {
     (void) other;
-//    this->lineEditValue = NULL;
-//    this->value = 0;
 }
 
 ElementLCD::~ElementLCD()
@@ -46,10 +43,7 @@ ElementLCD::~ElementLCD()
 
 void ElementLCD::displayConfig()
 {
-//    this->lineEditValue = new QLineEdit();
     QHBoxLayout *hbox = new QHBoxLayout();
-
-//    hbox->addWidget(this->lineEditValue);
     this->setConfigLayout(hbox);
 }
 
@@ -58,31 +52,18 @@ void ElementLCD::displayElem()
     QVBoxLayout *vbox = new QVBoxLayout();
     this->lcd = new QLCDNumber();
 
-//    QPushButton *button = new QPushButton();
-
-//    qDebug() << "val: " << value;
-
-//    button->setText("Send");
-
-//    connect(button, SIGNAL(clicked()), this, SLOT(sendValue()));
-
     vbox->addWidget(this->lcd);
     this->setDisplayLayout(vbox);
 }
 
 void ElementLCD::sendValue()
 {
-//    (void) value;
-//    this->sendValueToDevice(this->value);
+
 }
 
 void ElementLCD::onApply()
 {
-//    bool ok;
 
-//    this->value = this->lineEditValue->text().toInt(&ok);
-//    if (!ok)
-//        this->value = 0;
 }
 
 void ElementLCD::save()
@@ -98,10 +79,4 @@ void ElementLCD::load()
     qDebug() << "Load ElementLCD";
 
     int value = this->persistantData.at(0).toInt();
-
-//    qDebug() << "value: " << this->value;
-
-//    TODO: reload value
-//    this->lcd->set
-//    this->value = value;
 }

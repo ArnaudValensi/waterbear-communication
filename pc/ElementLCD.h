@@ -37,9 +37,6 @@ public:
 
 private:
     virtual void displayConfig();
-
-//    QLineEdit *lineEditValue;
-//    int value;
     QLCDNumber *lcd;
 
 public slots:
