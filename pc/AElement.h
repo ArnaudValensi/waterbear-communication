@@ -32,6 +32,7 @@
 
 class PinController;
 class QDialog;
+class QLineEdit;
 
 // TODO: put the virtual member functions in pure.
 class AElement : public QObject
@@ -68,6 +69,7 @@ private:
     QLayout *configLayout;
     QDialog *configWindow;
     PinController *pin;
+    QLineEdit *lineEditPin;
     friend QDataStream &operator<<(QDataStream &out, const AElement *&value);
     friend QDataStream &operator>>(QDataStream &in, AElement *&value);
     friend QDataStream &operator<<(QDataStream &out, const AElement &value);

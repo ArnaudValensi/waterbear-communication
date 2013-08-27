@@ -253,8 +253,15 @@ void GuiController::initCommunication(Communication::Type type)
     {
         this->communication = new Serial(this->controllerConnect->getSerialPort(),
                                       this, this);
-        this->communication->init();
-        QMessageBox::information(this, "Connected", "Connected to the device.");
+        try
+        {
+            this->communication->init();
+            QMessageBox::information(this, "Connected", "Connected to the device.");
+        }
+        catch (SerialError &e)
+        {
+            QMessageBox::warning(this, "Error", e.what());
+        }
     }
     else if (type == Communication::UDP)
     {

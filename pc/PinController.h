@@ -54,6 +54,7 @@ public:
     void setUi(GuiController *ui);
     void print();
     static void initSerialization();
+    void setPinNumber(int pinNumber);
 
 private:
     static int const fixedWidth = 130;

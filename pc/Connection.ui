@@ -66,7 +66,11 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QLineEdit" name="lineEditEditPort"/>
+       <widget class="QLineEdit" name="lineEditEditPort">
+        <property name="text">
+         <string>/dev/ttyUSB0</string>
+        </property>
+       </widget>
       </item>
       <item row="3" column="0" colspan="11">
        <widget class="QLabel" name="labelHelp">

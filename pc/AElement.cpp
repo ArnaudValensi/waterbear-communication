@@ -20,6 +20,7 @@
 #include <QDebug>
 #include <QDialog>
 #include <QPushButton>
+#include <QLabel>
 #include "AElement.h"
 #include "PinController.h"
 //#include "ElementSlider.h"
@@ -113,10 +114,15 @@ void AElement::closeConfigWindow()
 
 void AElement::setConfigLayout(QLayout *layout)
 {
+    QLabel *labelPin = new QLabel("Pin: ");
+    this->lineEditPin = new QLineEdit();
+    layout->addWidget(labelPin);
+    layout->addWidget(lineEditPin);
+
     // Add a 'OK' button and connect it to onApply() function
     QPushButton *apply = new QPushButton("OK");
     layout->addWidget(apply);
-    connect(apply, SIGNAL(clicked()), this, SLOT(onApplyProc()));
+    connect(apply, SIGNAL(clicked()), this, SLOT(onApplyProc()));    
 
     this->configLayout = layout;
 }
@@ -160,6 +166,12 @@ AElement::TransfertType AElement::getTransfertType()
 
 void AElement::onApplyProc()
 {
+    bool ok;
+    int pinNumber;
+
+    pinNumber = this->lineEditPin->text().toInt(&ok);
+    if (ok)
+        this->pin->setPinNumber(pinNumber);
     this->onApply();
     this->closeConfigWindow();
 }

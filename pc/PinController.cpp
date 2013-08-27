@@ -41,13 +41,13 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
         this->ui->addToTab1Layout(this);
 
         QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), this->ui, SLOT(transmitCmd(Communication::Buffer)));
-   }
+    }
     this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
     this->createActions();
 
     this->resizing = false;
-//    this->sizeGrip = new QSizeGrip(this);
+    //    this->sizeGrip = new QSizeGrip(this);
 }
 
 PinController::PinController(PinController const &other)
@@ -249,6 +249,12 @@ void PinController::editElement()
     qDebug() << "Edit";
 
     this->elem->openConfigWindow();
+}
+
+void PinController::setPinNumber(int pinNumber)
+{
+    this->pinNumber = pinNumber;
+    this->setTitle(QString("Pin %1").arg(this->pinNumber));
 }
 
 void PinController::print()
