@@ -33,7 +33,6 @@ ElementPot::ElementPot(QObject *parent)
     this->maxValue = NULL;
     this->displayVBox = NULL;
     this->pot = NULL;
-    this->lcd = NULL;
 }
 
 ElementPot::ElementPot(ElementPot const &other)
@@ -44,7 +43,6 @@ ElementPot::ElementPot(ElementPot const &other)
     this->maxValue = NULL;
     this->displayVBox = NULL;
     this->pot = NULL;
-    this->lcd = NULL;
 }
 
 ElementPot::~ElementPot()
@@ -73,7 +71,6 @@ void ElementPot::displayElem()
 
     this->displayVBox = new QVBoxLayout();
     this->pot = new QDial();
-    this->lcd = new QLCDNumber();
 
     qDebug() << "min: " << min;
     qDebug() << "max: " << max;
@@ -81,10 +78,8 @@ void ElementPot::displayElem()
     pot->setMinimum(min);
     pot->setMaximum(max);
 
-    connect(pot, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
     connect(pot, SIGNAL(valueChanged(int)), this, SLOT(sendValueToDevice(int)));
 
-    displayVBox->addWidget(lcd);
     displayVBox->addWidget(pot);
     this->setDisplayLayout(displayVBox);
 }

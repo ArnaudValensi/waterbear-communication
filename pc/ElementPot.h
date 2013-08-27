@@ -25,7 +25,6 @@
 class QLineEdit;
 class QDial;
 class QVBoxLayout;
-class QLCDNumber;
 
 class ElementPot : public AElement
 {
@@ -45,7 +44,6 @@ private:
     QLineEdit *maxValue;
     QDial *pot;
     QVBoxLayout *displayVBox;
-    QLCDNumber *lcd;
 
 private slots:
     void onApply();
