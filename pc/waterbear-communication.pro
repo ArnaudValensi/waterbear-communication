@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     Communication.cpp \
     Serial.cpp \
     UDP.cpp \
-    ConnectionController.cpp
+    ConnectionController.cpp \
+    ElementLCD.cpp
 
 HEADERS  += \
     PinController.h \
@@ -42,7 +43,8 @@ HEADERS  += \
     Communication.h \
     Serial.h \
     UDP.h \
-    ConnectionController.h
+    ConnectionController.h \
+    ElementLCD.h
 
 FORMS    += Gui.ui \
     About.ui \

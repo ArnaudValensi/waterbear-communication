@@ -28,7 +28,7 @@
 #include <QMetaType>
 
 PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *parent)
-    : QGroupBox(parent),
+    : QWidget(parent),
       pinNumber(pinNumber),
       ui(ui)
 {
@@ -42,7 +42,7 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
 
         QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), this->ui, SLOT(transmitCmd(Communication::Buffer)));
     }
-    this->setTitle(QString("Pin %1").arg(this->pinNumber));
+    //this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
     this->createActions();
 
@@ -51,7 +51,7 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
 }
 
 PinController::PinController(PinController const &other)
-    : QGroupBox()
+    : QWidget()
 {
     qDebug() << "PinController Copy Constructor";
 
@@ -75,7 +75,7 @@ PinController::PinController(PinController const &other)
 
         QObject::connect(this, SIGNAL(valueChanged(Communication::Buffer)), this->ui, SLOT(transmitCmd(Communication::Buffer)));
     }
-    this->setTitle(QString("Pin %1").arg(this->pinNumber));
+    //this->setTitle(QString("Pin %1").arg(this->pinNumber));
 
     this->createActions();
 }
@@ -254,7 +254,7 @@ void PinController::editElement()
 void PinController::setPinNumber(int pinNumber)
 {
     this->pinNumber = pinNumber;
-    this->setTitle(QString("Pin %1").arg(this->pinNumber));
+    //this->setTitle(QString("Pin %1").arg(this->pinNumber));
 }
 
 void PinController::print()

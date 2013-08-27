@@ -42,7 +42,7 @@
 
 class GuiController;
 
-class PinController : public QGroupBox
+class PinController : public QWidget
 {
     Q_OBJECT
 public:

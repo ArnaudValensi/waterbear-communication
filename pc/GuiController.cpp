@@ -26,6 +26,7 @@
 #include "ElementSlider.h"
 #include "ElementPot.h"
 #include "ElementPushButton.h"
+#include "ElementLCD.h"
 #include "UDP.h"
 #include "ConnectionController.h"
 
@@ -57,6 +58,7 @@ GuiController::GuiController(QWidget *parent) :
     this->elemFactory->registerElem<ElementSlider>();
     this->elemFactory->registerElem<ElementPot>();
     this->elemFactory->registerElem<ElementPushButton>();
+    this->elemFactory->registerElem<ElementLCD>();
 }
 
 GuiController::~GuiController()
@@ -163,6 +165,17 @@ void GuiController::on_actionButton_triggered()
 
     if (pin)
         pin->addElement(button);
+}
+
+void GuiController::on_actionLCD_triggered()
+{
+    qDebug() << "on_actionLCD_triggered";
+
+    AElement *lcd = new ElementLCD(this);
+    PinController *pin = this->addPinControl();
+
+    if (pin)
+        pin->addElement(lcd);
 }
 
 void GuiController::on_actionSave_triggered()

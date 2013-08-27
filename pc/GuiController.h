@@ -73,6 +73,7 @@ private slots:
     void on_actionConnect_triggered();
     void initCommunication(Communication::Type);
     void transmitCmd(Communication::Buffer);
+    void on_actionLCD_triggered();
 };
 
 #endif // GUI_H

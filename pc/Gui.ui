@@ -65,6 +65,7 @@
    <addaction name="actionSlider"/>
    <addaction name="actionPotar"/>
    <addaction name="actionButton"/>
+   <addaction name="actionLCD"/>
    <addaction name="separator"/>
    <addaction name="actionGrid_auto"/>
    <addaction name="separator"/>
@@ -194,6 +195,11 @@
   <action name="actionConnect">
    <property name="text">
     <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionLCD">
+   <property name="text">
+    <string>LCD</string>
    </property>
   </action>
  </widget>
