@@ -37,7 +37,7 @@
 #include <QFile>
 #include <QDataStream>
 #include <QFileDialog>
-
+#include "tcontainer.h"
 
 GuiController::GuiController(QWidget *parent) :
     QMainWindow(parent),
@@ -59,6 +59,13 @@ GuiController::GuiController(QWidget *parent) :
     this->elemFactory->registerElem<ElementPot>();
     this->elemFactory->registerElem<ElementPushButton>();
     this->elemFactory->registerElem<ElementLCD>();
+
+    this->editing = true;
+//    Test
+//    QLabel *lab1 = new QLabel("Label1");
+//    QLabel *lab2 = new QLabel("Label2");
+//    TContainer *con1 = new TContainer(this,QPoint(10,10),lab1);
+//    TContainer *con2 = new TContainer(this,QPoint(20,50),lab2);
 }
 
 GuiController::~GuiController()
@@ -93,12 +100,15 @@ QList<PinController *> *GuiController::getPinControllerList()
     return &this->pinControllerList;
 }
 
+// TODO: Put this in addPinControl.
 void GuiController::addToTab1Layout(QWidget *widget)
 {
-    this->ui->tab1Layout->addWidget(widget);
+    TContainer *pinContainer = new TContainer(this, QPoint(20,50), widget);
+    pinContainerList.push_back(pinContainer);
+//    this->ui->tab1Layout->addWidget(widget);
 }
 
-QHBoxLayout *GuiController::getTab1Layout() const
+QWidget *GuiController::getTab1Layout() const
 {
     return this->ui->tab1Layout;
 }
@@ -106,6 +116,11 @@ QHBoxLayout *GuiController::getTab1Layout() const
 bool GuiController::isGridAuto()
 {
     return this->gridAuto;
+}
+
+bool GuiController::isEditing()
+{
+    return this->editing;
 }
 
 void GuiController::on_dockWidgetConsole_topLevelChanged(bool floating)
@@ -248,6 +263,16 @@ void GuiController::on_actionAbout_triggered()
 //    aboutUi.labelTitle->setFont(QFont(":/ressources/handsean.ttf", 27));
 
     about->show();
+}
+
+void GuiController::on_actionEditing_triggered()
+{
+    this->editing = this->ui->actionEditing->isChecked();
+
+    for (int i = 0; i < this->pinContainerList.size(); ++i)
+    {
+        this->pinContainerList.at(i)->setEditing(this->editing);
+    }
 }
 
 void GuiController::on_actionGrid_auto_triggered()

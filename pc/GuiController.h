@@ -32,6 +32,7 @@ class Gui;
 
 class PinController;
 class ConnectionController;
+class TContainer;
 
 class GuiController : public QMainWindow
 {
@@ -46,17 +47,20 @@ public:
     PinController *addPinControl(quint8 pinNumber);
     PinController *addPinControl();
     Communication *getCommunication();
-    QHBoxLayout *getTab1Layout() const;
+    QWidget *getTab1Layout() const;
     QList<PinController *> *getPinControllerList();
     bool isGridAuto();
+    bool isEditing();
 
 private:
     void SaveConfig();
 
     Ui::Gui *ui;
     QList<PinController *> pinControllerList;
+    QList<TContainer *> pinContainerList;
     Communication *communication;
     bool gridAuto;
+    bool editing;
     ElementFactory *elemFactory;
     ConnectionController *controllerConnect;
 
@@ -74,6 +78,7 @@ private slots:
     void initCommunication(Communication::Type);
     void transmitCmd(Communication::Buffer);
     void on_actionLCD_triggered();
+    void on_actionEditing_triggered();
 };
 
 #endif // GUI_H

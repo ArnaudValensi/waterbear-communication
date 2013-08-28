@@ -20,6 +20,7 @@
 #include "PinController.h"
 #include "AElement.h"
 #include "ElementSlider.h"
+//#include "tcontainer.h"
 
 #include <QMouseEvent>
 #include <QDebug>
@@ -35,7 +36,7 @@ PinController::PinController(GuiController *ui, quint8 pinNumber, QWidget *paren
     qDebug() << "PinController Constructor";
 
     this->elem = NULL;
-    this->setFixedWidth(this->fixedWidth);
+    //this->setFixedWidth(this->fixedWidth);
     if (this->ui)
     {
         this->ui->addToTab1Layout(this);
@@ -125,109 +126,109 @@ void PinController::addElement(AElement *elem)
     elem->setPinController(this);
 }
 
-void PinController::mousePressEvent(QMouseEvent *event)
-{
-    offset = event->pos();
-}
+//void PinController::mousePressEvent(QMouseEvent *event)
+//{
+//    offset = event->pos();
+//}
 
-void PinController::mouseMoveEvent(QMouseEvent *event)
-{
-    if(event->buttons() & Qt::LeftButton)
-    {
-        if (this->resizing)
-        {
-            QPoint p = event->pos();
-            QSize newSize = QSize(p.rx(), p.ry());
-            this->resize(newSize);
-        }
-        else
-            this->move(this->mapToParent(event->pos() - offset));
-    }
+//void PinController::mouseMoveEvent(QMouseEvent *event)
+//{
+//    if(event->buttons() & Qt::LeftButton)
+//    {
+//        if (this->resizing)
+//        {
+//            QPoint p = event->pos();
+//            QSize newSize = QSize(p.rx(), p.ry());
+//            this->resize(newSize);
+//        }
+//        else
+//            this->move(this->mapToParent(event->pos() - offset));
+//    }
 
-//    qDebug() << "pos: " << event->pos();
+////    qDebug() << "pos: " << event->pos();
 
-    if (this->size().width() - event->pos().rx() < 8 &&
-        this->size().height() - event->pos().ry() < 8)
-    {
-        qDebug() << "Corner enter";
-        this->setCursor(Qt::SizeFDiagCursor);
-        this->resizing = true;
+//    if (this->size().width() - event->pos().rx() < 8 &&
+//        this->size().height() - event->pos().ry() < 8)
+//    {
+//        qDebug() << "Corner enter";
+//        this->setCursor(Qt::SizeFDiagCursor);
+//        this->resizing = true;
 
-    }
-    // TODO: not very good.
-    else
-    {
-//        qDebug() << "Corner leave";
-        this->setCursor(Qt::SizeAllCursor);
-//        this->resizing = false;
-    }
-}
-
-void PinController::mouseReleaseEvent(QMouseEvent *event)
-{
-    // TODO: protect against the right click
-
-    if (!this->ui)
-        return;
-
-    if (this->ui->isGridAuto())
-    {
-        // Strategie auto
-        QHBoxLayout *layout = this->ui->getTab1Layout();
-        QList<PinController *> *pinControllerList = this->ui->getPinControllerList();
-
-        int index = pinControllerList->indexOf(this);
-        int mouseX = this->mapToParent(event->pos()).x();
-        int newIndex = mouseX / PinController::fixedWidth;
-        int listSize = pinControllerList->size();
-
-        if (newIndex > listSize)
-            newIndex = listSize;
-
-        PinController *pinController = pinControllerList->at(index);
-        pinControllerList->removeAt(index);
-        pinControllerList->insert(newIndex, pinController);
-
-        QLayoutItem* item;
-        while ((item = layout->takeAt(0)) != NULL)
-            layout->removeItem(item);
-
-        foreach (PinController *p, *pinControllerList) {
-            layout->addWidget(p);
-        }
-
-        this->updateGeometry();
-    }
+//    }
+//    // TODO: not very good.
 //    else
 //    {
-//        // Strategie manual
-//        return;
+////        qDebug() << "Corner leave";
+//        this->setCursor(Qt::SizeAllCursor);
+////        this->resizing = false;
 //    }
-//    this->setCursor(Qt::ArrowCursor);
+//}
 
-//    if ()
-//    emit leaveEvent();
-}
+//void PinController::mouseReleaseEvent(QMouseEvent *event)
+//{
+//    // TODO: protect against the right click
 
-void PinController::enterEvent(QEvent *event)
-{
-    qDebug() << "Enter event";
+//    if (!this->ui)
+//        return;
 
-    (void) event;
+////    if (this->ui->isGridAuto())
+////    {
+////        // Strategie auto
+////        QHBoxLayout *layout = this->ui->getTab1Layout();
+////        QList<PinController *> *pinControllerList = this->ui->getPinControllerList();
 
-    this->setCursor(Qt::SizeAllCursor);
-    this->setMouseTracking(true);
-}
+////        int index = pinControllerList->indexOf(this);
+////        int mouseX = this->mapToParent(event->pos()).x();
+////        int newIndex = mouseX / PinController::fixedWidth;
+////        int listSize = pinControllerList->size();
 
-void PinController::leaveEvent(QEvent * event)
-{
-    qDebug() << "Leave event";
+////        if (newIndex > listSize)
+////            newIndex = listSize;
 
-    (void) event;
+////        PinController *pinController = pinControllerList->at(index);
+////        pinControllerList->removeAt(index);
+////        pinControllerList->insert(newIndex, pinController);
 
-    this->setMouseTracking(false);
-    this->resizing = false;
-}
+////        QLayoutItem* item;
+////        while ((item = layout->takeAt(0)) != NULL)
+////            layout->removeItem(item);
+
+////        foreach (PinController *p, *pinControllerList) {
+////            layout->addWidget(p);
+////        }
+
+////        this->updateGeometry();
+////    }
+////    else
+////    {
+////        // Strategie manual
+////        return;
+////    }
+////    this->setCursor(Qt::ArrowCursor);
+
+////    if ()
+////    emit leaveEvent();
+//}
+
+//void PinController::enterEvent(QEvent *event)
+//{
+//    qDebug() << "Enter event";
+
+//    (void) event;
+
+//    this->setCursor(Qt::SizeAllCursor);
+//    this->setMouseTracking(true);
+//}
+
+//void PinController::leaveEvent(QEvent * event)
+//{
+//    qDebug() << "Leave event";
+
+//    (void) event;
+
+//    this->setMouseTracking(false);
+//    this->resizing = false;
+//}
 
 void PinController::contextMenuEvent(QContextMenuEvent *event)
 {

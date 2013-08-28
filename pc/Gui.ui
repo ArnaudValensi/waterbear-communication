@@ -18,22 +18,12 @@
     <normaloff>:/main/waterbear-256x256.png</normaloff>:/main/waterbear-256x256.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="1">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="0">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
      <layout class="QGridLayout" name="gridLayoutWorkSpace">
+      <item row="0" column="0">
+       <widget class="QWidget" name="tab1Layout" native="true"/>
+      </item>
       <item row="0" column="1">
        <spacer name="horizontalSpacer">
         <property name="orientation">
@@ -47,13 +37,24 @@
         </property>
        </spacer>
       </item>
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="tab1Layout"/>
-      </item>
      </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
    <zorder>verticalSpacer</zorder>
+   <zorder>horizontalSpacer</zorder>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -67,6 +68,7 @@
    <addaction name="actionButton"/>
    <addaction name="actionLCD"/>
    <addaction name="separator"/>
+   <addaction name="actionEditing"/>
    <addaction name="actionGrid_auto"/>
    <addaction name="separator"/>
    <addaction name="actionConnect"/>
@@ -200,6 +202,17 @@
   <action name="actionLCD">
    <property name="text">
     <string>LCD</string>
+   </property>
+  </action>
+  <action name="actionEditing">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Editing</string>
    </property>
   </action>
  </widget>
