@@ -86,7 +86,7 @@ bool TContainer::eventFilter( QObject *obj, QEvent *evt ) {
 
     //return QWidget::eventFilter(obj, evt);
     if (m_isEditing && m_infocus) {
-        qDebug() << "  onfocus";
+//        qDebug() << "  onfocus";
         QWidget *w = this->parentWidget();
         if (w == obj && evt->type()==QEvent::Paint) {
             //Рисуем выделение контейнара
@@ -293,12 +293,14 @@ void TContainer::setEditing(bool isEditing)
     if ((this->m_isEditing = isEditing))
     {
         this->childWidget->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+        m_infocus = true;
     }
     else
     {
         this->childWidget->setAttribute(Qt::WA_TransparentForMouseEvents, false);
         m_infocus = false;
         this->parentWidget()->repaint();
+        setCursor(QCursor(Qt::ArrowCursor));
 
 //        emit outFocus(false);
 //        emit inFocus(true);
