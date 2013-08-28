@@ -7,6 +7,8 @@ email: aliks-os@yandex.ru
 
 #include <QApplication>
 
+static int g_num = 0;
+
 TContainer::TContainer(GuiController *parent, QPoint p, QWidget *cWidget) : QWidget(parent) {
     mode = NONE;
     childWidget = cWidget;
@@ -31,8 +33,10 @@ TContainer::TContainer(GuiController *parent, QPoint p, QWidget *cWidget) : QWid
 
     m_infocus = true;
     m_showMenu = false;
-    //m_isEditing = true;
+    m_isEditing = true;
     this->installEventFilter(parent);
+
+    i = g_num++;
 }
 
 TContainer::~TContainer() {
@@ -58,6 +62,8 @@ void TContainer::popupShow(const QPoint &pt) {
 }
 
 void TContainer::focusInEvent(QFocusEvent *e) {
+    qDebug() << "InFocus" << i;
+
     m_infocus = true;
     this->parentWidget()->installEventFilter(this);
     this->parentWidget()->repaint();
@@ -65,16 +71,22 @@ void TContainer::focusInEvent(QFocusEvent *e) {
 }
 
 void TContainer::focusOutEvent(QFocusEvent *e) {
-    if (!this->guiController->isEditing()) return;
+    qDebug() << "OutFocus" << i;
+
+//    if (!m_isEditing) return;
     if (m_showMenu) return;
+    setCursor(QCursor(Qt::ArrowCursor));
     mode = NONE;
     emit outFocus(false);
     m_infocus = false;
 }
 
 bool TContainer::eventFilter( QObject *obj, QEvent *evt ) {
+//    qDebug() << "eventFilter " << i;
+
     //return QWidget::eventFilter(obj, evt);
-    if (m_infocus) {
+    if (m_isEditing && m_infocus) {
+        qDebug() << "  onfocus";
         QWidget *w = this->parentWidget();
         if (w == obj && evt->type()==QEvent::Paint) {
             //Рисуем выделение контейнара
@@ -89,14 +101,14 @@ bool TContainer::eventFilter( QObject *obj, QEvent *evt ) {
             painter.fillRect(LB.x(),LB.y(),6,6,QColor("black"));
             painter.fillRect(RB.x(),RB.y(),6,6,QColor("black"));
             painter.fillRect(RT.x(),RT.y(),6,6,QColor("black"));
-            return QWidget::eventFilter(obj,evt);
+            return true;//QWidget::eventFilter(obj,evt);
         }
     }
     return QWidget::eventFilter(obj, evt);}
 
 void TContainer::mousePressEvent(QMouseEvent *e) {
     position = QPoint(e->globalX()-geometry().x(), e->globalY()-geometry().y());
-    if (!this->guiController->isEditing()) return;
+    if (!m_isEditing) return;
     if (!m_infocus) return;
     //QWidget::mouseMoveEvent(e);
     if (!e->buttons() & Qt::LeftButton) {
@@ -110,7 +122,7 @@ void TContainer::mousePressEvent(QMouseEvent *e) {
 }
 
 void TContainer::keyPressEvent(QKeyEvent *e) {
-    if (!this->guiController->isEditing()) return;
+    if (!m_isEditing) return;
     if (e->key() == Qt::Key_Delete) {
         this->deleteLater();
     }
@@ -207,7 +219,7 @@ void TContainer::mouseReleaseEvent(QMouseEvent *e) {
 
 void TContainer::mouseMoveEvent(QMouseEvent *e) {
     QWidget::mouseMoveEvent(e);
-    if (!this->guiController->isEditing()) return;
+    if (!m_isEditing) return;
     if (!m_infocus) return;
     if (!e->buttons() & Qt::LeftButton) {
         QPoint p = QPoint(e->x()+geometry().x(), e->y()+geometry().y());
@@ -278,5 +290,18 @@ void TContainer::mouseMoveEvent(QMouseEvent *e) {
 
 void TContainer::setEditing(bool isEditing)
 {
-    this->childWidget->setAttribute(Qt::WA_TransparentForMouseEvents, isEditing);
+    if ((this->m_isEditing = isEditing))
+    {
+        this->childWidget->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+    }
+    else
+    {
+        this->childWidget->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+        m_infocus = false;
+        this->parentWidget()->repaint();
+
+//        emit outFocus(false);
+//        emit inFocus(true);
+//        QWidget::focusNextChild();
+    }
 }

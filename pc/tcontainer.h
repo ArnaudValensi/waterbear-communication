@@ -55,7 +55,7 @@ protected:
     QWidget *clone();
 
 private:
-
+    int i;
 
 signals:
     void inFocus(bool mode);

@@ -273,6 +273,8 @@ void GuiController::on_actionEditing_triggered()
     {
         this->pinContainerList.at(i)->setEditing(this->editing);
     }
+
+//    this->repaint();
 }
 
 void GuiController::on_actionGrid_auto_triggered()
